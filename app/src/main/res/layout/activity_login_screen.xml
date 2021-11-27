@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/emailTxt"
+                android:id="@+id/nameRegTxt"
                 android:layout_width="270dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="5dp"
@@ -86,7 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/loginTxt" />
 
             <EditText
-                android:id="@+id/passwordTxt"
+                android:id="@+id/emailRegTxt"
                 android:layout_width="270dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="20dp"
@@ -101,7 +101,7 @@
                 android:theme="@style/EditTextTheme"
                 app:layout_constraintEnd_toEndOf="@+id/loginTxt"
                 app:layout_constraintStart_toStartOf="@+id/loginTxt"
-                app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/nameRegTxt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
