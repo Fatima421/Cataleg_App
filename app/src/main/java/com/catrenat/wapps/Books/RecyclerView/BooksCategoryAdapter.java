@@ -25,10 +25,7 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
 
     public BooksCategoryAdapter(List<BooksCategory> booksCategoriesList, Context context){
         this.context = context;
-    }
-
-    public void setData(List<BooksCategory> list) {
-        this.mListCategory = list;
+        this.mListCategory = booksCategoriesList;
     }
 
     @NonNull
@@ -47,13 +44,12 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
 
     @Override
     public int getItemCount() {
-        if (mListCategory != null){ return mListCategory.size();}
-        return 0;
+        return mListCategory.size();
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        private TextView bookNameCategory;
-        private RecyclerView rcvBookCategory;
+        TextView bookNameCategory;
+        RecyclerView rcvBookCategory;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);

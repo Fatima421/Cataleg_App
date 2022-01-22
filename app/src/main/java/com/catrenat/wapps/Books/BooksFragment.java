@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.SerieCategories;
@@ -51,6 +54,12 @@ public class BooksFragment extends Fragment {
                              Bundle savedInstanceState) {
         View bookView = inflater.inflate(R.layout.fragment_books, container, false);
 
+        TextView bookIntroText = bookView.findViewById(R.id.bookIntroText);
+
+        // Making the welcome text fade in
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        bookIntroText.setAnimation(animation);
+
         rcvCategory = bookView.findViewById(R.id.rcv_category);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
@@ -73,12 +82,15 @@ public class BooksFragment extends Fragment {
                             for (int i = 0; i < booksList.size(); i++) {
                                 if (booksList.get(i).getCategory().equals("romance")) {
                                     romanceBooks.add(booksList.get(i));
+                                    Log.i("booksRomance", booksList.get(i).getTitle());
                                 }
                                 if (booksList.get(i).getCategory().equals("thriller")) {
                                     thrillerBooks.add(booksList.get(i));
+                                    Log.i("booksThriller", booksList.get(i).getTitle());
                                 }
                                 if (booksList.get(i).getCategory().equals("childs")) {
                                     childsBooks.add(booksList.get(i));
+                                    Log.i("books", booksList.get(i).getTitle());
                                 }
                             }
                             // Initializing the RecyclerView for the movie categories list
@@ -99,13 +111,13 @@ public class BooksFragment extends Fragment {
             booksCategoriesList.clear();
         }
         if (!romanceBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("romance", romanceBooks));
+            booksCategoriesList.add(new BooksCategory("Romance", romanceBooks));
         }
         if (!thrillerBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("thriller", thrillerBooks));
+            booksCategoriesList.add(new BooksCategory("Thriller", thrillerBooks));
         }
         if (!childsBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("childs", childsBooks));
+            booksCategoriesList.add(new BooksCategory("Childs", childsBooks));
         }
     }
 

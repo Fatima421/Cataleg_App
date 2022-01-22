@@ -7,6 +7,18 @@
     android:background="@drawable/bg_books"
     tools:context=".Books.BooksFragment">
 
+    <TextView
+        android:id="@+id/bookIntroText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/notosanshk_bold"
+        android:text="Descobreix els llibres catalans"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_category"
         android:layout_width="match_parent"
