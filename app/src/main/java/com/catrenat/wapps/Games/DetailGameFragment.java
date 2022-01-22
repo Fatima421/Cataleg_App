@@ -133,11 +133,12 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 // using pre-made custom ui
                 DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, youTubePlayer);
+                defaultPlayerUiController.showFullscreenButton(false);
+
                 youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
             }
         };
-
-// disable iframe ui
+        // disable iframe ui
         IFramePlayerOptions options = new IFramePlayerOptions.Builder().controls(0).build();
         youTubePlayerView.initialize(listener, options);
 

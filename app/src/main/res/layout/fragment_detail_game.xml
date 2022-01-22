@@ -8,29 +8,41 @@
     android:background="@drawable/bg_games"
     tools:context=".Games.DetailGameFragment">
 
-    <ImageView
-        android:id="@+id/gameMainImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view2"
         android:layout_width="0dp"
         android:layout_height="220dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="85dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/gameYoutubePlayer"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="10dp"
-        app:autoPlay="false"
-        app:enableAutomaticInitialization="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/gameMainImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gameYoutubePlayer"
+            app:layout_constraintEnd_toEndOf="@+id/gameYoutubePlayer"
+            app:layout_constraintStart_toStartOf="@+id/gameYoutubePlayer"
+            app:layout_constraintTop_toTopOf="@+id/gameYoutubePlayer"
+            android:scaleType="centerCrop"
+            />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/gameYoutubePlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:autoPlay="false"
+            app:enableAutomaticInitialization="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +55,7 @@
         android:requiresFadingEdge="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameMainImage" />
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <ScrollView
         android:id="@+id/gameInfoScrollView"
