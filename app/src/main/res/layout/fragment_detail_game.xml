@@ -23,27 +23,25 @@
             android:id="@+id/gameMainImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/gameYoutubePlayer"
             app:layout_constraintEnd_toEndOf="@+id/gameYoutubePlayer"
             app:layout_constraintStart_toStartOf="@+id/gameYoutubePlayer"
-            app:layout_constraintTop_toTopOf="@+id/gameYoutubePlayer"
-            android:scaleType="centerCrop"
-            />
+            app:layout_constraintTop_toTopOf="@+id/gameYoutubePlayer" />
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/gameYoutubePlayer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             app:autoPlay="false"
             app:enableAutomaticInitialization="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/galleryRecyclerView"
@@ -57,19 +55,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+    <TextView
+        android:id="@+id/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="Game Title"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryRecyclerView" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/platformLogoRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameTitle"
+        app:layout_constraintStart_toEndOf="@+id/gameTitle"
+        app:layout_constraintTop_toTopOf="@+id/gameTitle" />
+
+    <ImageView
+        android:id="@+id/gameFavImage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:scaleX="1.3"
+        android:scaleY="1.3"
+        android:src="@drawable/ic_music_heart"
+        app:layout_constraintBottom_toTopOf="@+id/gameInfoScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryRecyclerView" />
+
     <ScrollView
         android:id="@+id/gameInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:requiresFadingEdge="vertical"
         app:layout_constraintBottom_toTopOf="@+id/separatorLineView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/galleryRecyclerView">
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/gameInfoLayout"
@@ -77,38 +111,14 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/gameTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Game Title"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/releaseDateString"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:text="@string/gameReleaseDate"
                 android:textColor="@color/gameDetail_grey"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/platformLogoRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="60dp"
-                app:layout_constraintBottom_toBottomOf="@+id/gameTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/gameTitle"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -186,16 +196,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/gameEditorString"
                 app:layout_constraintStart_toEndOf="@+id/gameEditorString"
                 app:layout_constraintTop_toTopOf="@+id/gameEditorString" />
-
-            <ImageView
-                android:id="@+id/gameFavImage"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:src="@drawable/ic_music_heart"
-                app:layout_constraintBottom_toTopOf="@+id/gameReleaseDate"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/platformLogoRecyclerView"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
