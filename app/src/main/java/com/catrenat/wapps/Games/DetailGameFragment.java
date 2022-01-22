@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,12 +43,13 @@ import java.util.Map;
 
 public class DetailGameFragment extends Fragment implements SelectListener {
     private Game game;
-    private TextView gameTitle, gameReleaseDate, gameDeveloper, gameDescription, gameEditor;
+    private TextView gameTitle, gameReleaseDate, gameDeveloper, gameDescription, gameEditor, translateString;
     private RecyclerView gameGalleryRecyclerView, gamePlatformRecyclerView;
-    private ImageView gameMainImage;
+    private ImageView gameMainImage, translateImage, gameFavImage;
     private View shareView, moreView, translateView;
     private YouTubePlayerView youTubePlayerView;
     private FirebaseFirestore db;
+    boolean heartPressed = false;
 
     public DetailGameFragment(Game game) {
         this.game = game;
@@ -71,18 +73,24 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         shareView = root.findViewById(R.id.shareView);
         moreView = root.findViewById(R.id.moreView);
         translateView = root.findViewById(R.id.translateView);
+        translateImage = root.findViewById(R.id.translateImage);
+        translateString = root.findViewById(R.id.translateString);
+        gameFavImage = root.findViewById(R.id.gameFavImage);
         youTubePlayerView = root.findViewById(R.id.gameYoutubePlayer);
 
+        // Set game details
         gameTitle.setText(game.getName());
         gameReleaseDate.setText(game.getReleaseDate());
         gameDescription.setText(game.getGameDescription());
         gameDeveloper.setText(game.getDeveloper());
         gameEditor.setText(game.getEditor());
 
+        // Thumbnail gallery RecyclerView
         GameGalleryRecyclerViewAdapter gameGalleryAdapter = new GameGalleryRecyclerViewAdapter(game.getGalleryPaths(), getContext(), DetailGameFragment.this);
         gameGalleryRecyclerView.setAdapter(gameGalleryAdapter);
         gameGalleryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        // MainImage from thumbnail gallery onClick setter with Glide
         if (!game.getGalleryPaths().get(0).isEmpty()){
             FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
                     .getReference()
@@ -98,11 +106,22 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             });
         }
 
+        // Platform logo available RecyclerView
         PlatformLogoRecyclerViewAdapter platformLogoAdapter = new PlatformLogoRecyclerViewAdapter(game.getPlatforms());
         gamePlatformRecyclerView.setAdapter(platformLogoAdapter);
         gamePlatformRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        // To share
+        // Favorites button
+        gameFavImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
+                heartPressed = current != R.drawable.ic_music_heart;
+                gameFavImage.setImageResource(current);
+            }
+        });
+
+        // Share button
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +133,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             }
         });
 
+        // More button
         moreView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,17 +142,22 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             }
         });
 
-        // Translate view
-        translateView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (game.getTranslateURL() != null || !game.getTranslateURL().isEmpty()) {
+        // Translate button
+        if(!game.getTranslateURL().isEmpty()) {
+            Log.d("Fatima", "trans: " + game.getTranslateURL() );
+            translateView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(game.getTranslateURL()));
                     startActivity(browserIntent);
                 }
-            }
-        });
+            });
+        } else {
+            translateImage.setVisibility(View.GONE);
+            translateString.setVisibility(View.GONE);
+        }
 
+        // Youtube video player
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
@@ -142,24 +167,27 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             }
         });
 
+        // Youtube UI listener
         YouTubePlayerListener listener = new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                // using pre-made custom ui
+                // Using pre-made custom ui
                 DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, youTubePlayer);
                 defaultPlayerUiController.showFullscreenButton(false);
                 youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
             }
         };
-        // disable iframe ui
+        // Disable IFrame UI
         IFramePlayerOptions options = new IFramePlayerOptions.Builder().controls(0).build();
         youTubePlayerView.initialize(listener, options);
 
         return root;
     }
 
+    // onItemClicked SelectListener interface
     @Override
     public void onItemClicked(Uri uri, int position) {
+        // When thumbnail clicked shows in main image or player.
         if(position == 0) {
             youTubePlayerView.setVisibility(View.VISIBLE);
             gameMainImage.setVisibility(View.INVISIBLE);
