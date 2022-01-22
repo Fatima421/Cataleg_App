@@ -29,6 +29,7 @@ public class PlatformLogoRecyclerViewAdapter extends RecyclerView.Adapter<Platfo
 
     @Override
     public void onBindViewHolder(@NonNull PlatformLogoRecyclerViewAdapter.ViewHolder holder, int position) {
+        // Switch case for logo setter
         switch(platforms.get(position)) {
             case "Play Store":
                 holder.platformLogo.setImageResource(R.drawable.googleplay_logo);

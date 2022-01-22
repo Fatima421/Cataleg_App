@@ -187,7 +187,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
     // onItemClicked SelectListener interface
     @Override
     public void onItemClicked(Uri uri, int position) {
-        // When thumbnail clicked shows in main image or player.
+        // When thumbnail clicked shows in main image or player and hides current.
         if(position == 0) {
             youTubePlayerView.setVisibility(View.VISIBLE);
             gameMainImage.setVisibility(View.INVISIBLE);

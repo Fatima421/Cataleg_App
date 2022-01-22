@@ -56,6 +56,8 @@ public class GameGalleryRecyclerViewAdapter extends RecyclerView.Adapter<GameGal
                         .into(holder.galleryItemImage);
                 Log.i("IMAGEGLIDE", uri.toString());
 
+                // onItemClicked SelectListener interface
+                // When thumbnail clicked shows in main image or player and hides current.
                 holder.galleryItemImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
