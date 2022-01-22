@@ -2,12 +2,12 @@ package com.catrenat.wapps.Movies;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Movies.RecyclerView.MovieTagRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesDetailsFragment extends Fragment {
     // Properties
@@ -59,22 +59,17 @@ public class MoviesDetailsFragment extends Fragment {
         ImageView movieShareImg = view.findViewById(R.id.movieShareImg);
         TextView moviePlatformTxt = view.findViewById(R.id.moviePlatformTxt);
         ImageView moviePlatformImg = view.findViewById(R.id.moviePlatformImg);
-        ChipGroup chipGroup = view.findViewById(R.id.movieChipGroup);
+        RecyclerView movieTagRecyclerView = view.findViewById(R.id.movieTagRecyclerView);
 
         // Setting values to the view elements
         movieTitle.setText(serie.getName());
         seasonsAndEpisodes.setText(serie.getSeasons() + " "+getString(R.string.seasons)+" "+ serie.getEpisodes() + " "+getString(R.string.episodes)+" ");
         movieSinopsis.setText(serie.getSinopsis());
 
-        // Adding the genres chips
-        for(String genre: genres) {
-            Chip chip = new Chip(getContext());
-            chip.setText(genre);
-            chip.setTextColor(getResources().getColor(R.color.white));
-            chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.redishBlack)));
-            chip.setClickable(false);
-            chipGroup.addView(chip);
-        }
+        // Tag RecyclerView
+        MovieTagRecyclerViewAdapter movieTagAdapter = new MovieTagRecyclerViewAdapter(serie.getGenres());
+        movieTagRecyclerView.setAdapter(movieTagAdapter);
+        movieTagRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // Set moviePlatform Image
         if (selectedPlatform.equals(getString(R.string.netflix))) {
