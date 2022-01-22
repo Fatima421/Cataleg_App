@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,12 @@ import com.catrenat.wapps.Movies.RecyclerView.MovieTagRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.youtube.player.YouTubePlayerView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
 
 import java.util.ArrayList;
 
@@ -28,6 +35,7 @@ public class MoviesDetailsFragment extends Fragment {
     private Serie serie;
     private ArrayList<String> genres;
     private String selectedPlatform;
+    YouTubePlayerView youTubePlayerView;
 
     public MoviesDetailsFragment() {
         // Required empty public constructor
@@ -60,6 +68,7 @@ public class MoviesDetailsFragment extends Fragment {
         TextView moviePlatformTxt = view.findViewById(R.id.moviePlatformTxt);
         ImageView moviePlatformImg = view.findViewById(R.id.moviePlatformImg);
         RecyclerView movieTagRecyclerView = view.findViewById(R.id.movieTagRecyclerView);
+        youTubePlayerView = view.findViewById(R.id.movieYoutubePlayer);
 
         // Setting values to the view elements
         movieTitle.setText(serie.getName());
@@ -75,6 +84,29 @@ public class MoviesDetailsFragment extends Fragment {
         if (selectedPlatform.equals(getString(R.string.netflix))) {
             moviePlatformImg.setImageResource(R.drawable.netflix);
         }
+
+        // Movie trailer
+        getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = serie.getYoutubeUrl();
+                youTubePlayer.cueVideo(videoId, 0);
+            }
+        });
+
+        YouTubePlayerListener listener = new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                // using pre-made custom ui
+                DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, youTubePlayer);
+                defaultPlayerUiController.showFullscreenButton(false);
+                youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
+            }
+        };
+        // disable iframe ui
+        IFramePlayerOptions options = new IFramePlayerOptions.Builder().controls(0).build();
+        youTubePlayerView.initialize(listener, options);
 
 
         // Share button
