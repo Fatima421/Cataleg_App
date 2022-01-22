@@ -19,10 +19,12 @@ import java.util.List;
 public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeriesRecyclerViewAdapter.AllSeriesViewHolder> {
     private List<SerieCategories> allCategories;
     private Context context;
+    private String selectedPlatform;
 
-    public AllSeriesRecyclerViewAdapter(List<SerieCategories> allCategories, Context context) {
+    public AllSeriesRecyclerViewAdapter(List<SerieCategories> allCategories, Context context, String selectedPlatform) {
         this.context = context;
         this.allCategories = allCategories;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -59,7 +61,7 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
 
     // Set the series recycler view
     private void setSeriesRecycler(RecyclerView seriesRecyclerView, List<Serie> series) {
-        SeriesRecyclerViewAdapter seriesRecyclerViewAdapter = new SeriesRecyclerViewAdapter(series, context);
+        SeriesRecyclerViewAdapter seriesRecyclerViewAdapter = new SeriesRecyclerViewAdapter(series, context, selectedPlatform);
         seriesRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         seriesRecyclerView.setAdapter(seriesRecyclerViewAdapter);
     }

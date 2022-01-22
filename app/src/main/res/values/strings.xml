@@ -63,4 +63,11 @@
     <string name="technology">Tecnologia</string>
     <string name="health">Salut</string>
     <string name="food">Alimentació</string>
+    <string name="movieTitle">Títol de pel·lícula</string>
+    <string name="seasonsAndEpisodes">X temporades X capítols</string>
+    <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una serie.</string>
+    <string name="seasons">temporades</string>
+    <string name="episodes">capítols</string>
+    <string name="watchItOnNetflix">Mira-la a Netflix</string>
+    <string name="more">més</string>
 </resources>
