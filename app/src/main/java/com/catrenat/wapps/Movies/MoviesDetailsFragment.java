@@ -64,16 +64,7 @@ public class MoviesDetailsFragment extends Fragment {
         // Setting values to the view elements
         movieTitle.setText(serie.getName());
         seasonsAndEpisodes.setText(serie.getSeasons() + " "+getString(R.string.seasons)+" "+ serie.getEpisodes() + " "+getString(R.string.episodes)+" ");
-
-        // Setting the sinopsis text
-        String movieText = serie.getSinopsis();
-        int position = movieText.indexOf("...");
-        if (position != -1) {
-            String sinopsisText = movieText.substring(0, position);
-            movieSinopsis.setText(Html.fromHtml(sinopsisText+ "... " + "<font color=\"#B7DFF8\">" + "més"));
-        } else {
-            movieSinopsis.setText(movieText);
-        }
+        movieSinopsis.setText(serie.getSinopsis());
 
         // Adding the genres chips
         for(String genre: genres) {
@@ -83,6 +74,11 @@ public class MoviesDetailsFragment extends Fragment {
             chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.redishBlack)));
             chip.setClickable(false);
             chipGroup.addView(chip);
+        }
+
+        // Set moviePlatform Image
+        if (selectedPlatform.equals(getString(R.string.netflix))) {
+            moviePlatformImg.setImageResource(R.drawable.netflix);
         }
 
 
@@ -100,6 +96,21 @@ public class MoviesDetailsFragment extends Fragment {
                 shareMovieTrailer();
             }
         });
+        
+        // Platform link button
+        moviePlatformTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPlatform();
+            }
+        });
+
+        moviePlatformImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPlatform();
+            }
+        });
 
         return view;
     }
@@ -112,5 +123,9 @@ public class MoviesDetailsFragment extends Fragment {
         sendIntent.putExtra(Intent.EXTRA_TEXT, youtubeInitialText + serie.getYoutubeUrl());
         sendIntent.setType("text/plain");
         getContext().startActivity(sendIntent);
+    }
+
+    public void openPlatform() {
+
     }
 }

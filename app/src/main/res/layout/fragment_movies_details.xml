@@ -61,11 +61,11 @@
         android:id="@+id/movieSinopsis"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_gravity="center_vertical|end"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center_vertical|end"
+        android:layout_marginBottom="30dp"
         android:lineSpacingExtra="5dp"
         android:scrollbars="vertical"
         android:text="@string/movieSinopsis"
@@ -82,18 +82,18 @@
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/episodesAndSeasons" >
-    </com.google.android.material.chip.ChipGroup>
+        app:layout_constraintTop_toBottomOf="@+id/episodesAndSeasons"></com.google.android.material.chip.ChipGroup>
 
     <ImageView
         android:id="@+id/movieShareImg"
-        android:layout_width="43dp"
-        android:layout_height="41dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/share"
-        app:layout_constraintBottom_toTopOf="@+id/movieShareText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/moviePlatformCard" />
+        app:layout_constraintStart_toEndOf="@+id/moviePlatformCard"
+        app:layout_constraintTop_toBottomOf="@+id/movieSinopsis" />
 
     <TextView
         android:id="@+id/movieShareText"
@@ -101,13 +101,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:fontFamily="@font/notosanshk_medium"
+        android:gravity="center"
         android:text="@string/share"
         android:textColor="@color/white"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/moviePlatformTxt" />
+        app:layout_constraintEnd_toEndOf="@+id/movieShareImg"
+        app:layout_constraintStart_toStartOf="@+id/movieShareImg"
+        app:layout_constraintTop_toBottomOf="@+id/movieShareImg" />
 
     <TextView
         android:id="@+id/moviePlatformTxt"
@@ -115,24 +116,25 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:fontFamily="@font/notosanshk_medium"
-        android:text="@string/watchItOnNetflix"
+        android:text="@string/watchIt"
         android:textColor="@color/white"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/movieShareText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/moviePlatformCard"
+        app:layout_constraintStart_toStartOf="@+id/moviePlatformCard"
+        app:layout_constraintTop_toBottomOf="@+id/moviePlatformCard" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/moviePlatformCard"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         app:cardBackgroundColor="@color/transparent"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/moviePlatformTxt"
         app:layout_constraintEnd_toStartOf="@+id/movieShareImg"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieSinopsis">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -140,13 +142,15 @@
 
             <ImageView
                 android:id="@+id/moviePlatformImg"
-                android:layout_width="166dp"
-                android:layout_height="91dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/netflix"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

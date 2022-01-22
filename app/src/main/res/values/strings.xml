@@ -68,6 +68,7 @@
     <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una serie.</string>
     <string name="seasons">temporades</string>
     <string name="episodes">capítols</string>
-    <string name="watchItOnNetflix">Mira-la a Netflix</string>
+    <string name="watchIt">Ves a la plataforma</string>
     <string name="more">més</string>
+    <string name="netflix">Netflix</string>
 </resources>
