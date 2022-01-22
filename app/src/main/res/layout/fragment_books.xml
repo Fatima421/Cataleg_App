@@ -14,7 +14,7 @@
         android:layout_marginTop="68dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/notosanshk_bold"
-        android:text="Descobreix els llibres catalans"
+        android:text="@string/welcomeBookScreen"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp" />
