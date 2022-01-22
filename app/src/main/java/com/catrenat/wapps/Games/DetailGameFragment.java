@@ -23,14 +23,22 @@ import com.catrenat.wapps.Games.RecyclerView.SelectListener;
 import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Music.RecyclerView.CustomPlayerUiController;
 import com.catrenat.wapps.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailGameFragment extends Fragment implements SelectListener {
     private Game game;
@@ -39,6 +47,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
     private ImageView gameMainImage;
     private View shareView, moreView, translateView;
     private YouTubePlayerView youTubePlayerView;
+    private FirebaseFirestore db;
 
     public DetailGameFragment(Game game) {
         this.game = game;
@@ -74,23 +83,26 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         gameGalleryRecyclerView.setAdapter(gameGalleryAdapter);
         gameGalleryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
-                .getReference()
-                .child(game.getGalleryPaths().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Load image with glide
-                Glide.with(getContext())
-                        .load(uri.toString())
-                        .into(gameMainImage);
-                Log.i("IMAGEGLIDE", uri.toString());
-            }
-        });
+        if (!game.getGalleryPaths().get(0).isEmpty()){
+            FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
+                    .getReference()
+                    .child(game.getGalleryPaths().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // Load image with glide
+                    Glide.with(getContext())
+                            .load(uri.toString())
+                            .into(gameMainImage);
+                    Log.i("IMAGEGLIDE", uri.toString());
+                }
+            });
+        }
 
         PlatformLogoRecyclerViewAdapter platformLogoAdapter = new PlatformLogoRecyclerViewAdapter(game.getPlatforms());
         gamePlatformRecyclerView.setAdapter(platformLogoAdapter);
         gamePlatformRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        // To share
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,14 +122,16 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             }
         });
 
+        // Translate view
         translateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(game.getTranslateURL()));
-                startActivity(browserIntent);
+                if (game.getTranslateURL() != null || !game.getTranslateURL().isEmpty()) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(game.getTranslateURL()));
+                    startActivity(browserIntent);
+                }
             }
         });
-
 
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -134,7 +148,6 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                 // using pre-made custom ui
                 DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, youTubePlayer);
                 defaultPlayerUiController.showFullscreenButton(false);
-
                 youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
             }
         };
@@ -157,6 +170,45 @@ public class DetailGameFragment extends Fragment implements SelectListener {
             Glide.with(getContext())
                     .load(uri.toString())
                     .into(gameMainImage);
+            youTubePlayerView.getYouTubePlayerWhenReady(new YouTubePlayerCallback() {
+                @Override
+                public void onYouTubePlayer(@NonNull YouTubePlayer youTubePlayer) {
+                    youTubePlayer.pause();
+                }
+            });
         }
+    }
+
+    private void addGameOnFirebase() {
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("developer", "");
+        user.put("editor", "");
+        user.put("galleryPaths", Arrays.asList(""));
+        user.put("gameDescription", "");
+        user.put("imagePath", "/gamesImages/gameCover/");
+        user.put("moreURL", "");
+        user.put("name", "");
+        user.put("platforms", Arrays.asList(""));
+        user.put("releaseDate", "");
+        user.put("translateURL", "");
+        user.put("youtubeURL", "");
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Games")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error adding document", e);
+                    }
+                });
     }
 }
