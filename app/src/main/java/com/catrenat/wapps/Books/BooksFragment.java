@@ -46,6 +46,8 @@ public class BooksFragment extends Fragment {
     private List<Book> romanceBooks = new ArrayList<>();
     private List<Book> thrillerBooks = new ArrayList<>();
     private List<Book> childsBooks = new ArrayList<>();
+    private List<Book> comediaBooks = new ArrayList<>();
+    private List<Book> literaturaBooks = new ArrayList<>();
 
 
 
@@ -82,15 +84,18 @@ public class BooksFragment extends Fragment {
                             for (int i = 0; i < booksList.size(); i++) {
                                 if (booksList.get(i).getCategory().equals("romance")) {
                                     romanceBooks.add(booksList.get(i));
-                                    Log.i("booksRomance", booksList.get(i).getTitle());
                                 }
                                 if (booksList.get(i).getCategory().equals("thriller")) {
                                     thrillerBooks.add(booksList.get(i));
-                                    Log.i("booksThriller", booksList.get(i).getTitle());
                                 }
                                 if (booksList.get(i).getCategory().equals("childs")) {
                                     childsBooks.add(booksList.get(i));
-                                    Log.i("books", booksList.get(i).getTitle());
+                                }
+                                if (booksList.get(i).getCategory().equals("comedia")) {
+                                    comediaBooks.add(booksList.get(i));
+                                }
+                                if (booksList.get(i).getCategory().equals("literatura")) {
+                                    literaturaBooks.add(booksList.get(i));
                                 }
                             }
                             // Initializing the RecyclerView for the movie categories list
@@ -114,10 +119,16 @@ public class BooksFragment extends Fragment {
             booksCategoriesList.add(new BooksCategory("Romance", romanceBooks));
         }
         if (!thrillerBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Thriller", thrillerBooks));
+            booksCategoriesList.add(new BooksCategory("Suspens i misteri", thrillerBooks));
         }
         if (!childsBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Childs", childsBooks));
+            booksCategoriesList.add(new BooksCategory("Llibres Infantils", childsBooks));
+        }
+        if (!comediaBooks.isEmpty()) {
+            booksCategoriesList.add(new BooksCategory("Comèdia", comediaBooks));
+        }
+        if (!literaturaBooks.isEmpty()) {
+            booksCategoriesList.add(new BooksCategory("Literatura", literaturaBooks));
         }
     }
 
@@ -134,6 +145,12 @@ public class BooksFragment extends Fragment {
         }
         if (childsBooks != null) {
             childsBooks.clear();
+        }
+        if (romanceBooks != null) {
+            romanceBooks.clear();
+        }
+        if (literaturaBooks != null) {
+            literaturaBooks.clear();
         }
     }
 }
