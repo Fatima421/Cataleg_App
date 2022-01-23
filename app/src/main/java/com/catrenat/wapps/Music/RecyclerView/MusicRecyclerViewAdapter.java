@@ -37,8 +37,17 @@ import com.catrenat.wapps.Music.MusicArtistFragment;
 import com.catrenat.wapps.Music.MusicDetailsFragment;
 import com.catrenat.wapps.R;
 import com.catrenat.wapps.Models.Music;
+import com.catrenat.wapps.Models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -51,7 +60,10 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiCo
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecyclerViewAdapter.MusicViewHolder>{
 
@@ -61,17 +73,16 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
     private RecyclerView musicRecyclerView;
     boolean heartPressed = false;
     YouTubePlayerView youTubePlayerView;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+    private FirebaseFirestore db;
+    private User user;
 
     // Constructor
-    public MusicRecyclerViewAdapter(RecyclerView musicRecyclerView, ArrayList<Music> musicArray, Context context, YouTubePlayerView youTubePlayerView){
+    public MusicRecyclerViewAdapter(RecyclerView musicRecyclerView, ArrayList<Music> musicArray, Context context, YouTubePlayerView youTubePlayerView, User user){
         this.musicRecyclerView = musicRecyclerView;
         this.musicArray = musicArray;
         this.context = context;
         this.youTubePlayerView = youTubePlayerView;
-        this.sharedPref = context.getSharedPreferences("music_fav", Context.MODE_PRIVATE);
-        this.editor = sharedPref.edit();
+        this.user = user;
     }
 
     // Creating a new onCreateViewHolder
@@ -88,6 +99,13 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
     public void onBindViewHolder(@NonNull MusicViewHolder holder, int position) {
         // Create a music object with the music that is inside the array list
         Music music = musicArray.get(position);
+
+        // Load favourite image
+        for (int i = 0; i < user.getMusics().size(); i++) {
+            if (user.getMusics().get(i).equals(music.getSongName())) {
+                holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
+            }
+        }
 
         // Creating the music artist details fragment
         MusicArtistFragment musicArtistFragment = new MusicArtistFragment();
@@ -111,19 +129,17 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
         });
 
         // For the favourite button
-        if (sharedPref.getBoolean(music.getSong(), true)) {
-            holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
-        }
         holder.favouriteImage.setOnClickListener(view -> {
             AppCompatActivity app = (AppCompatActivity) view.getContext();
             int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
-            if (!heartPressed) {
-                editor.putBoolean(music.getSong(), true).commit();
-            } else {
-                editor.putBoolean(music.getSong(), false).commit();
-            }
             heartPressed = current != R.drawable.ic_music_heart;
             holder.favouriteImage.setImageResource(current);
+            if (heartPressed) {
+                addFavToFirebase(music.getSongName());
+            }
+            if (!heartPressed) {
+                deleteFavFromFirebase(music.getSongName());
+            }
         });
 
         // Music Details Fragment Dialog
@@ -143,7 +159,7 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
 
             // Elements of the dialog
             View dialogDismissView = musicDetailsFragmentPopup.findViewById(R.id.musicDetailsdismissDialogView);
-            ImageView favouriteImage = musicDetailsFragmentPopup.findViewById(R.id.musicDetailFavourite);
+            ImageView favouriteImageDialog = musicDetailsFragmentPopup.findViewById(R.id.musicDetailFavourite);
             TextView favouriteText = musicDetailsFragmentPopup.findViewById(R.id.musicDetailFavouriteText);
             ImageView songImage = musicDetailsFragmentPopup.findViewById(R.id.songImage);
             ImageView songImagePlaceholder = musicDetailsFragmentPopup.findViewById(R.id.musicDetailPlaceholderImg);
@@ -185,36 +201,38 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
                 songImagePlaceholder.setVisibility(View.VISIBLE);
             }
 
-            if (sharedPref.getBoolean(music.getSong(), true)) {
-                favouriteImage.setImageResource(R.drawable.ic_music_details_filled_heart);
-                holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
+            // Load favourite image
+            for (int i = 0; i < user.getMusics().size(); i++) {
+                if (user.getMusics().get(i).equals(music.getSongName())) {
+                    favouriteImageDialog.setImageResource(R.drawable.ic_music_details_filled_heart);
+                }
             }
 
             // Change dialog favourite image by touching
-            favouriteImage.setOnClickListener(view -> {
+            favouriteImageDialog.setOnClickListener(view -> {
                 int current = (!heartPressed) ? R.drawable.ic_music_details_filled_heart : R.drawable.ic_music_details_heart;
-                if (!heartPressed) {
-                    editor.putBoolean(music.getSong(), true).commit();
+                heartPressed = current != R.drawable.ic_music_details_heart;
+                favouriteImageDialog.setImageResource(current);
+                if (heartPressed) {
+                    addFavToFirebase(music.getSongName());
                     holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
-                } else {
-                    editor.putBoolean(music.getSong(), false).commit();
+                }
+                if (!heartPressed) {
+                    deleteFavFromFirebase(music.getSongName());
                     holder.favouriteImage.setImageResource(R.drawable.ic_music_heart);
                 }
-                heartPressed = current != R.drawable.ic_music_details_heart;
-                favouriteImage.setImageResource(current);
             });
 
             favouriteText.setOnClickListener(view -> {
                 int current = (!heartPressed) ? R.drawable.ic_music_details_filled_heart : R.drawable.ic_music_details_heart;
-                if (!heartPressed) {
-                    editor.putBoolean(music.getSong(), true).commit();
-                    holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
-                } else {
-                    editor.putBoolean(music.getSong(), false).commit();
-                    holder.favouriteImage.setImageResource(R.drawable.ic_music_heart);
-                }
                 heartPressed = current != R.drawable.ic_music_details_heart;
-                favouriteImage.setImageResource(current);
+                favouriteImageDialog.setImageResource(current);
+                if (heartPressed) {
+                    addFavToFirebase(music.getSongName());
+                }
+                if (!heartPressed) {
+                    deleteFavFromFirebase(music.getSongName());
+                }
             });
 
             // More about the song artist button
@@ -361,5 +379,83 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
             // Disable iframe ui
             youTubePlayerView.initialize(listener, options);
         }
+    }
+
+    public void addFavToFirebase(String songName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("musics", FieldValue.arrayUnion(songName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void deleteFavFromFirebase(String songName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("musics", FieldValue.arrayRemove(songName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }
