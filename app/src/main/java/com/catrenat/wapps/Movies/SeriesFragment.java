@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.catrenat.wapps.Models.SerieCategories;
 import com.catrenat.wapps.Models.Serie;
@@ -58,6 +61,8 @@ public class SeriesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_series, container, false);
+        TextView noSeriesTxt = view.findViewById(R.id.noSeriesTxt);
+        noSeriesTxt.setVisibility(view.GONE);
 
         // Gets data from bundle
         Bundle bundle = getArguments();
@@ -86,6 +91,11 @@ public class SeriesFragment extends Fragment {
                                         seriesList.add(serie);
                                     }
                                 }
+                            }
+                            if (seriesList.isEmpty() || seriesList == null) {
+                                noSeriesTxt.setVisibility(view.VISIBLE);
+                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                noSeriesTxt.setAnimation(animation);
                             }
                             for (int i = 0; i < seriesList.size(); i++) {
                                 if (seriesList.get(i).getCategory().equals(getString(R.string.action))) {

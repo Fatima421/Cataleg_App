@@ -47,7 +47,7 @@
     <string name="albumYear">Any ·</string>
     <string name="albumType">Tipus de títol</string>
     <string name="titlesArtist">Més títols en català</string>
-    <string name="seriesFragmentName">Series</string>
+    <string name="seriesFragmentName">Sèries</string>
     <string name="moviesFragmentName">Pel·lícules</string>
     <string name="docsFragmentName">Documentals</string>
     <string name="games">Videojocs</string>
@@ -70,7 +70,7 @@
     <string name="gameTranslate">Traducció</string>
     <string name="movieTitle">Títol de pel·lícula</string>
     <string name="seasonsAndEpisodes">X temporades X capítols</string>
-    <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una serie.</string>
+    <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una sèrie.</string>
     <string name="seasons">temporades</string>
     <string name="season">temporada</string>
     <string name="episodes">capítols</string>
@@ -87,4 +87,7 @@
     <string name="exitMessage">Estàs segur de què vols sortir?</string>
     <string name="accept">Acceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="noSerie">Cap sèrie en català trobada en aquesta plataforma</string>
+    <string name="noMovie">Cap pel·lícula en català trobada en aquesta plataforma</string>
+    <string name="noDocumental">Cap documental en català trobat en aquesta plataforma</string>
 </resources>
