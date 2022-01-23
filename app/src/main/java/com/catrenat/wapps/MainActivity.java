@@ -135,17 +135,18 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle(R.string.alert_logout_title);
                         builder.setMessage(R.string.alert_logout_message);
-                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // Log off the app and deactivates auto-login
                                 SharedPreferences prefs= getSharedPreferences("SharedP", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putBoolean("login", false);
                                 editor.commit();
+                                finish();
                                 startActivity(new Intent(getApplicationContext(), LoginScreen.class));
                             }
                         });
-                        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // Closes alert dialog
                             }
