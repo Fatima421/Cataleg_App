@@ -18,5 +18,6 @@
     <color name="black25">#40000000</color>
     <color name="black60">#99000000</color>
     <color name="login_grey">#757575</color>
+    <color name="gameDetail_grey">#B9ADAD</color>
     <color name="redishBlack">#544141</color>
 </resources>

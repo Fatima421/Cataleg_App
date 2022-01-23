@@ -30,6 +30,7 @@
     <string name="welcomeMusicScreen">Descobreix la música catalana</string>
     <string name="welcomeGameScreen">Descobreix els videojocs en català</string>
     <string name="welcomeMovieScreen">Selecciona una plataforma d\'interés</string>
+    <string name="welcomeBookScreen">Descobreix els llibres catalans</string>
     <string name="choosePlatform">Escull una plataforma</string>
     <string name="rememberMe">Recorda\'m</string>
     <string name="favourite">T\'agrada</string>
@@ -63,6 +64,12 @@
     <string name="technology">Tecnologia</string>
     <string name="health">Salut</string>
     <string name="food">Alimentació</string>
+    <string name="gameReleaseDate">DATA DE LLANÇAMENT:</string>
+    <string name="gameDeveloper">DESENVOLUPADOR:</string>
+    <string name="gameEditor">EDITOR:</string>
+    <string name="gameMore">Ves-hi</string>
+    <string name="gameShare">Compartir</string>
+    <string name="gameTranslate">Traducció</string>
     <string name="movieTitle">Títol de pel·lícula</string>
     <string name="seasonsAndEpisodes">X temporades X capítols</string>
     <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una serie.</string>
