@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new BooksFragment();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack("").commit();
 
                 return true;
             }

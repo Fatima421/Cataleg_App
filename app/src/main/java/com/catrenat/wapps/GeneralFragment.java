@@ -247,5 +247,4 @@ public class GeneralFragment extends Fragment {
             bottomNav.getMenu().getItem(i).setEnabled(disable);
         }
     }
-
 }

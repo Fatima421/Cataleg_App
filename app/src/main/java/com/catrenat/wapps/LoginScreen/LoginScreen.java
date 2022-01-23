@@ -79,6 +79,7 @@ private SharedPreferences prefs;
         registerTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
@@ -94,6 +95,7 @@ private SharedPreferences prefs;
         // If remember was check permits auto-login.
         if(prefs.getBoolean("login", false)) {
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }
@@ -135,6 +137,7 @@ private SharedPreferences prefs;
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putBoolean("login", true).commit();
                 }
+                finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
