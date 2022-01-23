@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue">#2E82BF</color>
-
-
     <color name="base">#1E79B8</color>
     <color name="music">#ACD3C4</color>
     <color name="musicMid">#69B1B2</color>
@@ -21,4 +19,5 @@
     <color name="black60">#99000000</color>
     <color name="login_grey">#757575</color>
     <color name="gameDetail_grey">#B9ADAD</color>
+    <color name="redishBlack">#544141</color>
 </resources>

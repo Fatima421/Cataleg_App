@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
+import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Movies.MoviesDetailsFragment;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,10 +26,12 @@ import java.util.List;
 public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecyclerViewAdapter.PelisViewHolder> {
     private List<Pelis> pelis;
     private Context context;
+    private String selectedPlatform;
 
-    public PelisRecyclerViewAdapter(List<Pelis> pelis, Context context){
+    public PelisRecyclerViewAdapter(List<Pelis> pelis, Context context, String selectedPlatform){
         this.pelis = pelis;
         this.context = context;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -39,6 +44,9 @@ public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecycler
 
     @Override
     public void onBindViewHolder(@NonNull PelisRecyclerViewAdapter.PelisViewHolder holder, int position) {
+        // Peli in the current position
+        Pelis peli = pelis.get(position);
+
         // Image loader from firebase using glide (Asks firebase for image hosted url using imagePath to storage)
         StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
         if(!pelis.get(position).getImagePath().isEmpty() && pelis.get(position).getImagePath() != null) {
@@ -52,6 +60,14 @@ public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecycler
                 }
             });
         }
+
+        holder.pelisImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(peli, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

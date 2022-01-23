@@ -106,7 +106,7 @@ public class SeriesFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext());
+                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform);
                             allSeriesRecyclerView.setAdapter(moviesAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

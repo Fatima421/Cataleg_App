@@ -20,10 +20,12 @@ import java.util.List;
 public class AllDocusRecyclerViewAdapter extends RecyclerView.Adapter<AllDocusRecyclerViewAdapter.AllDocusViewHolder> {
     private List<DocusCategories> documentalsCategories;
     private Context context;
+    private String selectedPlatform;
 
-    public AllDocusRecyclerViewAdapter(List<DocusCategories> documentalsCategories, Context context) {
+    public AllDocusRecyclerViewAdapter(List<DocusCategories> documentalsCategories, Context context, String selectedPlatform) {
         this.context = context;
         this.documentalsCategories = documentalsCategories;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -60,7 +62,7 @@ public class AllDocusRecyclerViewAdapter extends RecyclerView.Adapter<AllDocusRe
 
     // Set the Documental recycler view
     private void setDocusRecycler(RecyclerView docusRecyclerView, List<Documental> documentals) {
-        DocusRecyclerViewAdapter docusRecyclerViewAdapter = new DocusRecyclerViewAdapter(documentals, context);
+        DocusRecyclerViewAdapter docusRecyclerViewAdapter = new DocusRecyclerViewAdapter(documentals, context, selectedPlatform);
         docusRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         docusRecyclerView.setAdapter(docusRecyclerViewAdapter);
     }
