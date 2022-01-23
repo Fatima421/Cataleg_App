@@ -85,4 +85,8 @@
     <string name="primeVideo">Prime Video</string>
     <string name="super3">Super 3</string>
     <string name="filmin">Filmin</string>
+    <string name="exitAlert">Sortir?</string>
+    <string name="exitMessage">Estàs segur de què vols sortir?</string>
+    <string name="accept">Acceptar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

@@ -72,6 +72,7 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
                 app.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, detailGameFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });
