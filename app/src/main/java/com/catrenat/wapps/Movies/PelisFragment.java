@@ -49,7 +49,6 @@ public class PelisFragment extends Fragment {
     public PelisFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +107,7 @@ public class PelisFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext());
+                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
                             allPelisRecyclerView.setAdapter(pelisAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

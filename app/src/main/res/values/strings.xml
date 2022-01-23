@@ -74,9 +74,15 @@
     <string name="seasonsAndEpisodes">X temporades X capítols</string>
     <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una serie.</string>
     <string name="seasons">temporades</string>
+    <string name="season">temporada</string>
     <string name="episodes">capítols</string>
+    <string name="episode">capítol</string>
     <string name="watchIt">Ves a la plataforma</string>
     <string name="more">més</string>
     <string name="netflix">Netflix</string>
     <string name="tv3">TV3</string>
+    <string name="disney">Disney</string>
+    <string name="primeVideo">Prime Video</string>
+    <string name="super3">Super 3</string>
+    <string name="filmin">Filmin</string>
 </resources>

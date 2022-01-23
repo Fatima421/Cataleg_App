@@ -106,7 +106,7 @@ public class DocusFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext());
+                            docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext(), selectedPlatform);
                             allDocusRecyclerView.setAdapter(docusAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

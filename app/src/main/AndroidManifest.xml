@@ -11,6 +11,8 @@
             <action android:name="com.google.android.youtube.api.service.START" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
+        <package android:name="cat.tv3.eng.tresac" />
+        <package android:name="com.disney.disneyplus" />
     </queries>
 
     <application
