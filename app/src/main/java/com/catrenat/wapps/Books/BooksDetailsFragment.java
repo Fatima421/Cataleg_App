@@ -7,11 +7,19 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.R;
 
 public class BooksDetailsFragment extends Fragment {
+
+    Book book = new Book();
+
     public BooksDetailsFragment() {
         // Required empty public constructor
+    }
+
+    public BooksDetailsFragment(Book book) {
+        this.book = book;
     }
 
     @Override
