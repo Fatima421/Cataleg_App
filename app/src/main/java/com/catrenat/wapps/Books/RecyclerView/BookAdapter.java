@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.catrenat.wapps.Books.BooksDetailsFragment;
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,6 +59,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 }
             });
         }
+        holder.imgBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BooksDetailsFragment(), "booksDetailsFragment").addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
