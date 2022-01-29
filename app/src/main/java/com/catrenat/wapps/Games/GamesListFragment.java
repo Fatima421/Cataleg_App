@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.catrenat.wapps.Games.RecyclerView.GameListRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Game;
@@ -30,6 +31,7 @@ public class GamesListFragment extends Fragment {
     private FirebaseFirestore db;
     private ArrayList<Game> games;
     private String selectedPlatform;
+    private GameListRecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +69,7 @@ public class GamesListFragment extends Fragment {
 
                         // RecyclerView declared and init with array
                         RecyclerView recyclerView = root.findViewById(R.id.gameListRecyclerView);
-                        GameListRecyclerViewAdapter adapter = new GameListRecyclerViewAdapter(games, getContext());
+                        adapter = new GameListRecyclerViewAdapter(games, getContext());
                         recyclerView.setAdapter(adapter);
 
                         // Disables recyclerView nested scroll
@@ -77,6 +79,35 @@ public class GamesListFragment extends Fragment {
                         });
                     }
                 });
+        // Searcher that lets search items by name
+        SearchView searchItem = root.findViewById(R.id.gamesSearchBar);
+        searchItem.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+            }
+        });
+        searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                return false;
+            }
+        });
+        //search
+        // Item.setIconified(false);
+        searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //adapter.filter(newText);
+                return false;
+            }});
 
         return root;
     }

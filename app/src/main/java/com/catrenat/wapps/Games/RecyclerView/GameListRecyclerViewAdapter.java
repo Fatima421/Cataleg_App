@@ -2,6 +2,7 @@ package com.catrenat.wapps.Games.RecyclerView;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,9 +25,13 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Game> games;
+    private ArrayList<Game> all_games;
     private Context context;
 
     public GameListRecyclerViewAdapter() {
@@ -35,6 +40,8 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
     public GameListRecyclerViewAdapter(ArrayList<Game> games, Context context){
         this.games = games;
         this.context = context;
+        all_games = new ArrayList<>();
+        all_games.addAll(games);
     }
 
     @NonNull
@@ -81,6 +88,30 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
     @Override
     public int getItemCount() {
         return games.size();
+    }
+
+    // SearchBar filter
+    public void filter(String StrSearch){
+        if(StrSearch.length()==0){
+            games.clear();
+            games.addAll(all_games);
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                List<Game> collect = games.stream()
+                        .filter(i->i.getName().toLowerCase(Locale.ROOT).contains(StrSearch))
+                        .collect(Collectors.toList());
+                games.clear();
+                games.addAll(collect);
+            }else{
+                games.clear();
+                for(Game i:all_games){
+                    if(i.getName().toLowerCase(Locale.ROOT).contains(StrSearch)){
+                        games.add(i);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
