@@ -22,10 +22,19 @@ import android.widget.TextView;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.RecyclerView.MovieTagRecyclerViewAdapter;
 import com.catrenat.wapps.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
@@ -45,27 +54,32 @@ public class MoviesDetailsFragment extends Fragment {
     boolean heartPressed = false;
     MovieTagRecyclerViewAdapter movieTagAdapter;
     private Documental documental;
+    private FirebaseFirestore db;
+    private User user;
 
     public MoviesDetailsFragment() {
         // Required empty public constructor
     }
 
-    public MoviesDetailsFragment(Serie serie, String selectedPlatform) {
+    public MoviesDetailsFragment(Serie serie, String selectedPlatform, User user) {
         this.serie = serie;
         this.genres = serie.getGenres();
         this.selectedPlatform = selectedPlatform;
+        this.user = user;
     }
 
-    public MoviesDetailsFragment(Pelis peli, String selectedPlatform) {
+    public MoviesDetailsFragment(Pelis peli, String selectedPlatform, User user) {
         this.peli = peli;
         this.genres = peli.getGenres();
         this.selectedPlatform = selectedPlatform;
+        this.user = user;
     }
 
-    public MoviesDetailsFragment(Documental documental, String selectedPlatform) {
+    public MoviesDetailsFragment(Documental documental, String selectedPlatform, User user) {
         this.documental = documental;
         this.genres = documental.getGenres();
         this.selectedPlatform = selectedPlatform;
+        this.user = user;
     }
 
     @Override
@@ -167,8 +181,50 @@ public class MoviesDetailsFragment extends Fragment {
                 int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
                 heartPressed = current != R.drawable.ic_music_heart;
                 favouriteImg.setImageResource(current);
+                if (serie != null) {
+                    if (heartPressed) {
+                        addFavToFirebase(serie.getName());
+                    } else {
+                        deleteFavFromFirebase(serie.getName());
+                    }
+                } else if (peli != null) {
+                    if (heartPressed) {
+                        addFavToFirebase(peli.getName());
+                    } else {
+                        deleteFavFromFirebase(peli.getName());
+                    }
+                } else {
+                    if (heartPressed) {
+                        addFavToFirebase(documental.getName());
+                    } else {
+                        deleteFavFromFirebase(documental.getName());
+                    }
+                }
+
             }
         });
+
+
+        // Load favourite image
+        if (user != null) {
+            if (user.getMovies() != null) {
+                for (int i = 0; i < user.getMovies().size(); i++) {
+                    if (serie != null) {
+                        if (user.getMovies().get(i).equals(serie.getName())) {
+                            favouriteImg.setImageResource(R.drawable.ic_music_filled_heart);
+                        }
+                    } else if (peli != null) {
+                        if (user.getMovies().get(i).equals(peli.getName())) {
+                            favouriteImg.setImageResource(R.drawable.ic_music_filled_heart);
+                        }
+                    } else {
+                        if (user.getMovies().get(i).equals(documental.getName())) {
+                            favouriteImg.setImageResource(R.drawable.ic_music_filled_heart);
+                        }
+                    }
+                }
+            }
+        }
 
         // Movie trailer
         getLifecycle().addObserver(youTubePlayerView);
@@ -382,5 +438,83 @@ public class MoviesDetailsFragment extends Fragment {
                 getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + filminPackage)));
             }
         }
+    }
+
+    public void addFavToFirebase(String name) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("movies", FieldValue.arrayUnion(name))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void deleteFavFromFirebase(String name) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("movies", FieldValue.arrayRemove(name))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }

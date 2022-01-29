@@ -2,6 +2,7 @@ package com.catrenat.wapps.Movies.RecyclerView.Series;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesDetailsFragment;
 import com.catrenat.wapps.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,6 +33,7 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
     private List<Serie> series;
     private Context context;
     private String selectedPlatform;
+    private User user;
 
     public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform){
         this.series = series;
@@ -64,7 +72,30 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
             @Override
             public void onClick(View view) {
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
-                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
+
+                // Creating the database instance
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                // Get user from firebase
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                    .document(userId)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    user = document.toObject(User.class);
+                                }
+                                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform, user), "moviesDetailsFragment").addToBackStack(null).commit();
+                            } else {
+                                Log.w("TAG", "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
             }
         });
     }
