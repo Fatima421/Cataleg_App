@@ -14,10 +14,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.catrenat.wapps.Models.Game;
+import com.catrenat.wapps.Favourites.MovieFav.MovieFavFragment;
+import com.catrenat.wapps.Favourites.MusicFav.MusicFavFragment;
+import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Music;
+import com.catrenat.wapps.Models.Pelis;
+import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
-import com.catrenat.wapps.Music.RecyclerView.MusicRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +36,9 @@ public class GeneralFavFragment extends Fragment {
     // Properties
     private User user;
     private ArrayList<Music> musicArray = new ArrayList<>();
+    private ArrayList<Serie> seriesList = new ArrayList();
+    private ArrayList<Pelis> pelisList = new ArrayList();
+    private ArrayList<Documental> documentalList = new ArrayList();
     FirebaseFirestore db;
 
     public GeneralFavFragment() {
@@ -112,7 +118,84 @@ public class GeneralFavFragment extends Fragment {
         movieFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MovieFavFragment()).addToBackStack(null).commit();
+                // Creating the database instance
+                db = FirebaseFirestore.getInstance();
+
+                // Get user from firebase
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .document(userId)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        user = document.toObject(User.class);
+                                    }
+                                    // Get data from firebase
+                                    db.collection("Serie")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                                            Log.d("TAG", document.getId() + " => " + document.getData());
+                                                            Serie serie = document.toObject(Serie.class);
+                                                            seriesList.add(serie);
+                                                        }
+
+                                                        // Get data from firebase
+                                                        db.collection("Peli")
+                                                                .get()
+                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                                Log.d("TAG", document.getId() + " => " + document.getData());
+                                                                                Pelis peli = document.toObject(Pelis.class);
+                                                                                pelisList.add(peli);
+                                                                            }
+
+                                                                            // Get data from firebase
+                                                                            db.collection("Documental")
+                                                                                    .get()
+                                                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                                        @Override
+                                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                                            if (task.isSuccessful()) {
+                                                                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                                                    Log.d("TAG", document.getId() + " => " + document.getData());
+                                                                                                    Documental documental = document.toObject(Documental.class);
+                                                                                                    documentalList.add(documental);
+                                                                                                }
+                                                                                                // Fragment transaction
+                                                                                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MovieFavFragment(user, seriesList, pelisList, documentalList)).addToBackStack(null).commit();
+                                                                                            } else {
+                                                                                                Log.w("TAG", "Error getting documents.", task.getException());
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                            Log.w("TAG", "Error getting documents.", task.getException());
+                                                                        } else {
+                                                                            Log.w("TAG", "Error getting documents.", task.getException());
+                                                                        }
+                                                                    }
+                                                                });
+                                                        Log.w("TAG", "Error getting documents.", task.getException());
+                                                    } else {
+                                                        Log.w("TAG", "Error getting documents.", task.getException());
+                                                    }
+                                                }
+                                            });
+                                    Log.w("TAG", "Error getting documents.", task.getException());
+                                }
+                            }
+                        });
             }
         });
 

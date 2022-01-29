@@ -44,6 +44,7 @@ public class MusicFragment extends Fragment {
     private RecyclerView musicRecyclerView;
     YouTubePlayerView youTubePlayerView;
     private User user;
+    private FirebaseFirestore db;
 
     public MusicFragment() {}
 
@@ -78,7 +79,7 @@ public class MusicFragment extends Fragment {
         );
 
         // Creating the database instance
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Get user from firebase
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -94,26 +95,26 @@ public class MusicFragment extends Fragment {
                             if (document.exists()) {
                                 user = document.toObject(User.class);
                             }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+                            // Get data from firebase
+                            db.collection("Music")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                                    Music music = document.toObject(Music.class);
+                                                    musicArray.add(music);
+                                                }
+                                                MusicRecyclerViewAdapter adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
+                                                musicRecyclerView.setAdapter(adapter);
+                                            } else {
+                                                Log.w(TAG, "Error getting documents.", task.getException());
+                                            }
+                                        }
+                                    });
 
-        // Get data from firebase
-        db.collection("Music")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Music music = document.toObject(Music.class);
-                                musicArray.add(music);
-                            }
-                            MusicRecyclerViewAdapter adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
-                            musicRecyclerView.setAdapter(adapter);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
