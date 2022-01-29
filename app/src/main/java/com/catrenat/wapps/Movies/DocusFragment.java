@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.DocusCategories;
@@ -59,6 +62,9 @@ public class DocusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_docus, container, false);
+        TextView noDocusText = view.findViewById(R.id.noDocumentalTxt);
+        noDocusText.setVisibility(view.GONE);
+
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
@@ -87,6 +93,11 @@ public class DocusFragment extends Fragment {
                                     }
                                 }
                             }
+                            if (documentals.isEmpty() || documentals == null) {
+                                noDocusText.setVisibility(view.VISIBLE);
+                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                noDocusText.setAnimation(animation);
+                            }
                             for (int i = 0; i < documentals.size(); i++) {
                                 if (documentals.get(i).getCategory().equals(getString(R.string.nature))) {
                                     natureDocus.add(documentals.get(i));
@@ -106,7 +117,7 @@ public class DocusFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext());
+                            docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext(), selectedPlatform);
                             allDocusRecyclerView.setAdapter(docusAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.PelisCategories;
@@ -49,7 +52,6 @@ public class PelisFragment extends Fragment {
     public PelisFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,8 @@ public class PelisFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pelis, container, false);
+        TextView noMovieTxt = view.findViewById(R.id.noMovieTxt);
+        noMovieTxt.setVisibility(view.GONE);
 
         // Gets data from bundle
         Bundle bundle = getArguments();
@@ -89,6 +93,11 @@ public class PelisFragment extends Fragment {
                                     }
                                 }
                             }
+                            if (pelisList.isEmpty() || pelisList == null) {
+                                noMovieTxt.setVisibility(view.VISIBLE);
+                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                noMovieTxt.setAnimation(animation);
+                            }
                             for (int i = 0; i < pelisList.size(); i++) {
                                 if (pelisList.get(i).getCategory().equals(getString(R.string.action))) {
                                     actionPelis.add(pelisList.get(i));
@@ -108,7 +117,7 @@ public class PelisFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext());
+                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
                             allPelisRecyclerView.setAdapter(pelisAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

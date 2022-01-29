@@ -81,10 +81,11 @@ public class PlatformListRecyclerViewAdapter extends RecyclerView.Adapter<Platfo
                 bundle.putSerializable("platform", gamePlatforms.get(position).getName());
                 gamesListFragment.setArguments(bundle);
 
-                // Fragment trasnaction
+                // Fragment transaction
                 app.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, gamesListFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });

@@ -22,10 +22,12 @@ import java.util.List;
 public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRecyclerViewAdapter.AllPelisViewHolder> {
     private List<PelisCategories> pelisCategories;
     private Context context;
+    private String selectedPlatform;
 
-    public AllPelisRecyclerViewAdapter(List<PelisCategories> pelisCategories, Context context) {
+    public AllPelisRecyclerViewAdapter(List<PelisCategories> pelisCategories, Context context, String selectedPlatform) {
         this.context = context;
         this.pelisCategories = pelisCategories;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -62,7 +64,7 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
 
     // Set the Pelis recycler view
     private void setPelisRecycler(RecyclerView pelisRecyclerView, List<Pelis> pelis) {
-        PelisRecyclerViewAdapter pelisRecyclerViewAdapter = new PelisRecyclerViewAdapter(pelis, context);
+        PelisRecyclerViewAdapter pelisRecyclerViewAdapter = new PelisRecyclerViewAdapter(pelis, context, selectedPlatform);
         pelisRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         pelisRecyclerView.setAdapter(pelisRecyclerViewAdapter);
     }

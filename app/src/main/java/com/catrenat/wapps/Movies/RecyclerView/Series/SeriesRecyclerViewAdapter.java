@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Movies.MoviesDetailsFragment;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -22,10 +25,12 @@ import java.util.List;
 public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecyclerViewAdapter.SeriesViewHolder> {
     private List<Serie> series;
     private Context context;
+    private String selectedPlatform;
 
-    public SeriesRecyclerViewAdapter(List<Serie> series, Context context){
+    public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform){
         this.series = series;
         this.context = context;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -38,6 +43,8 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
 
     @Override
     public void onBindViewHolder(@NonNull SeriesRecyclerViewAdapter.SeriesViewHolder holder, int position) {
+        // Serie in the current position
+        Serie serie = series.get(position);
 
         // Image loader from firebase using glide (Asks firebase for image hosted url using imagePath to storage)
         StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
@@ -52,6 +59,14 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
                 }
             });
         }
+
+        holder.serieImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

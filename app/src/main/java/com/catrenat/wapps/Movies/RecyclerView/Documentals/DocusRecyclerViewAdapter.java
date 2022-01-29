@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Models.Documental;
+import com.catrenat.wapps.Models.Pelis;
+import com.catrenat.wapps.Movies.MoviesDetailsFragment;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,10 +26,12 @@ import java.util.List;
 public class DocusRecyclerViewAdapter extends RecyclerView.Adapter<DocusRecyclerViewAdapter.DocusViewHolder> {
     private List<Documental> documentals;
     private Context context;
+    private String selectedPlatform;
 
-    public DocusRecyclerViewAdapter(List<Documental> documentals, Context context){
+    public DocusRecyclerViewAdapter(List<Documental> documentals, Context context, String selectedPlatform){
         this.documentals = documentals;
         this.context = context;
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -39,6 +44,9 @@ public class DocusRecyclerViewAdapter extends RecyclerView.Adapter<DocusRecycler
 
     @Override
     public void onBindViewHolder(@NonNull DocusRecyclerViewAdapter.DocusViewHolder holder, int position) {
+        // Documental in the current position
+        Documental documental = documentals.get(position);
+
         // Image loader from firebase using glide (Asks firebase for image hosted url using imagePath to storage)
         StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
         if(!documentals.get(position).getImagePath().isEmpty() && documentals.get(position).getImagePath() != null) {
@@ -52,6 +60,14 @@ public class DocusRecyclerViewAdapter extends RecyclerView.Adapter<DocusRecycler
                 }
             });
         }
+
+        holder.docusImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(documental, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

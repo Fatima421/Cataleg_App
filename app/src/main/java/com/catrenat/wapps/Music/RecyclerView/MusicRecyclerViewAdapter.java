@@ -293,16 +293,12 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
         String youtubeInitialText = "https://www.youtube.com/watch?v=";
 
         // Creating intents to check whether the app exists or not in the device
-        Intent youtubeExistsIntent = context.getPackageManager().getLaunchIntentForPackage(youtubePackage);
         Intent playStoreExists = context.getPackageManager().getLaunchIntentForPackage(playStorePackage);
-        if (youtubeExistsIntent != null) {
-            // Open youtube
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(youtubeInitialText + songUrl));
-            intent.setPackage(youtubePackage);
+        try {
+            // Open Youtube
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeInitialText + songUrl));
             context.startActivity(intent);
-        } else {
-            // Youtube not installed so open youtube in play store if it exists
+        } catch (Exception e) {
             if (playStoreExists != null) {
                 context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + youtubePackage)));
             }
