@@ -41,7 +41,7 @@ public class MovieTagRecyclerViewAdapter extends RecyclerView.Adapter<MovieTagRe
         TextView tagTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tagTextView = itemView.findViewById(R.id.itemBookTagTextView);
+            tagTextView = itemView.findViewById(R.id.itemMovieTagTextView);
         }
     }
 }
