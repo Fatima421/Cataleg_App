@@ -110,7 +110,9 @@ public class GamesListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.filter(newText);
+                if(newText.isEmpty()) {
+                    adapter.filter(newText);
+                }
                 return false;
             }});
 
