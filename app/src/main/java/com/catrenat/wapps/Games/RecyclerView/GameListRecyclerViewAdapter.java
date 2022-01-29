@@ -85,11 +85,6 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return games.size();
-    }
-
     // SearchBar filter
     public void filter(String string){
         String search = string.toLowerCase();
@@ -105,6 +100,11 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
             }
         }
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemCount() {
+        return games.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

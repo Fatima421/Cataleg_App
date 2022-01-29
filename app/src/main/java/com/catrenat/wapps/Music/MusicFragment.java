@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Music;
@@ -39,6 +41,7 @@ public class MusicFragment extends Fragment {
     // Properties
     private ArrayList<Music> musicArray = new ArrayList<>();
     private RecyclerView musicRecyclerView;
+    private MusicRecyclerViewAdapter adapter;
     YouTubePlayerView youTubePlayerView;
 
     public MusicFragment() {}
@@ -55,6 +58,8 @@ public class MusicFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_music, container, false);
 
+        // Properties
+        MotionLayout motionLayout = view.findViewById(R.id.musicMotionLayout);
         TextView musicIntroText = view.findViewById(R.id.musicIntroText);
 
         // Making the welcome text fade in
@@ -87,13 +92,44 @@ public class MusicFragment extends Fragment {
                                 Music music = document.toObject(Music.class);
                                 musicArray.add(music);
                             }
-                            MusicRecyclerViewAdapter adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView);
+                            adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView);
                             musicRecyclerView.setAdapter(adapter);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
                 });
+
+        // Searcher that lets search items by name
+        SearchView searchItem = view.findViewById(R.id.musicSearchBar);
+        searchItem.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                motionLayout.transitionToEnd();
+            }
+        });
+        searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                motionLayout.transitionToStart();
+                return false;
+            }
+        });
+        searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()) {
+                    adapter.filter(newText);
+                }
+                return false;
+            }});
 
         return view;
     }

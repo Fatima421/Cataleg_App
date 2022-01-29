@@ -43,7 +43,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/searchBarCardView"
+            android:id="@+id/gamesSearchBarCardView"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
