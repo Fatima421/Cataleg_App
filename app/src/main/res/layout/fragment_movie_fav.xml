@@ -24,12 +24,13 @@
         <TextView
             android:id="@+id/seriesFavText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/notosanshk_bold"
             android:gravity="center"
             android:text="@string/seriesFragmentName"
             android:textColor="@color/white"
+            android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movieFavRecyclerView" />
 
@@ -62,13 +63,14 @@
         <TextView
             android:id="@+id/pelisFavText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/notosanshk_bold"
             android:gravity="center"
             android:text="@string/moviesFragmentName"
             android:textColor="@color/white"
+            android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movieFavIntro" />
 
@@ -91,11 +93,12 @@
         <TextView
             android:id="@+id/documentalFavTxt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="30dp"
+            android:fontFamily="@font/notosanshk_bold"
             android:text="@string/docsFragmentName"
             android:textColor="@color/white"
-            android:fontFamily="@font/notosanshk_bold"
+            android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seriesFavRecyclerView" />
 

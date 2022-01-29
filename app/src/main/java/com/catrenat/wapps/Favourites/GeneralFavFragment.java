@@ -14,9 +14,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.catrenat.wapps.Favourites.GameFav.GameFavFragment;
 import com.catrenat.wapps.Favourites.MovieFav.MovieFavFragment;
 import com.catrenat.wapps.Favourites.MusicFav.MusicFavFragment;
 import com.catrenat.wapps.Models.Documental;
+import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.Serie;
@@ -39,6 +41,7 @@ public class GeneralFavFragment extends Fragment {
     private ArrayList<Serie> seriesList = new ArrayList();
     private ArrayList<Pelis> pelisList = new ArrayList();
     private ArrayList<Documental> documentalList = new ArrayList();
+    private ArrayList<Game> gamesList = new ArrayList<>();
     FirebaseFirestore db;
 
     public GeneralFavFragment() {
@@ -203,7 +206,46 @@ public class GeneralFavFragment extends Fragment {
         gameFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GameFavFragment()).addToBackStack(null).commit();
+                // Creating the database instance
+                db = FirebaseFirestore.getInstance();
+
+                // Get user from firebase
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .document(userId)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        user = document.toObject(User.class);
+                                    }
+                                    // Get data from firebase
+                                    db.collection("Games")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                                            Log.d("TAG", document.getId() + " => " + document.getData());
+                                                            Game game = document.toObject(Game.class);
+                                                            gamesList.add(game);
+                                                        }
+                                                        // Fragment transaction
+                                                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new GameFavFragment(user, gamesList)).addToBackStack(null).commit();
+                                                    } else {
+                                                        Log.w("TAG", "Error getting documents.", task.getException());
+                                                    }
+                                                }
+                                            });
+                                    Log.w("TAG", "Error getting documents.", task.getException());
+                                }
+                            }
+                        });
             }
         });
 

@@ -134,7 +134,7 @@ public class MovieFavFragment extends Fragment {
         }
         if (!favDocusArray.isEmpty()) {
             DocusFavRecyclerView adapter = new DocusFavRecyclerView(getContext(), favDocusArray);
-            seriesRecyclerView.setAdapter(adapter);
+            docusRecyclerView.setAdapter(adapter);
         } else {
             docusFavText.setVisibility(View.GONE);
         }
