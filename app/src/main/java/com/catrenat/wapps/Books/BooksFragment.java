@@ -79,6 +79,8 @@ public class BooksFragment extends Fragment {
                             // RecyclerView array argument construction
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Book book = document.toObject(Book.class);
+                                book.setUrl(document.getString("url"));
+                                Log.i("edwing", ""+book.getUrl());
                                 booksList.add(book);
                             }
                             for (int i = 0; i < booksList.size(); i++) {

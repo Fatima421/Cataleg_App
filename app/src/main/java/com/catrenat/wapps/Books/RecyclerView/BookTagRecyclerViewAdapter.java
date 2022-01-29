@@ -1,4 +1,4 @@
-package com.catrenat.wapps.Movies.RecyclerView;
+package com.catrenat.wapps.Books.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +12,17 @@ import com.catrenat.wapps.R;
 
 import java.util.ArrayList;
 
-public class MovieTagRecyclerViewAdapter extends RecyclerView.Adapter<MovieTagRecyclerViewAdapter.ViewHolder> {
+public class BookTagRecyclerViewAdapter extends RecyclerView.Adapter<BookTagRecyclerViewAdapter.ViewHolder> {
     private ArrayList<String> genres;
 
-    public MovieTagRecyclerViewAdapter(ArrayList<String> genres) {
+    public BookTagRecyclerViewAdapter(ArrayList<String> genres) {
         this.genres = genres;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_tag, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_tag, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
