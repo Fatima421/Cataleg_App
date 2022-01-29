@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.catrenat.wapps.Favourites.MovieFav.DocusRecyclerView.DocusFavRecyclerView;
 import com.catrenat.wapps.Favourites.MovieFav.MovieFavRecyclerView.MovieFavRecyclerView;
-import com.catrenat.wapps.Favourites.MusicFav.MusicFavRecyclerView.MusicFavRecyclerView;
+import com.catrenat.wapps.Favourites.MovieFav.SerieRecyclerView.SerieFavRecyclerView;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,9 @@ public class MovieFavFragment extends Fragment {
         emptyMovieText.setVisibility(View.INVISIBLE);
         TextView movieFavIntro = view.findViewById(R.id.movieFavIntro);
         movieFavIntro.setVisibility(View.INVISIBLE);
+        TextView movieFavText = view.findViewById(R.id.pelisFavText);
+        TextView serieFavText = view.findViewById(R.id.seriesFavText);
+        TextView docusFavText = view.findViewById(R.id.documentalFavTxt);
 
         // Check if user has music in favourites
         if (user != null) {
@@ -111,12 +116,40 @@ public class MovieFavFragment extends Fragment {
         }
         // Creating Recycler view
         // RecyclerView declared and init with array
-        RecyclerView recyclerView = view.findViewById(R.id.movieFavRecyclerView);
-        MovieFavRecyclerView adapter = new MovieFavRecyclerView(getContext(), favSerieArray, favPelisArray, favDocusArray);
-        recyclerView.setAdapter(adapter);
+        RecyclerView movieRecyclerView = view.findViewById(R.id.movieFavRecyclerView);
+        RecyclerView seriesRecyclerView = view.findViewById(R.id.seriesFavRecyclerView);
+        RecyclerView docusRecyclerView = view.findViewById(R.id.docusFavRecyclerView);
 
+        if (!favPelisArray.isEmpty()) {
+            MovieFavRecyclerView adapter = new MovieFavRecyclerView(getContext(), favPelisArray);
+            movieRecyclerView.setAdapter(adapter);
+        } else {
+            movieFavText.setVisibility(View.GONE);
+        }
+        if (!favSerieArray.isEmpty()) {
+            SerieFavRecyclerView adapter = new SerieFavRecyclerView(getContext(), favSerieArray);
+            seriesRecyclerView.setAdapter(adapter);
+        } else {
+            serieFavText.setVisibility(View.GONE);
+        }
+        if (!favDocusArray.isEmpty()) {
+            DocusFavRecyclerView adapter = new DocusFavRecyclerView(getContext(), favDocusArray);
+            seriesRecyclerView.setAdapter(adapter);
+        } else {
+            docusFavText.setVisibility(View.GONE);
+        }
         // Disables recyclerView nested scroll
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3) {
+        movieRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3) {
+            @Override
+            public boolean canScrollVertically() { return false; }
+        });
+        // Disables recyclerView nested scroll
+        seriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3) {
+            @Override
+            public boolean canScrollVertically() { return false; }
+        });
+        // Disables recyclerView nested scroll
+        docusRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3) {
             @Override
             public boolean canScrollVertically() { return false; }
         });

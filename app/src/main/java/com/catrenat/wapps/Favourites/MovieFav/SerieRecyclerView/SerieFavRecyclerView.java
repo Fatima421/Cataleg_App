@@ -1,4 +1,4 @@
-package com.catrenat.wapps.Favourites.MovieFav.MovieFavRecyclerView;
+package com.catrenat.wapps.Favourites.MovieFav.SerieRecyclerView;
 
 import android.content.Context;
 import android.net.Uri;
@@ -22,37 +22,37 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MovieFavRecyclerView extends RecyclerView.Adapter<MovieFavRecyclerView.MovieFavViewHolder> {
+public class SerieFavRecyclerView extends RecyclerView.Adapter<SerieFavRecyclerView.SerieFavViewHolder> {
     private Context context;
-    ArrayList<Pelis> pelis;
+    ArrayList<Serie> series;
 
-    public MovieFavRecyclerView(Context context, ArrayList<Pelis> pelis) {
+    public SerieFavRecyclerView(Context context, ArrayList<Serie> series) {
         this.context = context;
-        this.pelis = pelis;
+        this.series = series;
     }
 
     @NonNull
     @Override
-    public MovieFavRecyclerView.MovieFavViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_fav, parent, false);
-        MovieFavRecyclerView.MovieFavViewHolder holder = new MovieFavRecyclerView.MovieFavViewHolder(view);
+    public SerieFavRecyclerView.SerieFavViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_serie_fav, parent, false);
+        SerieFavRecyclerView.SerieFavViewHolder holder = new SerieFavRecyclerView.SerieFavViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieFavRecyclerView.MovieFavViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SerieFavRecyclerView.SerieFavViewHolder holder, int position) {
 
         // Image loader from firebase using glide (Asks firebase for image hosted url using imagePath to storage)
         StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
-        if (!pelis.isEmpty()) {
-            if(!pelis.get(position).getImagePath().isEmpty()) {
-                storageReference.child(pelis.get(position).getImagePath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        if (!series.isEmpty()) {
+            if(!series.get(position).getImagePath().isEmpty()) {
+                storageReference.child(series.get(position).getImagePath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         // Load image with glide
                         Glide.with(context) // Context from getContext() in HomeFragment
                                 .load(uri.toString())
-                                .into(holder.favMovieImage);
+                                .into(holder.favSerieImage);
                     }
                 });
             }
@@ -61,16 +61,16 @@ public class MovieFavRecyclerView extends RecyclerView.Adapter<MovieFavRecyclerV
 
     @Override
     public int getItemCount() {
-        return pelis.size();
+        return series.size();
     }
 
-    public class MovieFavViewHolder extends RecyclerView.ViewHolder{
+    public class SerieFavViewHolder extends RecyclerView.ViewHolder{
         // View Elements
-        ImageView favMovieImage;
+        ImageView favSerieImage;
 
-        public MovieFavViewHolder(@NonNull View itemView) {
+        public SerieFavViewHolder(@NonNull View itemView) {
             super(itemView);
-            favMovieImage = itemView.findViewById(R.id.movieFavImage);
+            favSerieImage = itemView.findViewById(R.id.serieFavImage);
         }
     }
 }

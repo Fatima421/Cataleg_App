@@ -10,11 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.catrenat.wapps.Models.Documental;
-import com.catrenat.wapps.Models.DocusCategories;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.PelisCategories;
-import com.catrenat.wapps.Movies.RecyclerView.Documentals.DocusRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
 import java.util.List;
@@ -58,7 +55,7 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         public AllPelisViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.movieCategoryTitle);
-            pelisRecyclerView = itemView.findViewById(R.id.seriesRecyclerView);
+            pelisRecyclerView = itemView.findViewById(R.id.seriesFavRecyclerView);
         }
     }
 

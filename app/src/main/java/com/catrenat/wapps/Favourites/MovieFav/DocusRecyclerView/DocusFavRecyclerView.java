@@ -1,4 +1,4 @@
-package com.catrenat.wapps.Favourites.MovieFav.MovieFavRecyclerView;
+package com.catrenat.wapps.Favourites.MovieFav.DocusRecyclerView;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.catrenat.wapps.Models.Documental;
+import com.catrenat.wapps.Favourites.MovieFav.MovieFavRecyclerView.MovieFavRecyclerView;
 import com.catrenat.wapps.Models.Pelis;
-import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -22,19 +20,19 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MovieFavRecyclerView extends RecyclerView.Adapter<MovieFavRecyclerView.MovieFavViewHolder> {
+public class DocusFavRecyclerView extends RecyclerView.Adapter<MovieFavRecyclerView.MovieFavViewHolder> {
     private Context context;
     ArrayList<Pelis> pelis;
 
-    public MovieFavRecyclerView(Context context, ArrayList<Pelis> pelis) {
+    public DocusFavRecyclerView(Context context, ArrayList<Pelis> pelis) {
         this.context = context;
         this.pelis = pelis;
     }
 
     @NonNull
     @Override
-    public MovieFavRecyclerView.MovieFavViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_fav, parent, false);
+    public DocusFavRecyclerView.MovieFavViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_docus_fav, parent, false);
         MovieFavRecyclerView.MovieFavViewHolder holder = new MovieFavRecyclerView.MovieFavViewHolder(view);
         return holder;
     }
