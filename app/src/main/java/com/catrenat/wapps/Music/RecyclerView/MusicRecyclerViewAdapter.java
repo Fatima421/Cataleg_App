@@ -101,9 +101,13 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
         Music music = musicArray.get(position);
 
         // Load favourite image
-        for (int i = 0; i < user.getMusics().size(); i++) {
-            if (user.getMusics().get(i).equals(music.getSongName())) {
-                holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
+        if (user != null) {
+            if (user.getMusics() != null) {
+                for (int i = 0; i < user.getMusics().size(); i++) {
+                    if (user.getMusics().get(i).equals(music.getSongName())) {
+                        holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
+                    }
+                }
             }
         }
 
@@ -202,9 +206,11 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
             }
 
             // Load favourite image
-            for (int i = 0; i < user.getMusics().size(); i++) {
-                if (user.getMusics().get(i).equals(music.getSongName())) {
-                    favouriteImageDialog.setImageResource(R.drawable.ic_music_details_filled_heart);
+            if (user.getMusics() != null) {
+                for (int i = 0; i < user.getMusics().size(); i++) {
+                    if (user.getMusics().get(i).equals(music.getSongName())) {
+                        favouriteImageDialog.setImageResource(R.drawable.ic_music_details_filled_heart);
+                    }
                 }
             }
 
