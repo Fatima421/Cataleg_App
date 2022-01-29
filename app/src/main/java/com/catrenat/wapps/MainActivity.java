@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView drawerNav;
     private FirebaseFirestore db;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                User user = document.toObject(User.class);
+                                user = document.toObject(User.class);
                                 // Header properties
                                 headerUsername = findViewById(R.id.headerUsername);
                                 headerBio = findViewById(R.id.headerBio);

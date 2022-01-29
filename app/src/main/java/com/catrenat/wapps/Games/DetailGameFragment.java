@@ -22,11 +22,17 @@ import com.catrenat.wapps.Games.RecyclerView.GameGalleryRecyclerViewAdapter;
 import com.catrenat.wapps.Games.RecyclerView.PlatformLogoRecyclerViewAdapter;
 import com.catrenat.wapps.Games.RecyclerView.SelectListener;
 import com.catrenat.wapps.Models.Game;
+import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Music.RecyclerView.CustomPlayerUiController;
 import com.catrenat.wapps.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -50,9 +56,11 @@ public class DetailGameFragment extends Fragment implements SelectListener {
     private YouTubePlayerView youTubePlayerView;
     private FirebaseFirestore db;
     boolean heartPressed = false;
+    private User user;
 
-    public DetailGameFragment(Game game) {
+    public DetailGameFragment(Game game, User user) {
         this.game = game;
+        this.user = user;
     }
 
     @Override
@@ -91,19 +99,21 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         gameGalleryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // MainImage from thumbnail gallery onClick setter with Glide
-        if (!game.getGalleryPaths().get(0).isEmpty()){
-            FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
-                    .getReference()
-                    .child(game.getGalleryPaths().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    // Load image with glide
-                    Glide.with(getContext())
-                            .load(uri.toString())
-                            .into(gameMainImage);
-                    Log.i("IMAGEGLIDE", uri.toString());
-                }
-            });
+        if (game != null) {
+            if (!game.getGalleryPaths().get(0).isEmpty()){
+                FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
+                        .getReference()
+                        .child(game.getGalleryPaths().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Load image with glide
+                        Glide.with(getContext())
+                                .load(uri.toString())
+                                .into(gameMainImage);
+                        Log.i("IMAGEGLIDE", uri.toString());
+                    }
+                });
+            }
         }
 
         // Platform logo available RecyclerView
@@ -118,8 +128,24 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                 int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
                 heartPressed = current != R.drawable.ic_music_heart;
                 gameFavImage.setImageResource(current);
+                if (game != null) {
+                    if (heartPressed) {
+                        addFavToFirebase(game.getName());
+                    } else {
+                        deleteFavFromFirebase(game.getName());
+                    }
+                }
             }
         });
+
+        // Load favourite image
+        if (user != null) {
+            if (user.getGames() != null) {
+                for (int i = 0; i < user.getGames().size(); i++) {
+                    gameFavImage.setImageResource(R.drawable.ic_music_filled_heart);
+                }
+            }
+        }
 
         // Share button
         shareView.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +262,84 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("TAG", "Error adding document", e);
+                    }
+                });
+    }
+
+    public void addFavToFirebase(String gameName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("games", FieldValue.arrayUnion(gameName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void deleteFavFromFirebase(String gameName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("games", FieldValue.arrayRemove(gameName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
                     }
                 });
     }
