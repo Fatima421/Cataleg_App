@@ -91,23 +91,40 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
     }
 
     // SearchBar filter
-    public void filter(String StrSearch){
-        if(StrSearch.length()==0){
+    //public void filter(String search){
+    //    if(search.length() == 0){
+    //        games.clear();
+    //        games.addAll(all_games);
+    //    }else{
+    //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    //            List<Game> collect = games.stream()
+    //                    .filter(i->i.getName().toLowerCase(Locale.ROOT).contains(search))
+    //                    .collect(Collectors.toList());
+    //            games.clear();
+    //            games.addAll(collect);
+    //        }else{
+    //            games.clear();
+    //            for(Game i:all_games){
+    //                if(i.getName().toLowerCase(Locale.ROOT).contains(search)){
+    //                    games.add(i);
+    //                }
+    //            }
+    //        }
+    //    }
+    //    notifyDataSetChanged();
+    //}
+    // SearchBar filter
+    public void filter(String string){
+        
+        String search = string.toLowerCase();
+        if(search.length() == 0){
             games.clear();
             games.addAll(all_games);
-        }else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                List<Game> collect = games.stream()
-                        .filter(i->i.getName().toLowerCase(Locale.ROOT).contains(StrSearch))
-                        .collect(Collectors.toList());
-                games.clear();
-                games.addAll(collect);
-            }else{
-                games.clear();
-                for(Game i:all_games){
-                    if(i.getName().toLowerCase(Locale.ROOT).contains(StrSearch)){
-                        games.add(i);
-                    }
+        } else {
+            games.clear();
+            for(Game game: all_games) {
+                if(game.getName().toLowerCase().contains(search)) {
+                    games.add(game);
                 }
             }
         }

@@ -5,6 +5,8 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +40,9 @@ public class GamesListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_games_list, container, false);
+
+        // Properties
+        MotionLayout motionLayout = root.findViewById(R.id.gameListLayout);
 
         // Gets data from bundle
         Bundle bundle = getArguments();
@@ -85,17 +90,17 @@ public class GamesListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("Click", "Se iso clic open");
+                motionLayout.transitionToEnd();
             }
         });
         searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 Log.d("Click", "Se iso clic close");
+                motionLayout.transitionToStart();
                 return false;
             }
         });
-        //search
-        // Item.setIconified(false);
         searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -105,7 +110,7 @@ public class GamesListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //adapter.filter(newText);
+                adapter.filter(newText);
                 return false;
             }});
 

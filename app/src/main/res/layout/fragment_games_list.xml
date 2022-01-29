@@ -9,11 +9,12 @@
     android:background="@drawable/bg_games"
     tools:context=".Games.PlatformsListFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/gameListLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="60dp">
+        android:paddingBottom="60dp"
+        app:layoutDescription="@xml/fragment_games_list_xml_gamelistlayout_scene">
 
         <TextView
             android:id="@+id/gamesWelcomeText"
@@ -42,15 +43,14 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:id="@+id/searchBarCardView"
+            android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginStart="85dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="85dp"
-            app:cardCornerRadius="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <SearchView
                 android:id="@+id/gamesSearchBar"
@@ -63,6 +63,6 @@
             </SearchView>
         </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </androidx.core.widget.NestedScrollView>
