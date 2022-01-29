@@ -26,11 +26,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.BooksFragment;
+import com.catrenat.wapps.Favourites.GeneralFavFragment;
 import com.catrenat.wapps.LoginScreen.LoginScreen;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesFragment;
 import com.catrenat.wapps.Music.MusicFragment;
 import com.catrenat.wapps.Games.PlatformsListFragment;
+import com.catrenat.wapps.Profile.ProfileScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -129,6 +131,16 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new GeneralFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+                    case R.id.nav_profile:
+                        vibe.vibrate(3);
+                        fragment = new ProfileScreen();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.nav_favourites:
+                        vibe.vibrate(3);
+                        fragment = new GeneralFavFragment();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
                     case R.id.nav_disconnect:
                         vibe.vibrate(3);
                         // Alert dialog to confirm logout action
@@ -155,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.show();
                         break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
                 return true;
             }
         });

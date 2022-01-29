@@ -90,4 +90,5 @@
     <string name="noSerie">Cap sèrie en català trobada en aquesta plataforma</string>
     <string name="noMovie">Cap pel·lícula en català trobada en aquesta plataforma</string>
     <string name="noDocumental">Cap documental en català trobat en aquesta plataforma</string>
+    <string name="seeFavsAgain">Torna a mirar els teus preferits de cada secció</string>
 </resources>

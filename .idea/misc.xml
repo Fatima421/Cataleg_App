@@ -64,6 +64,8 @@
         <entry key="app/src/main/res/drawable/menu_music_icon.xml" value="0.38" />
         <entry key="app/src/main/res/drawable/music_bg_box.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/music_bg_box_less_corners.xml" value="0.3859375" />
+        <entry key="app/src/main/res/drawable/person.xml" value="0.2765625" />
+        <entry key="app/src/main/res/drawable/profile.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/tab_layout_bg.xml" value="0.3859375" />
@@ -79,26 +81,28 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_games.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_games_list.xml" value="0.33229166666666665" />
-        <entry key="app/src/main/res/layout/fragment_general.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_general.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_general_fav.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_movie_fav.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.3697916666666667" />
-        <entry key="app/src/main/res/layout/fragment_movies_details.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_movies_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_movies_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_music.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_music_artist.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_music_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_music_fav.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_pelis.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_profile_screen.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_series.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/header.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/item_docus.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/item_game_gallery.xml" value="0.34739583333333335" />
-        <entry key="app/src/main/res/layout/item_game_listgame.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/item_game_listgame.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/item_game_platform.xml" value="0.11206896551724138" />
+        <entry key="app/src/main/res/layout/item_game_platformlogo.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/item_movie_all_categories.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/item_movie_list.xml" value="0.3697916666666667" />
-        <entry key="app/src/main/res/layout/item_game_platformlogo.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/item_movie_platform.xml" value="0.31746031746031744" />
         <entry key="app/src/main/res/layout/item_movie_tag.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_music_artist.xml" value="0.5" />
