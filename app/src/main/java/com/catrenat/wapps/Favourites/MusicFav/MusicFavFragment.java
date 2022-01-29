@@ -76,6 +76,12 @@ public class MusicFavFragment extends Fragment {
                         }
                     }
                 }
+            } else {
+                emptyMusicTxt.setVisibility(View.VISIBLE);
+                musicFavIntro.setVisibility(View.INVISIBLE);
+                // Making the welcome text fade in
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                emptyMusicTxt.setAnimation(animation);
             }
         }
 

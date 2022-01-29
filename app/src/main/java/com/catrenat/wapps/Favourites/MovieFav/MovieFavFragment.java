@@ -101,6 +101,12 @@ public class MovieFavFragment extends Fragment {
                         }
                     }
                 }
+            } else {
+                emptyMovieText.setVisibility(View.VISIBLE);
+                movieFavIntro.setVisibility(View.INVISIBLE);
+                // Making the welcome text fade in
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                emptyMovieText.setAnimation(animation);
             }
         }
         // Creating Recycler view
