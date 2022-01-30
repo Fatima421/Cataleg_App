@@ -77,6 +77,10 @@ public class GeneralFavFragment extends Fragment {
         musicFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Erasing list
+                if (musicArray != null || !musicArray.isEmpty()) {
+                    musicArray.clear();
+                }
                 // Creating the database instance
                 db = FirebaseFirestore.getInstance();
 
@@ -124,6 +128,18 @@ public class GeneralFavFragment extends Fragment {
         movieFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Erasing list
+                if (seriesList != null || !seriesList.isEmpty()) {
+                    seriesList.clear();
+                }
+                // Erasing list
+                if (pelisList != null || !pelisList.isEmpty()) {
+                    pelisList.clear();
+                }
+                // Erasing list
+                if (documentalList != null || !documentalList.isEmpty()) {
+                    documentalList.clear();
+                }
                 // Creating the database instance
                 db = FirebaseFirestore.getInstance();
 
@@ -209,6 +225,10 @@ public class GeneralFavFragment extends Fragment {
         gameFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Erasing list
+                if (gamesList != null || !gamesList.isEmpty()) {
+                    gamesList.clear();
+                }
                 // Creating the database instance
                 db = FirebaseFirestore.getInstance();
 
@@ -256,6 +276,10 @@ public class GeneralFavFragment extends Fragment {
         bookFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Erasing list
+                if (booksList != null || !booksList.isEmpty()) {
+                    booksList.clear();
+                }
                 // Creating the database instance
                 db = FirebaseFirestore.getInstance();
 
