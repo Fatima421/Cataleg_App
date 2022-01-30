@@ -96,4 +96,9 @@
     <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
     <string name="emptyGameFavs">No tens cap joc en preferits</string>
     <string name="emptyBookFavs">No tens cap llibre en preferits</string>
+    <string name="aboutImageRights">Sobre el dret d\'imatges</string>
+    <string name="aboutImagesRightsText">Les imatges dels videojocs, les pel·lícules i els llibres es poden utilitzar sempre que es realitzi
+        un ús justificatiu de la imatge, entenent-se per ús justificatiu aquell que busca dotar d\'una informació i no beneficiar-se de
+        l\'explotació d\'aquesta imatge, s\'hauria de considerar un ús autoritzat. Dit per Yasmina I. Glez. Müller,
+        advocada Canària especialitzada en Propietat Intel·lectual i Industrial.</string>
 </resources>

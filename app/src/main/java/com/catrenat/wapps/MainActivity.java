@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         vibe.vibrate(3);
                         fragment = new InformationFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
                     case R.id.nav_disconnect:
                         vibe.vibrate(3);
                         // Alert dialog to confirm logout action
