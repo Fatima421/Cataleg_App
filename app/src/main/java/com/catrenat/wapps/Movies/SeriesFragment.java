@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.SerieCategories;
 import com.catrenat.wapps.Models.Serie;
+import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.Movies.RecyclerView.Series.AllSeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,8 +50,13 @@ public class SeriesFragment extends Fragment {
     private List<Serie> thrillerSeries = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
+    private SearchView searchView;
 
     public SeriesFragment() {
+    }
+
+    public SeriesFragment(SearchView searchView) {
+        this.searchView = searchView;
     }
 
     @Override
@@ -116,7 +123,7 @@ public class SeriesFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform);
+                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform, searchView);
                             allSeriesRecyclerView.setAdapter(moviesAdapter);
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());

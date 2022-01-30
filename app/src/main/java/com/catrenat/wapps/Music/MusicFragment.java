@@ -59,7 +59,6 @@ public class MusicFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_music, container, false);
 
         // Properties
-        MotionLayout motionLayout = view.findViewById(R.id.musicMotionLayout);
         TextView musicIntroText = view.findViewById(R.id.musicIntroText);
 
         // Making the welcome text fade in
@@ -100,8 +99,11 @@ public class MusicFragment extends Fragment {
                     }
                 });
 
-        // Searcher that lets search items by name
+        // SearchBar configuration
+        MotionLayout motionLayout = view.findViewById(R.id.musicMotionLayout);
         SearchView searchItem = view.findViewById(R.id.musicSearchBar);
+
+        // Calls animation on motionLayout on searchBar icon click
         searchItem.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +119,8 @@ public class MusicFragment extends Fragment {
                 return false;
             }
         });
+
+        // Filters on search click and resets when no string or cancelled
         searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

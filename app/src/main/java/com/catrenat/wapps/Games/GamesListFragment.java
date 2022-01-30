@@ -41,9 +41,6 @@ public class GamesListFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_games_list, container, false);
 
-        // Properties
-        MotionLayout motionLayout = root.findViewById(R.id.gameListLayout);
-
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("platform");
@@ -84,8 +81,12 @@ public class GamesListFragment extends Fragment {
                         });
                     }
                 });
-        // Searcher that lets search items by name
+
+        // SearchBar configuration
         SearchView searchItem = root.findViewById(R.id.gamesSearchBar);
+        MotionLayout motionLayout = root.findViewById(R.id.gameListLayout);
+
+        // Calls animation on motionLayout on searchBar icon click
         searchItem.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +102,8 @@ public class GamesListFragment extends Fragment {
                 return false;
             }
         });
+
+        // Filters on search click and resets when no string or cancelled
         searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

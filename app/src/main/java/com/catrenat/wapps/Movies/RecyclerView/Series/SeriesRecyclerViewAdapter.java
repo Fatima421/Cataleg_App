@@ -2,35 +2,45 @@ package com.catrenat.wapps.Movies.RecyclerView.Series;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Movies.MoviesDetailsFragment;
+import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecyclerViewAdapter.SeriesViewHolder> {
     private List<Serie> series;
+    private List<Serie> all_series;
     private Context context;
     private String selectedPlatform;
+    private SearchView searchView;
 
-    public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform){
+    public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform, SearchView searchView){
         this.series = series;
         this.context = context;
         this.selectedPlatform = selectedPlatform;
+        all_series = new ArrayList<>();
+        all_series.addAll(series);
+        this.searchView = searchView;
     }
 
     @NonNull
@@ -67,6 +77,23 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
             }
         });
+    }
+
+    // SearchBar filter
+    public void filter(String string){
+        String search = "cit";
+        if(search.length() == 0){
+            series.clear();
+            series.addAll(all_series);
+        } else {
+            series.clear();
+            for(Serie serie: all_series) {
+                if(serie.getName().toLowerCase().contains(search)) {
+                    series.add(serie);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override

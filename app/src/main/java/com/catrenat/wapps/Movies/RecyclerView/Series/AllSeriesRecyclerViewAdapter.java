@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,14 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
     private List<SerieCategories> allCategories;
     private Context context;
     private String selectedPlatform;
+    private SeriesRecyclerViewAdapter seriesRecyclerViewAdapter;
+    private SearchView searchView;
 
-    public AllSeriesRecyclerViewAdapter(List<SerieCategories> allCategories, Context context, String selectedPlatform) {
+    public AllSeriesRecyclerViewAdapter(List<SerieCategories> allCategories, Context context, String selectedPlatform, SearchView searchView) {
         this.context = context;
         this.allCategories = allCategories;
         this.selectedPlatform = selectedPlatform;
+        this.searchView = searchView;
     }
 
     @NonNull
@@ -61,7 +65,7 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
 
     // Set the series recycler view
     private void setSeriesRecycler(RecyclerView seriesRecyclerView, List<Serie> series) {
-        SeriesRecyclerViewAdapter seriesRecyclerViewAdapter = new SeriesRecyclerViewAdapter(series, context, selectedPlatform);
+        seriesRecyclerViewAdapter = new SeriesRecyclerViewAdapter(series, context, selectedPlatform, searchView);
         seriesRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         seriesRecyclerView.setAdapter(seriesRecyclerViewAdapter);
     }
