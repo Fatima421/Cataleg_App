@@ -40,7 +40,7 @@ public class BooksDetailsFragment extends Fragment {
 
     private BookTagRecyclerViewAdapter bookTagAdapter;
     boolean heartPressed = false;
-    Book book = new Book();
+    private Book book = new Book();
     private User user;
     private FirebaseFirestore db;
 
@@ -77,7 +77,6 @@ public class BooksDetailsFragment extends Fragment {
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(book.getAuthor());
         bookSinopsis.setText(book.getDescription());
-        Log.i("edwing", ""+book.getUrl());
 
         bookTagAdapter = new BookTagRecyclerViewAdapter(book.getGenres());
         bookTagRecyclerView.setAdapter(bookTagAdapter);
@@ -122,7 +121,9 @@ public class BooksDetailsFragment extends Fragment {
         if (user != null) {
             if (user.getBooks() != null) {
                 for (int i = 0; i < user.getBooks().size(); i++) {
-                    bookFavImg.setImageResource(R.drawable.ic_music_filled_heart);
+                    if (user.getBooks().get(i).equals(book.getTitle())) {
+                        bookFavImg.setImageResource(R.drawable.ic_music_filled_heart);
+                    }
                 }
             }
         }
