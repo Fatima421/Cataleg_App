@@ -1,8 +1,6 @@
 package com.catrenat.wapps.Movies;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 
