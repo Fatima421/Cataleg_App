@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.catrenat.wapps.Favourites.GameFav.GameFavRecyclerView.GameFavRecyclerView;
 import com.catrenat.wapps.Models.Game;
-import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
 

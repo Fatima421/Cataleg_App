@@ -14,9 +14,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.catrenat.wapps.Favourites.BookFav.BookFavFragment;
 import com.catrenat.wapps.Favourites.GameFav.GameFavFragment;
 import com.catrenat.wapps.Favourites.MovieFav.MovieFavFragment;
 import com.catrenat.wapps.Favourites.MusicFav.MusicFavFragment;
+import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.Music;
@@ -42,6 +44,7 @@ public class GeneralFavFragment extends Fragment {
     private ArrayList<Pelis> pelisList = new ArrayList();
     private ArrayList<Documental> documentalList = new ArrayList();
     private ArrayList<Game> gamesList = new ArrayList<>();
+    private ArrayList<Book> booksList = new ArrayList<>();
     FirebaseFirestore db;
 
     public GeneralFavFragment() {
@@ -253,7 +256,46 @@ public class GeneralFavFragment extends Fragment {
         bookFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BookFavFragment()).addToBackStack(null).commit();
+                // Creating the database instance
+                db = FirebaseFirestore.getInstance();
+
+                // Get user from firebase
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .document(userId)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        user = document.toObject(User.class);
+                                    }
+                                    // Get data from firebase
+                                    db.collection("Books")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                                            Log.d("TAG", document.getId() + " => " + document.getData());
+                                                            Book book = document.toObject(Book.class);
+                                                            booksList.add(book);
+                                                        }
+                                                        // Fragment transaction
+                                                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BookFavFragment(user, booksList)).addToBackStack(null).commit();
+                                                    } else {
+                                                        Log.w("TAG", "Error getting documents.", task.getException());
+                                                    }
+                                                }
+                                            });
+                                    Log.w("TAG", "Error getting documents.", task.getException());
+                                }
+                            }
+                        });
             }
         });
 

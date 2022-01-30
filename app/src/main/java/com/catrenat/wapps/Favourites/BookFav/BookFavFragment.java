@@ -1,66 +1,103 @@
-package com.catrenat.wapps.Favourites;
+package com.catrenat.wapps.Favourites.BookFav;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
+import com.catrenat.wapps.Favourites.BookFav.BookFavRecyclerView.BookFavRecyclerView;
+import com.catrenat.wapps.Favourites.MusicFav.MusicFavRecyclerView.MusicFavRecyclerView;
+import com.catrenat.wapps.Models.Book;
+import com.catrenat.wapps.Models.Music;
+import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BookFavFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class BookFavFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // Properties
+    private User user;
+    private ArrayList<Book> booksArray = new ArrayList<>();
+    private ArrayList<Book> favBooksArray = new ArrayList<>();
 
     public BookFavFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BookFavFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BookFavFragment newInstance(String param1, String param2) {
-        BookFavFragment fragment = new BookFavFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public BookFavFragment(User user, ArrayList<Book> booksArray) {
+        this.user = user;
+        this.booksArray = booksArray;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_fav, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_fav, container, false);
+        // Elements from the view
+        TextView emptyBooksFav = view.findViewById(R.id.emptyBooksFav);
+        emptyBooksFav.setVisibility(View.INVISIBLE);
+        TextView bookFavIntro = view.findViewById(R.id.booksFavIntro);
+        bookFavIntro.setVisibility(View.INVISIBLE);
+
+        // Check if user has music in favourites
+        if (user != null) {
+            if (user.getBooks() != null) {
+                if (user.getBooks().isEmpty()) {
+                    emptyBooksFav.setVisibility(View.VISIBLE);
+                    bookFavIntro.setVisibility(View.INVISIBLE);
+                    // Making the welcome text fade in
+                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                    emptyBooksFav.setAnimation(animation);
+                } else {
+                    emptyBooksFav.setVisibility(View.INVISIBLE);
+                    bookFavIntro.setVisibility(View.VISIBLE);
+                    // Making the welcome text fade in
+                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                    bookFavIntro.setAnimation(animation);
+                    for (int i = 0; i < user.getBooks().size(); i++) {
+                        for (int j = 0; j < booksArray.size(); j++) {
+                            if (user.getBooks().get(i).equals(booksArray.get(j).getTitle())) {
+                                favBooksArray.add(booksArray.get(j));
+                            }
+                        }
+                    }
+                }
+            } else {
+                emptyBooksFav.setVisibility(View.VISIBLE);
+                bookFavIntro.setVisibility(View.INVISIBLE);
+                // Making the welcome text fade in
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                emptyBooksFav.setAnimation(animation);
+            }
+        }
+
+        // Creating Recycler view
+        // RecyclerView declared and init with array
+        RecyclerView recyclerView = view.findViewById(R.id.booksFavRecyclerView);
+        BookFavRecyclerView adapter = new BookFavRecyclerView(favBooksArray, getContext());
+        recyclerView.setAdapter(adapter);
+
+        // Disables recyclerView nested scroll
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3) {
+            @Override
+            public boolean canScrollVertically() { return false; }
+        });
+
+        return view;
     }
 }
