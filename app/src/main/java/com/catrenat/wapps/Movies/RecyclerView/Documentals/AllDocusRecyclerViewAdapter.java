@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.DocusCategories;
-import com.catrenat.wapps.Movies.RecyclerView.Series.SeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
 import java.util.List;
@@ -56,7 +55,7 @@ public class AllDocusRecyclerViewAdapter extends RecyclerView.Adapter<AllDocusRe
         public AllDocusViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.movieCategoryTitle);
-            docusRecyclerView = itemView.findViewById(R.id.seriesRecyclerView);
+            docusRecyclerView = itemView.findViewById(R.id.seriesFavRecyclerView);
         }
     }
 

@@ -55,7 +55,7 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
         public AllSeriesViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.movieCategoryTitle);
-            seriesRecyclerView = itemView.findViewById(R.id.seriesRecyclerView);
+            seriesRecyclerView = itemView.findViewById(R.id.seriesFavRecyclerView);
         }
     }
 

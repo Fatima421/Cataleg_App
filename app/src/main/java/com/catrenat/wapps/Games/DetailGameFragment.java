@@ -142,7 +142,9 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         if (user != null) {
             if (user.getGames() != null) {
                 for (int i = 0; i < user.getGames().size(); i++) {
-                    gameFavImage.setImageResource(R.drawable.ic_music_filled_heart);
+                    if (user.getGames().get(i).equals(game.getName())) {
+                        gameFavImage.setImageResource(R.drawable.ic_music_filled_heart);
+                    }
                 }
             }
         }

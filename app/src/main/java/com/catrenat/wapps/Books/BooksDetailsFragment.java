@@ -22,10 +22,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.RecyclerView.BookTagRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Book;
+import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.RecyclerView.MovieTagRecyclerViewAdapter;
 import com.catrenat.wapps.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,14 +40,17 @@ public class BooksDetailsFragment extends Fragment {
 
     private BookTagRecyclerViewAdapter bookTagAdapter;
     boolean heartPressed = false;
-    Book book = new Book();
+    private Book book = new Book();
+    private User user;
+    private FirebaseFirestore db;
 
     public BooksDetailsFragment() {
         // Required empty public constructor
     }
 
-    public BooksDetailsFragment(Book book) {
+    public BooksDetailsFragment(Book book, User user) {
         this.book = book;
+        this.user = user;
     }
 
     @Override
@@ -67,7 +77,6 @@ public class BooksDetailsFragment extends Fragment {
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(book.getAuthor());
         bookSinopsis.setText(book.getDescription());
-        Log.i("edwing", ""+book.getUrl());
 
         bookTagAdapter = new BookTagRecyclerViewAdapter(book.getGenres());
         bookTagRecyclerView.setAdapter(bookTagAdapter);
@@ -98,8 +107,26 @@ public class BooksDetailsFragment extends Fragment {
                 int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
                 heartPressed = current != R.drawable.ic_music_heart;
                 bookFavImg.setImageResource(current);
+                if (book != null) {
+                    if (heartPressed) {
+                        addFavToFirebase(book.getTitle());
+                    } else {
+                        deleteFavFromFirebase(book.getTitle());
+                    }
+                }
             }
         });
+
+        // Load favourite image
+        if (user != null) {
+            if (user.getBooks() != null) {
+                for (int i = 0; i < user.getBooks().size(); i++) {
+                    if (user.getBooks().get(i).equals(book.getTitle())) {
+                        bookFavImg.setImageResource(R.drawable.ic_music_filled_heart);
+                    }
+                }
+            }
+        }
 
         bookShareImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +142,86 @@ public class BooksDetailsFragment extends Fragment {
     public void shareBookLink() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        Log.i("edwing", ""+book.getUrl());
         sendIntent.putExtra(Intent.EXTRA_TEXT, book.getUrl());
         sendIntent.setType("text/plain");
         getContext().startActivity(sendIntent);
+    }
+
+    public void addFavToFirebase(String bookName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("books", FieldValue.arrayUnion(bookName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void deleteFavFromFirebase(String bookName) {
+        // Create a new user with a first and last name
+        String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(document)
+                .update("books", FieldValue.arrayRemove(bookName))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }
