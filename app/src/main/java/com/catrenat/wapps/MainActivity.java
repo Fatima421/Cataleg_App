@@ -174,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
                         dialog.show();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                if (item.getItemId() != R.id.nav_disconnect) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                }
                 return true;
             }
         });

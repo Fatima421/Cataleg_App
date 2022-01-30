@@ -17,10 +17,6 @@ import android.widget.TextView;
 import com.catrenat.wapps.R;
 
 public class InformationFragment extends Fragment {
-    // Properties
-    TextView imagesRightsText;
-    ConstraintLayout imagesRightsConstraint;
-    CardView imagesRightCardView;
 
     public InformationFragment() {
         // Required empty public constructor
@@ -37,9 +33,16 @@ public class InformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_information, container, false);
-        imagesRightsText = view.findViewById(R.id.imageRightsText);
-        imagesRightsConstraint = view.findViewById(R.id.aboutImageRightsConstraint);
-        imagesRightCardView = view.findViewById(R.id.imagesRightsCardView);
+
+        // Elements from the view
+        TextView imagesRightsText = view.findViewById(R.id.imageRightsText);
+        ConstraintLayout imagesRightsConstraint = view.findViewById(R.id.aboutImageRightsConstraint);
+        CardView imagesRightCardView = view.findViewById(R.id.imagesRightsCardView);
+        TextView aboutUsText = view.findViewById(R.id.aboutUsText);
+        ConstraintLayout aboutUsConstraint = view.findViewById(R.id.aboutUsConstraintLayout);
+        CardView aboutUsCardView = view.findViewById(R.id.aboutUsCardView);
+
+        // Transition of the constraint to show text
         imagesRightsConstraint.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         imagesRightCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +50,17 @@ public class InformationFragment extends Fragment {
                 int v = (imagesRightsText.getVisibility() == View.GONE) ? View.VISIBLE: View.GONE;
                 TransitionManager.beginDelayedTransition(imagesRightsConstraint, new AutoTransition());
                 imagesRightsText.setVisibility(v);
+            }
+        });
+
+        // Transition of the constraint to show text
+        aboutUsConstraint.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        aboutUsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int v = (aboutUsText.getVisibility() == View.GONE) ? View.VISIBLE: View.GONE;
+                TransitionManager.beginDelayedTransition(aboutUsConstraint, new AutoTransition());
+                aboutUsText.setVisibility(v);
             }
         });
         return view;
