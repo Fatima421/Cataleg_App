@@ -36,11 +36,15 @@ public class InformationFragment extends Fragment {
 
         // Elements from the view
         TextView imagesRightsText = view.findViewById(R.id.imageRightsText);
+        imagesRightsText.setText(getString(R.string.aboutImagesRightsTextPart1)+System.lineSeparator()+getString(R.string.aboutImageRightsTextPart2));
         ConstraintLayout imagesRightsConstraint = view.findViewById(R.id.aboutImageRightsConstraint);
         CardView imagesRightCardView = view.findViewById(R.id.imagesRightsCardView);
         TextView aboutUsText = view.findViewById(R.id.aboutUsText);
         ConstraintLayout aboutUsConstraint = view.findViewById(R.id.aboutUsConstraintLayout);
         CardView aboutUsCardView = view.findViewById(R.id.aboutUsCardView);
+        TextView aboutAppText = view.findViewById(R.id.aboutAppText);
+        ConstraintLayout aboutAppConstraint = view.findViewById(R.id.aboutAppConstraint);
+        CardView aboutAppCardView = view.findViewById(R.id.aboutAppCardView);
 
         // Transition of the constraint to show text
         imagesRightsConstraint.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
@@ -63,6 +67,18 @@ public class InformationFragment extends Fragment {
                 aboutUsText.setVisibility(v);
             }
         });
+
+        // Transition of the constraint to show text
+        aboutAppConstraint.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        aboutAppCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int v = (aboutAppText.getVisibility() == View.GONE) ? View.VISIBLE: View.GONE;
+                TransitionManager.beginDelayedTransition(aboutAppConstraint, new AutoTransition());
+                aboutAppText.setVisibility(v);
+            }
+        });
+
         return view;
     }
 }

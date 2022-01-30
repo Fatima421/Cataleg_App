@@ -96,11 +96,18 @@
     <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
     <string name="emptyGameFavs">No tens cap joc en preferits</string>
     <string name="emptyBookFavs">No tens cap llibre en preferits</string>
-    <string name="aboutImageRights">Sobre el dret d\'imatges</string>
-    <string name="aboutImagesRightsText">Les imatges dels videojocs, les pel·lícules i els llibres es poden utilitzar sempre que es realitzi
+    <string name="aboutImageRights">Sobre el contingut multimèdia utilitzat</string>
+    <string name="aboutImagesRightsTextPart1">Les imatges dels videojocs, les pel·lícules, els àlbums i els llibres es poden utilitzar sempre que es realitzi
         un ús justificatiu de la imatge, entenent-se per ús justificatiu aquell que busca dotar d\'una informació i no beneficiar-se de
         l\'explotació d\'aquesta imatge, s\'hauria de considerar un ús autoritzat. Dit per Yasmina I. Glez. Müller,
         advocada Canària especialitzada en Propietat Intel·lectual i Industrial.</string>
+    <string name="aboutImageRightsTextPart2">
+        Respecte a la música i tràilers utilitzats en l\'aplicació són trets d\'una versió de l\'api oficial de YouTube.
+        Aquesta aplicació no ha sigut creada per ús comercial, és una aplicació merament formativa, per tant, es justifica l\'ús dels vídeos.
+        El codi utilitzat pels vídeos ha sigut tret del GitHub de Pierfrancesco Soffritti: https://github.com/PierfrancescoSoffritti/android-youtube-player
+        en el seu GitHub trobareu una explicació més extensa sobre els termes i condicions d\ús de YouTube.</string>
     <string name="aboutUs">Sobre nosaltres</string>
     <string name="aboutUsText">Nosaltres som el grup de Cat Renat, un equip de 3 persones. L\'Erik Michel, la Fatima Sahar Syed i l\'Edwing Montero. Hem fet aquesta aplicació amb molta il·lusió i ganes, li hem dedicat hores i hores durant aquests mesos. Ha sigut un llarg procés en el qual ens hem divertit i après un munt, n\'hi ha hagut moments més tensos, on les coses no sortien o simplement anàvem justos de temps, però al final hem aconseguit fer una aplicació amb tots els valors que volem transmetre.</string>
+    <string name="aboutApp">Sobre l\'aplicació</string>
+    <string name="aboutAppText"></string>
 </resources>
