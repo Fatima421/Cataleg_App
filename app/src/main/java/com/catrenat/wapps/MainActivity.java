@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.BooksFragment;
 import com.catrenat.wapps.Favourites.GeneralFavFragment;
+import com.catrenat.wapps.Information.InformationFragment;
 import com.catrenat.wapps.LoginScreen.LoginScreen;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesFragment;
@@ -142,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new GeneralFavFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+                    case R.id.nav_information:
+                        vibe.vibrate(3);
+                        fragment = new InformationFragment();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                     case R.id.nav_disconnect:
                         vibe.vibrate(3);
                         // Alert dialog to confirm logout action
