@@ -36,7 +36,6 @@ public class InformationFragment extends Fragment {
 
         // Elements from the view
         TextView imagesRightsText = view.findViewById(R.id.imageRightsText);
-        imagesRightsText.setText(getString(R.string.aboutImagesRightsTextPart1)+System.lineSeparator()+getString(R.string.aboutImageRightsTextPart2));
         ConstraintLayout imagesRightsConstraint = view.findViewById(R.id.aboutImageRightsConstraint);
         CardView imagesRightCardView = view.findViewById(R.id.imagesRightsCardView);
         TextView aboutUsText = view.findViewById(R.id.aboutUsText);
