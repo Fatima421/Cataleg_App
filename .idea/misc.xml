@@ -112,7 +112,7 @@
         <entry key="app/src/main/res/layout/item_game_fav.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/item_game_gallery.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/item_game_listgame.xml" value="0.3697916666666667" />
-        <entry key="app/src/main/res/layout/item_game_platform.xml" value="0.11206896551724138" />
+        <entry key="app/src/main/res/layout/item_game_platform.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_game_platformlogo.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/item_movie_all_categories.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/item_movie_fav.xml" value="0.3697916666666667" />
