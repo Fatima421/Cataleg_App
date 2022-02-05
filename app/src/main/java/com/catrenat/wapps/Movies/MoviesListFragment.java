@@ -56,7 +56,7 @@ public class MoviesListFragment extends Fragment  {
         // Creating the fragments to be able to pass bundle to each
         SeriesFragment seriesFragment = new SeriesFragment(searchItem);
         seriesFragment.setArguments(bundle);
-        PelisFragment pelisFragment = new PelisFragment();
+        PelisFragment pelisFragment = new PelisFragment(searchItem);
         pelisFragment.setArguments(bundle);
         DocusFragment docusFragment = new DocusFragment();
         docusFragment.setArguments(bundle);
@@ -94,23 +94,6 @@ public class MoviesListFragment extends Fragment  {
                 return false;
             }
         });
-
-        // Filters on search click and resets when no string or cancelled
-        //searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-        //    @Override
-        //    public boolean onQueryTextSubmit(String query) {
-        //        adapter.getItem(0).get
-        //        //adapter.getItem(0).getMoviesAdapter().getSeriesRecyclerViewAdapter().getInstance().filter(query);
-        //        return false;
-        //    }
-//
-        //    @Override
-        //    public boolean onQueryTextChange(String query) {
-        //        if(query.isEmpty()) {
-        //            //seriesFragment.getMoviesAdapter().filter(query);
-        //        }
-        //        return false;
-        //    }});
 
         return view;
     }

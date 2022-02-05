@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Pelis;
@@ -38,7 +39,7 @@ public class PelisFragment extends Fragment {
 
     // Properties
     private RecyclerView allPelisRecyclerView;
-    private AllPelisRecyclerViewAdapter pelisAdapter;
+    private AllPelisRecyclerViewAdapter moviesAdapter;
     private ArrayList<Pelis> pelisList = new ArrayList();
     private List<PelisCategories> pelisCategories = new ArrayList<>();
     private List<Pelis> comedyPelis = new ArrayList<>();
@@ -48,10 +49,16 @@ public class PelisFragment extends Fragment {
     private List<Pelis> thrillerPelis = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
+    private SearchView searchView;
 
     public PelisFragment() {
         // Required empty public constructor
     }
+
+    public PelisFragment(SearchView searchView) {
+        this.searchView = searchView;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,8 +124,25 @@ public class PelisFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
-                            allPelisRecyclerView.setAdapter(pelisAdapter);
+                            moviesAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
+                            allPelisRecyclerView.setAdapter(moviesAdapter);
+
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    Log.i("Aqui buscador pelies", "kfdgkfdlñgfdñlgkfdñkgdfgfdg");
+                                    moviesAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        moviesAdapter.filter(query);
+                                        moviesAdapter.notifyDataSetChanged();
+                                    }
+                                    return false;
+                                }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }

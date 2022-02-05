@@ -26,21 +26,20 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecyclerViewAdapter.SeriesViewHolder> {
     private List<Serie> series;
     private List<Serie> all_series;
     private Context context;
     private String selectedPlatform;
-    private SearchView searchView;
 
-    public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform, SearchView searchView){
+    public SeriesRecyclerViewAdapter(List<Serie> series, Context context, String selectedPlatform){
         this.series = series;
         this.context = context;
         this.selectedPlatform = selectedPlatform;
         all_series = new ArrayList<>();
         all_series.addAll(series);
-        this.searchView = searchView;
     }
 
     @NonNull
@@ -77,23 +76,6 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
             }
         });
-    }
-
-    // SearchBar filter
-    public void filter(String string){
-        String search = "cit";
-        if(search.length() == 0){
-            series.clear();
-            series.addAll(all_series);
-        } else {
-            series.clear();
-            for(Serie serie: all_series) {
-                if(serie.getName().toLowerCase().contains(search)) {
-                    series.add(serie);
-                }
-            }
-        }
-        notifyDataSetChanged();
     }
 
     @Override

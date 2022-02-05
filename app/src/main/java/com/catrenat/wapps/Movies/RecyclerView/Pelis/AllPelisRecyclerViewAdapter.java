@@ -1,6 +1,7 @@
 package com.catrenat.wapps.Movies.RecyclerView.Pelis;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +15,30 @@ import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.DocusCategories;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.PelisCategories;
+import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Movies.RecyclerView.Documentals.DocusRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRecyclerViewAdapter.AllPelisViewHolder> {
     private List<PelisCategories> pelisCategories;
     private Context context;
     private String selectedPlatform;
+    private ArrayList<ArrayList<Pelis>> all_movies;
+
 
     public AllPelisRecyclerViewAdapter(List<PelisCategories> pelisCategories, Context context, String selectedPlatform) {
         this.context = context;
         this.pelisCategories = pelisCategories;
         this.selectedPlatform = selectedPlatform;
+        all_movies = new ArrayList<>();
+        for(int i = 0; i < all_movies.size(); i++) {
+            all_movies.add(new ArrayList<>());
+            all_movies.get(i).addAll(pelisCategories.get(i).getPelis());
+            Log.d("ALLPELIS", "THIS: " + all_movies.get(i));
+        }
     }
 
     @NonNull
@@ -43,6 +54,30 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         // Set the movie category title
         holder.categoryTitle.setText(pelisCategories.get(position).getTitle());
         setPelisRecycler(holder.pelisRecyclerView, pelisCategories.get(position).getPelis());
+    }
+
+    // SearchBar filter
+    public void filter(String string){
+        for(int i = 0; i < pelisCategories.size(); i++) {
+            String search = string.toLowerCase();
+            if(search.length() == 0){
+                Log.d("CLICK", "Pelis antes: " + pelisCategories.get(i).getPelis());
+                Log.d("CLICK", "All Pelis: " + all_movies.get(i));
+                Log.d("CLICK", "All Pelis: " + all_movies);
+
+                pelisCategories.get(i).getPelis().clear();
+                pelisCategories.get(i).getPelis().addAll(all_movies.get(i));
+                Log.d("CLICK", "Pelis despues: " + pelisCategories.get(i).getPelis());
+            } else {
+                pelisCategories.get(i).getPelis().clear();
+                for(Pelis pelis: all_movies.get(i)) {
+                    if(pelis.getName().toLowerCase().contains(search)) {
+                        pelisCategories.get(i).getPelis().add(pelis);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
     @Override

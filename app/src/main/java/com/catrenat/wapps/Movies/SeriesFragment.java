@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.catrenat.wapps.Models.SerieCategories;
 import com.catrenat.wapps.Models.Serie;
-import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.Movies.RecyclerView.Series.AllSeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +39,7 @@ public class SeriesFragment extends Fragment {
 
     // Properties
     private RecyclerView allSeriesRecyclerView;
-    private AllSeriesRecyclerViewAdapter moviesAdapter;
+    private AllSeriesRecyclerViewAdapter seriesAdapter;
     private ArrayList<Serie> seriesList = new ArrayList();
     private List<SerieCategories> serieCategoriesList = new ArrayList<>();
     private List<Serie> comedySeries = new ArrayList<>();
@@ -123,8 +122,24 @@ public class SeriesFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform, searchView);
-                            allSeriesRecyclerView.setAdapter(moviesAdapter);
+                            seriesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform);
+                            allSeriesRecyclerView.setAdapter(seriesAdapter);
+
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    seriesAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        seriesAdapter.filter(query);
+                                        seriesAdapter.notifyDataSetChanged();
+                                    }
+                                    return false;
+                                }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }
