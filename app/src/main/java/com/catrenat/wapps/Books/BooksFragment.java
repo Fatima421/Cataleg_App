@@ -15,9 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.catrenat.wapps.Models.Serie;
-import com.catrenat.wapps.Models.SerieCategories;
-import com.catrenat.wapps.Movies.RecyclerView.Series.AllSeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.catrenat.wapps.Books.RecyclerView.BooksCategoryAdapter;
 import com.catrenat.wapps.Models.Book;
@@ -62,7 +59,7 @@ public class BooksFragment extends Fragment {
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
         bookIntroText.setAnimation(animation);
 
-        rcvCategory = bookView.findViewById(R.id.rcv_category);
+        rcvCategory = bookView.findViewById(R.id.booksCategoriesRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
 
