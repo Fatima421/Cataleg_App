@@ -61,9 +61,9 @@ public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecycler
             });
         }
 
-        holder.pelisImage.setOnClickListener(new View.OnClickListener() {
+        holder.pelisImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(peli, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
             }

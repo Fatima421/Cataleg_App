@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,20 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeriesRecyclerViewAdapter.AllSeriesViewHolder> {
-    private List<SerieCategories> allCategories;
+    private List<SerieCategories> seriesCategories;
     private Context context;
     private String selectedPlatform;
     private SeriesRecyclerViewAdapter seriesRecyclerViewAdapter;
     private ArrayList<ArrayList<Serie>> all_series;
 
-    public AllSeriesRecyclerViewAdapter(List<SerieCategories> allCategories, Context context, String selectedPlatform) {
+    public AllSeriesRecyclerViewAdapter(List<SerieCategories> seriesCategories, Context context, String selectedPlatform) {
         this.context = context;
-        this.allCategories = allCategories;
+        this.seriesCategories = seriesCategories;
         this.selectedPlatform = selectedPlatform;
         all_series = new ArrayList<>();
-        for(int i = 0; i < allCategories.size(); i++) {
+        for(int i = 0; i < seriesCategories.size(); i++) {
             all_series.add(new ArrayList<>());
-            all_series.get(i).addAll(allCategories.get(i).getSeries());
+            all_series.get(i).addAll(seriesCategories.get(i).getSeries());
             Log.d("ALLSERIES", "THIS: " + all_series.get(i));
         }
     }
@@ -49,37 +48,39 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
 
     @Override
     public void onBindViewHolder(@NonNull AllSeriesRecyclerViewAdapter.AllSeriesViewHolder holder, int position) {
-        // Set the movie category title
-        if(allCategories.get(position).getSeries().size()==0) {
+
+        // Hides and shows category recycler view and title if is empty or contains items
+        if(seriesCategories.get(position).getSeries().size()==0) {
             holder.categoryTitle.setVisibility(View.GONE);
             holder.seriesRecyclerView.setVisibility(View.GONE);
-            holder.seriesRecyclerViewConstraintLayout.setVisibility(View.GONE);
+            holder.contentRecyclerViewConstraintLayout.setVisibility(View.GONE);
         } else {
             holder.categoryTitle.setVisibility(View.VISIBLE);
             holder.seriesRecyclerView.setVisibility(View.VISIBLE);
-            holder.seriesRecyclerViewConstraintLayout.setVisibility(View.VISIBLE);
+            holder.contentRecyclerViewConstraintLayout.setVisibility(View.VISIBLE);
         }
-        holder.categoryTitle.setText(allCategories.get(position).getTitle());
-        setSeriesRecycler(holder.seriesRecyclerView, allCategories.get(position).getSeries());
+        // Set the movie category title
+        holder.categoryTitle.setText(seriesCategories.get(position).getTitle());
+        setSeriesRecycler(holder.seriesRecyclerView, seriesCategories.get(position).getSeries());
     }
 
     // SearchBar filter
     public void filter(String string){
-        for(int i = 0; i < allCategories.size(); i++) {
+        for(int i = 0; i < seriesCategories.size(); i++) {
             String search = string.toLowerCase();
             if(search.length() == 0){
-                Log.d("CLICK", "series antes: " + allCategories.get(i).getSeries());
+                Log.d("CLICK", "series antes: " + seriesCategories.get(i).getSeries());
                 Log.d("CLICK", "All series: " + all_series.get(i));
                 Log.d("CLICK", "All series: " + all_series);
 
-                allCategories.get(i).getSeries().clear();
-                allCategories.get(i).getSeries().addAll(all_series.get(i));
-                Log.d("CLICK", "series despues: " + allCategories.get(i).getSeries());
+                seriesCategories.get(i).getSeries().clear();
+                seriesCategories.get(i).getSeries().addAll(all_series.get(i));
+                Log.d("CLICK", "series despues: " + seriesCategories.get(i).getSeries());
             } else {
-                allCategories.get(i).getSeries().clear();
+                seriesCategories.get(i).getSeries().clear();
                 for(Serie serie: all_series.get(i)) {
                     if(serie.getName().toLowerCase().contains(search)) {
-                        allCategories.get(i).getSeries().add(serie);
+                        seriesCategories.get(i).getSeries().add(serie);
                     }
                 }
             }
@@ -89,20 +90,20 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
 
     @Override
     public int getItemCount() {
-        return allCategories.size();
+        return seriesCategories.size();
     }
 
     public class AllSeriesViewHolder extends RecyclerView.ViewHolder{
         // View items
         TextView categoryTitle;
         RecyclerView seriesRecyclerView;
-        ConstraintLayout seriesRecyclerViewConstraintLayout;
+        ConstraintLayout contentRecyclerViewConstraintLayout;
 
         public AllSeriesViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.movieCategoryTitle);
-            seriesRecyclerView = itemView.findViewById(R.id.seriesRecyclerView);
-            seriesRecyclerViewConstraintLayout = itemView.findViewById(R.id.seriesRecyclerViewConstraintLayout);
+            seriesRecyclerView = itemView.findViewById(R.id.contentRecyclerView);
+            contentRecyclerViewConstraintLayout = itemView.findViewById(R.id.contentRecyclerViewConstraintLayout);
         }
     }
 

@@ -42,6 +42,7 @@ public class MusicFragment extends Fragment {
     private ArrayList<Music> musicArray = new ArrayList<>();
     private RecyclerView musicRecyclerView;
     private MusicRecyclerViewAdapter adapter;
+    private SearchView searchView;
     YouTubePlayerView youTubePlayerView;
 
     public MusicFragment() {}
@@ -101,17 +102,17 @@ public class MusicFragment extends Fragment {
 
         // SearchBar configuration
         MotionLayout motionLayout = view.findViewById(R.id.musicMotionLayout);
-        SearchView searchItem = view.findViewById(R.id.musicSearchBar);
+        searchView = view.findViewById(R.id.musicSearchBar);
 
         // Calls animation on motionLayout on searchBar icon click
-        searchItem.setOnSearchClickListener(new View.OnClickListener() {
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Click", "Se iso clic open");
                 motionLayout.transitionToEnd();
             }
         });
-        searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 Log.d("Click", "Se iso clic close");
@@ -121,7 +122,7 @@ public class MusicFragment extends Fragment {
         });
 
         // Filters on search click and resets when no string or cancelled
-        searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.filter(query);
@@ -141,15 +142,16 @@ public class MusicFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
     }
 }

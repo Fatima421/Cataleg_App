@@ -3,6 +3,7 @@ package com.catrenat.wapps.Movies;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,13 +51,10 @@ public class PelisFragment extends Fragment {
     private FirebaseFirestore db;
     private String selectedPlatform;
     private SearchView searchView;
+    private MotionLayout moviesMotionLayout;
 
     public PelisFragment() {
         // Required empty public constructor
-    }
-
-    public PelisFragment(SearchView searchView) {
-        this.searchView = searchView;
     }
 
     @Override
@@ -72,12 +70,16 @@ public class PelisFragment extends Fragment {
         TextView noMovieTxt = view.findViewById(R.id.noMovieTxt);
         noMovieTxt.setVisibility(view.GONE);
 
+        // Properties
+        searchView = view.findViewById(R.id.moviesSearchBar);
+        moviesMotionLayout = view.findViewById(R.id.moviesMotionLayout);
+
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
 
         // Setting up categories recycler view
-        allPelisRecyclerView = view.findViewById(R.id.pelisCategoryRecyclerView);
+        allPelisRecyclerView = view.findViewById(R.id.moviesCategoryRecyclerView);
         allPelisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allPelisRecyclerView.setHasFixedSize(false);
         clearData();
@@ -130,7 +132,6 @@ public class PelisFragment extends Fragment {
                             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                 @Override
                                 public boolean onQueryTextSubmit(String query) {
-                                    Log.i("Aqui buscador pelies", "kfdgkfdlñgfdñlgkfdñkgdfgfdg");
                                     moviesAdapter.filter(query);
                                     return false;
                                 }
@@ -139,15 +140,31 @@ public class PelisFragment extends Fragment {
                                 public boolean onQueryTextChange(String query) {
                                     if(query.isEmpty()) {
                                         moviesAdapter.filter(query);
-                                        moviesAdapter.notifyDataSetChanged();
                                     }
                                     return false;
-                                }});
+                            }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                moviesMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                moviesMotionLayout.transitionToStart();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -224,6 +241,22 @@ public class PelisFragment extends Fragment {
         }
         if (thrillerPelis != null) {
             thrillerPelis.clear();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 }

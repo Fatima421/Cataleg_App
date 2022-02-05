@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.catrenat.wapps.Models.Documental;
-import com.catrenat.wapps.Models.DocusCategories;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.PelisCategories;
-import com.catrenat.wapps.Models.Serie;
-import com.catrenat.wapps.Movies.RecyclerView.Documentals.DocusRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         this.pelisCategories = pelisCategories;
         this.selectedPlatform = selectedPlatform;
         all_movies = new ArrayList<>();
-        for(int i = 0; i < all_movies.size(); i++) {
+        for(int i = 0; i < pelisCategories.size(); i++) {
             all_movies.add(new ArrayList<>());
             all_movies.get(i).addAll(pelisCategories.get(i).getPelis());
             Log.d("ALLPELIS", "THIS: " + all_movies.get(i));
@@ -51,6 +48,16 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
 
     @Override
     public void onBindViewHolder(@NonNull AllPelisRecyclerViewAdapter.AllPelisViewHolder holder, int position) {
+        // Hides and shows category recycler view and title if is empty or contains items
+        if(pelisCategories.get(position).getPelis().size()==0) {
+            holder.categoryTitle.setVisibility(View.GONE);
+            holder.pelisRecyclerView.setVisibility(View.GONE);
+            holder.contentRecyclerViewConstraintLayout.setVisibility(View.GONE);
+        } else {
+            holder.categoryTitle.setVisibility(View.VISIBLE);
+            holder.pelisRecyclerView.setVisibility(View.VISIBLE);
+            holder.contentRecyclerViewConstraintLayout.setVisibility(View.VISIBLE);
+        }
         // Set the movie category title
         holder.categoryTitle.setText(pelisCategories.get(position).getTitle());
         setPelisRecycler(holder.pelisRecyclerView, pelisCategories.get(position).getPelis());
@@ -89,11 +96,13 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         // View items
         TextView categoryTitle;
         RecyclerView pelisRecyclerView;
+        ConstraintLayout contentRecyclerViewConstraintLayout;
 
         public AllPelisViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.movieCategoryTitle);
-            pelisRecyclerView = itemView.findViewById(R.id.seriesRecyclerView);
+            pelisRecyclerView = itemView.findViewById(R.id.contentRecyclerView);
+            contentRecyclerViewConstraintLayout = itemView.findViewById(R.id.contentRecyclerViewConstraintLayout);
         }
     }
 

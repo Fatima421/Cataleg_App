@@ -3,6 +3,7 @@ package com.catrenat.wapps.Movies;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,12 +51,9 @@ public class SeriesFragment extends Fragment {
     private FirebaseFirestore db;
     private String selectedPlatform;
     private SearchView searchView;
+    private MotionLayout seriesMotionLayout;
 
     public SeriesFragment() {
-    }
-
-    public SeriesFragment(SearchView searchView) {
-        this.searchView = searchView;
     }
 
     @Override
@@ -70,12 +68,16 @@ public class SeriesFragment extends Fragment {
         TextView noSeriesTxt = view.findViewById(R.id.noSeriesTxt);
         noSeriesTxt.setVisibility(view.GONE);
 
+        // Properties
+        seriesMotionLayout = view.findViewById(R.id.seriesMotionLayout);
+        searchView = view.findViewById(R.id.seriesSearchBar);
+
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
 
         // Setting up categories recycler view
-        allSeriesRecyclerView = view.findViewById(R.id.categoryRecyclerView);
+        allSeriesRecyclerView = view.findViewById(R.id.seriesCategoryRecyclerView);
         allSeriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allSeriesRecyclerView.setHasFixedSize(false);
         clearData();
@@ -128,7 +130,7 @@ public class SeriesFragment extends Fragment {
                             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                 @Override
                                 public boolean onQueryTextSubmit(String query) {
-                                    seriesAdapter.filter(query);
+                                        seriesAdapter.filter(query);
                                     return false;
                                 }
 
@@ -136,7 +138,6 @@ public class SeriesFragment extends Fragment {
                                 public boolean onQueryTextChange(String query) {
                                     if(query.isEmpty()) {
                                         seriesAdapter.filter(query);
-                                        seriesAdapter.notifyDataSetChanged();
                                     }
                                     return false;
                                 }});
@@ -145,6 +146,24 @@ public class SeriesFragment extends Fragment {
                         }
                     }
                 });
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                seriesMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                seriesMotionLayout.transitionToStart();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -222,6 +241,22 @@ public class SeriesFragment extends Fragment {
         }
         if (thrillerSeries != null) {
             thrillerSeries.clear();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 

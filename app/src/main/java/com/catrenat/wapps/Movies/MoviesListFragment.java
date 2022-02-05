@@ -49,14 +49,11 @@ public class MoviesListFragment extends Fragment  {
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
 
-        // SearchBar configuration
-        SearchView searchItem = view.findViewById(R.id.moviesSearchBar);
-        MotionLayout motionLayout = view.findViewById(R.id.moviesMotionLayout);
 
         // Creating the fragments to be able to pass bundle to each
-        SeriesFragment seriesFragment = new SeriesFragment(searchItem);
+        SeriesFragment seriesFragment = new SeriesFragment();
         seriesFragment.setArguments(bundle);
-        PelisFragment pelisFragment = new PelisFragment(searchItem);
+        PelisFragment pelisFragment = new PelisFragment();
         pelisFragment.setArguments(bundle);
         DocusFragment docusFragment = new DocusFragment();
         docusFragment.setArguments(bundle);
@@ -76,24 +73,6 @@ public class MoviesListFragment extends Fragment  {
 
         // Connect tab layout with view pager
         tabLayout.setupWithViewPager(viewPager);
-
-
-        // Calls animation on motionLayout on searchBar icon click
-        searchItem.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Click", "Se iso clic open");
-                motionLayout.transitionToEnd();
-            }
-        });
-        searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                Log.d("Click", "Se iso clic close");
-                motionLayout.transitionToStart();
-                return false;
-            }
-        });
 
         return view;
     }

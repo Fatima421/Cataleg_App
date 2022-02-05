@@ -3,6 +3,7 @@ package com.catrenat.wapps.Movies;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Documental;
@@ -49,6 +51,8 @@ public class DocusFragment extends Fragment {
     private List<Documental> foodDocus = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
+    private SearchView searchView;
+    private MotionLayout docusMotionLayout;
 
     public DocusFragment() {
         // Required empty public constructor
@@ -64,6 +68,10 @@ public class DocusFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_docus, container, false);
         TextView noDocusText = view.findViewById(R.id.noDocumentalTxt);
         noDocusText.setVisibility(view.GONE);
+
+        // Properties
+        docusMotionLayout = view.findViewById(R.id.docusMotionLayout);
+        searchView = view.findViewById(R.id.docusSearchBar);
 
         // Gets data from bundle
         Bundle bundle = getArguments();
@@ -119,11 +127,44 @@ public class DocusFragment extends Fragment {
                             addCategories();
                             docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext(), selectedPlatform);
                             allDocusRecyclerView.setAdapter(docusAdapter);
+
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    docusAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        docusAdapter.filter(query);
+                                    }
+                                    return false;
+                                }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                docusMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                docusMotionLayout.transitionToStart();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -201,6 +242,22 @@ public class DocusFragment extends Fragment {
         }
         if (foodDocus != null) {
             foodDocus.clear();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 }

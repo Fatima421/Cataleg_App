@@ -34,6 +34,7 @@ public class GamesListFragment extends Fragment {
     private ArrayList<Game> games;
     private String selectedPlatform;
     private GameListRecyclerViewAdapter adapter;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,18 +84,18 @@ public class GamesListFragment extends Fragment {
                 });
 
         // SearchBar configuration
-        SearchView searchItem = root.findViewById(R.id.gamesSearchBar);
+        searchView = root.findViewById(R.id.gamesSearchBar);
         MotionLayout motionLayout = root.findViewById(R.id.gameListLayout);
 
         // Calls animation on motionLayout on searchBar icon click
-        searchItem.setOnSearchClickListener(new View.OnClickListener() {
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Click", "Se iso clic open");
                 motionLayout.transitionToEnd();
             }
         });
-        searchItem.setOnCloseListener(new SearchView.OnCloseListener() {
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 Log.d("Click", "Se iso clic close");
@@ -104,7 +105,7 @@ public class GamesListFragment extends Fragment {
         });
 
         // Filters on search click and resets when no string or cancelled
-        searchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.filter(query);
@@ -120,5 +121,21 @@ public class GamesListFragment extends Fragment {
             }});
 
         return root;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
     }
 }

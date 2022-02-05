@@ -68,10 +68,9 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
                 }
             });
         }
-
-        holder.serieImage.setOnClickListener(new View.OnClickListener() {
+        holder.serieImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesDetailsFragment(serie, selectedPlatform), "moviesDetailsFragment").addToBackStack(null).commit();
             }
