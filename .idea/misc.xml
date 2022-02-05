@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/drawable/bg_books.xml" value="0.2875" />
         <entry key="app/src/main/res/drawable/bg_bottom_navigation.xml" value="0.2875" />
         <entry key="app/src/main/res/drawable/bg_games.xml" value="0.2875" />
+        <entry key="app/src/main/res/drawable/bg_header_userimage.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/bg_lateral_menu.xml" value="0.2875" />
         <entry key="app/src/main/res/drawable/bg_movies.xml" value="0.2875" />
         <entry key="app/src/main/res/drawable/bg_music.xml" value="0.2875" />
@@ -66,6 +67,7 @@
         <entry key="app/src/main/res/drawable/music_bg_box_less_corners.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/person.xml" value="0.2765625" />
         <entry key="app/src/main/res/drawable/profile.xml" value="0.3859375" />
+        <entry key="app/src/main/res/drawable/register_box_background.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.3859375" />
         <entry key="app/src/main/res/drawable/tab_layout_bg.xml" value="0.3859375" />
@@ -98,7 +100,7 @@
         <entry key="app/src/main/res/layout/fragment_music_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_music_fav.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_pelis.xml" value="0.3546875" />
-        <entry key="app/src/main/res/layout/fragment_profile_screen.xml" value="0.3697916666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_series.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/header.xml" value="0.2713541666666667" />

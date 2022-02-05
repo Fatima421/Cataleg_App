@@ -15,13 +15,13 @@
         android:layout_height="100dp"
         android:elevation="10dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/boxViewRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/boxViewRegister" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view"
+        android:id="@+id/boxViewRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/loginTxt"
+            android:id="@+id/registerText"
             android:layout_width="410dp"
             android:layout_height="74dp"
             android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
             android:gravity="bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginTxt"
+            app:layout_constraintTop_toBottomOf="@+id/registerText"
             app:startIconDrawable="@drawable/custom_username_icon">
 
             <EditText

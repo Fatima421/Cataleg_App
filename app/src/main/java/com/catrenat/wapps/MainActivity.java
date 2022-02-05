@@ -45,8 +45,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView headerUsername, headerBio, headerEmail;
-    private ImageView headerImage;
+    public static TextView headerUsername, headerBio, headerEmail;
+    public static ImageView headerImage;
     private Vibrator vibe;
     private BottomNavigationView bottomNav;
     private DrawerLayout drawerLayout;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_profile:
                         vibe.vibrate(3);
-                        fragment = new ProfileScreen();
+                        fragment = new ProfileScreen(user);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.nav_favourites:
