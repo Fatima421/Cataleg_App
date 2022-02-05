@@ -90,4 +90,13 @@
     <string name="noSerie">Cap sèrie en català trobada en aquesta plataforma</string>
     <string name="noMovie">Cap pel·lícula en català trobada en aquesta plataforma</string>
     <string name="noDocumental">Cap documental en català trobat en aquesta plataforma</string>
+    <string name="seeFavsAgain">Torna a mirar els teus preferits de cada secció</string>
+    <string name="emptyMusicFavs">No tens cap música en preferits</string>
+    <string name="favIntro">Aquests son els teus preferits</string>
+    <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
+    <string name="emptyGameFavs">No tens cap joc en preferits</string>
+    <string name="emptyBookFavs">No tens cap llibre en preferits</string>
+    <string name="modifyYourInfo">Modifica les teves dades</string>
+    <string name="save">Guardar</string>
+    <string name="pressToChangeImage">Prem per canviar la imatge</string>
 </resources>

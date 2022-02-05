@@ -3,14 +3,11 @@ package com.catrenat.wapps.Movies.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.catrenat.wapps.Games.RecyclerView.PlatformListRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
 import java.util.ArrayList;

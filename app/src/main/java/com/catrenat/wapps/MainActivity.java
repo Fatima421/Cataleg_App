@@ -26,11 +26,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.BooksFragment;
+import com.catrenat.wapps.Favourites.GeneralFavFragment;
 import com.catrenat.wapps.LoginScreen.LoginScreen;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesFragment;
 import com.catrenat.wapps.Music.MusicFragment;
 import com.catrenat.wapps.Games.PlatformsListFragment;
+import com.catrenat.wapps.Profile.ProfileScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -43,8 +45,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView headerUsername, headerBio, headerEmail;
-    private ImageView headerImage;
+    public static TextView headerUsername, headerBio, headerEmail;
+    public static ImageView headerImage;
     private Vibrator vibe;
     private BottomNavigationView bottomNav;
     private DrawerLayout drawerLayout;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView drawerNav;
     private FirebaseFirestore db;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                User user = document.toObject(User.class);
+                                user = document.toObject(User.class);
                                 // Header properties
                                 headerUsername = findViewById(R.id.headerUsername);
                                 headerBio = findViewById(R.id.headerBio);
@@ -129,6 +132,16 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new GeneralFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+                    case R.id.nav_profile:
+                        vibe.vibrate(3);
+                        fragment = new ProfileScreen(user);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.nav_favourites:
+                        vibe.vibrate(3);
+                        fragment = new GeneralFavFragment();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
                     case R.id.nav_disconnect:
                         vibe.vibrate(3);
                         // Alert dialog to confirm logout action
@@ -155,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.show();
                         break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
                 return true;
             }
         });
