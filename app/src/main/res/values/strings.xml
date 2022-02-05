@@ -96,4 +96,7 @@
     <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
     <string name="emptyGameFavs">No tens cap joc en preferits</string>
     <string name="emptyBookFavs">No tens cap llibre en preferits</string>
+    <string name="modifyYourInfo">Modifica les teves dades</string>
+    <string name="save">Guardar</string>
+    <string name="pressToChangeImage">Prem per canviar la imatge</string>
 </resources>
