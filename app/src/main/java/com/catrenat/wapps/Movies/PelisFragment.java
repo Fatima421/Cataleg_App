@@ -3,6 +3,7 @@ package com.catrenat.wapps.Movies;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.Pelis;
@@ -38,7 +40,7 @@ public class PelisFragment extends Fragment {
 
     // Properties
     private RecyclerView allPelisRecyclerView;
-    private AllPelisRecyclerViewAdapter pelisAdapter;
+    private AllPelisRecyclerViewAdapter moviesAdapter;
     private ArrayList<Pelis> pelisList = new ArrayList();
     private List<PelisCategories> pelisCategories = new ArrayList<>();
     private List<Pelis> comedyPelis = new ArrayList<>();
@@ -48,10 +50,13 @@ public class PelisFragment extends Fragment {
     private List<Pelis> thrillerPelis = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
+    private SearchView searchView;
+    private MotionLayout moviesMotionLayout;
 
     public PelisFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +70,16 @@ public class PelisFragment extends Fragment {
         TextView noMovieTxt = view.findViewById(R.id.noMovieTxt);
         noMovieTxt.setVisibility(view.GONE);
 
+        // Properties
+        searchView = view.findViewById(R.id.moviesSearchBar);
+        moviesMotionLayout = view.findViewById(R.id.moviesMotionLayout);
+
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
 
         // Setting up categories recycler view
-        allPelisRecyclerView = view.findViewById(R.id.pelisCategoryRecyclerView);
+        allPelisRecyclerView = view.findViewById(R.id.moviesCategoryRecyclerView);
         allPelisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allPelisRecyclerView.setHasFixedSize(false);
         clearData();
@@ -117,13 +126,47 @@ public class PelisFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            pelisAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
-                            allPelisRecyclerView.setAdapter(pelisAdapter);
+                            moviesAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
+                            allPelisRecyclerView.setAdapter(moviesAdapter);
+
+                            // Filters on search click and resets when no string or cancelled
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    moviesAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        moviesAdapter.filter(query);
+                                    }
+                                    return false;
+                            }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                moviesMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                moviesMotionLayout.transitionToStart();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -200,6 +243,22 @@ public class PelisFragment extends Fragment {
         }
         if (thrillerPelis != null) {
             thrillerPelis.clear();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 }

@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Music.MusicArtistFragment;
 import com.catrenat.wapps.Music.MusicDetailsFragment;
 import com.catrenat.wapps.R;
@@ -69,6 +70,7 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
 
     // Properties
     private ArrayList<Music> musicArray;
+    private ArrayList<Music> all_musicArray;
     private Context context;
     private RecyclerView musicRecyclerView;
     boolean heartPressed = false;
@@ -83,6 +85,8 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
         this.context = context;
         this.youTubePlayerView = youTubePlayerView;
         this.user = user;
+        all_musicArray = new ArrayList<>();
+        all_musicArray.addAll(musicArray);
     }
 
     // Creating a new onCreateViewHolder
@@ -339,6 +343,23 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
         sendIntent.putExtra(Intent.EXTRA_TEXT, youtubeInitialText + songUrl);
         sendIntent.setType("text/plain");
         context.startActivity(sendIntent);
+    }
+
+    // SearchBar filter
+    public void filter(String string){
+        String search = string.toLowerCase();
+        if(search.length() == 0){
+            musicArray.clear();
+            musicArray.addAll(all_musicArray);
+        } else {
+            musicArray.clear();
+            for(Music music: all_musicArray) {
+                if(music.getSongName().toLowerCase().contains(search)) {
+                    musicArray.add(music);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     // Counting the items in the music list

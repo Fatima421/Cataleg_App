@@ -9,8 +9,10 @@
     tools:context=".Movies.MoviesListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/moviesMotionLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_movies_list_xml_constraintlayout_scene">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

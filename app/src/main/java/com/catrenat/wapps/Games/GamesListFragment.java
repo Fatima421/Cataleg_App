@@ -5,6 +5,8 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.catrenat.wapps.Games.RecyclerView.GameListRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Game;
@@ -30,6 +33,8 @@ public class GamesListFragment extends Fragment {
     private FirebaseFirestore db;
     private ArrayList<Game> games;
     private String selectedPlatform;
+    private GameListRecyclerViewAdapter adapter;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +72,7 @@ public class GamesListFragment extends Fragment {
 
                         // RecyclerView declared and init with array
                         RecyclerView recyclerView = root.findViewById(R.id.gameListRecyclerView);
-                        GameListRecyclerViewAdapter adapter = new GameListRecyclerViewAdapter(games, getContext());
+                        adapter = new GameListRecyclerViewAdapter(games, getContext());
                         recyclerView.setAdapter(adapter);
 
                         // Disables recyclerView nested scroll
@@ -78,6 +83,60 @@ public class GamesListFragment extends Fragment {
                     }
                 });
 
+        // SearchBar configuration
+        searchView = root.findViewById(R.id.gamesSearchBar);
+        MotionLayout motionLayout = root.findViewById(R.id.gameListLayout);
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                motionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                motionLayout.transitionToStart();
+                return false;
+            }
+        });
+
+        // Filters on search click and resets when no string or cancelled
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if(query.isEmpty()) {
+                    adapter.filter(query);
+                }
+                return false;
+            }});
+
         return root;
+    }
+
+    // Resets search button to original position
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
     }
 }

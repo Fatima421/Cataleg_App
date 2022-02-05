@@ -3,6 +3,7 @@ package com.catrenat.wapps.Movies;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Models.SerieCategories;
@@ -38,7 +40,7 @@ public class SeriesFragment extends Fragment {
 
     // Properties
     private RecyclerView allSeriesRecyclerView;
-    private AllSeriesRecyclerViewAdapter moviesAdapter;
+    private AllSeriesRecyclerViewAdapter seriesAdapter;
     private ArrayList<Serie> seriesList = new ArrayList();
     private List<SerieCategories> serieCategoriesList = new ArrayList<>();
     private List<Serie> comedySeries = new ArrayList<>();
@@ -48,6 +50,8 @@ public class SeriesFragment extends Fragment {
     private List<Serie> thrillerSeries = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
+    private SearchView searchView;
+    private MotionLayout seriesMotionLayout;
 
     public SeriesFragment() {
     }
@@ -64,12 +68,16 @@ public class SeriesFragment extends Fragment {
         TextView noSeriesTxt = view.findViewById(R.id.noSeriesTxt);
         noSeriesTxt.setVisibility(view.GONE);
 
+        // Properties
+        seriesMotionLayout = view.findViewById(R.id.seriesMotionLayout);
+        searchView = view.findViewById(R.id.seriesSearchBar);
+
         // Gets data from bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
 
         // Setting up categories recycler view
-        allSeriesRecyclerView = view.findViewById(R.id.categoryRecyclerView);
+        allSeriesRecyclerView = view.findViewById(R.id.seriesCategoryRecyclerView);
         allSeriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allSeriesRecyclerView.setHasFixedSize(false);
         clearData();
@@ -116,13 +124,47 @@ public class SeriesFragment extends Fragment {
                             }
                             // Initializing the RecyclerView for the movie categories list
                             addCategories();
-                            moviesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform);
-                            allSeriesRecyclerView.setAdapter(moviesAdapter);
+                            seriesAdapter = new AllSeriesRecyclerViewAdapter(serieCategoriesList, getContext(), selectedPlatform);
+                            allSeriesRecyclerView.setAdapter(seriesAdapter);
+
+                            // Filters on search click and resets when no string or cancelled
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                        seriesAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        seriesAdapter.filter(query);
+                                    }
+                                    return false;
+                                }});
                         } else {
                             Log.d("SERIES", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                seriesMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                seriesMotionLayout.transitionToStart();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -200,6 +242,22 @@ public class SeriesFragment extends Fragment {
         }
         if (thrillerSeries != null) {
             thrillerSeries.clear();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 
