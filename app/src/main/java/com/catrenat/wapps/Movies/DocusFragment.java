@@ -128,6 +128,7 @@ public class DocusFragment extends Fragment {
                             docusAdapter = new AllDocusRecyclerViewAdapter(docusCategories, getContext(), selectedPlatform);
                             allDocusRecyclerView.setAdapter(docusAdapter);
 
+                            // Filters on search click and resets when no string or cancelled
                             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                 @Override
                                 public boolean onQueryTextSubmit(String query) {
@@ -244,7 +245,7 @@ public class DocusFragment extends Fragment {
             foodDocus.clear();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onPause() {
         super.onPause();
@@ -252,7 +253,7 @@ public class DocusFragment extends Fragment {
             searchView.onActionViewCollapsed();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onStop() {
         super.onStop();

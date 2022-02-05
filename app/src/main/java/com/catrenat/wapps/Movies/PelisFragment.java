@@ -129,6 +129,7 @@ public class PelisFragment extends Fragment {
                             moviesAdapter = new AllPelisRecyclerViewAdapter(pelisCategories, getContext(), selectedPlatform);
                             allPelisRecyclerView.setAdapter(moviesAdapter);
 
+                            // Filters on search click and resets when no string or cancelled
                             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                 @Override
                                 public boolean onQueryTextSubmit(String query) {
@@ -149,6 +150,7 @@ public class PelisFragment extends Fragment {
                     }
                 });
 
+        // Calls animation on motionLayout on searchBar icon click
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,7 +245,7 @@ public class PelisFragment extends Fragment {
             thrillerPelis.clear();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onPause() {
         super.onPause();
@@ -251,7 +253,7 @@ public class PelisFragment extends Fragment {
             searchView.onActionViewCollapsed();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onStop() {
         super.onStop();

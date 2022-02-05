@@ -8,10 +8,33 @@
     android:background="@drawable/bg_books"
     tools:context=".Books.BooksFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/booksMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="60dp">
+        android:paddingBottom="60dp"
+        app:layoutDescription="@xml/fragment_books_xml_constraintlayout_scene">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/booksSearchBarCardView"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <SearchView
+                android:id="@+id/booksSearchBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:queryHint="Busca">
+
+            </SearchView>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/bookIntroText"
@@ -39,6 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookIntroText" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </androidx.core.widget.NestedScrollView>

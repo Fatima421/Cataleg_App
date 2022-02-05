@@ -123,6 +123,7 @@ public class GamesListFragment extends Fragment {
         return root;
     }
 
+    // Resets search button to original position
     @Override
     public void onPause() {
         super.onPause();
@@ -130,7 +131,7 @@ public class GamesListFragment extends Fragment {
             searchView.onActionViewCollapsed();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onStop() {
         super.onStop();

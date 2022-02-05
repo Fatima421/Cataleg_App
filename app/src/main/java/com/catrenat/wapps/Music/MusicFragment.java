@@ -163,7 +163,7 @@ public class MusicFragment extends Fragment {
 
         return view;
     }
-
+    // Resets search button to original position
     @Override
     public void onPause() {
         super.onPause();
@@ -171,7 +171,7 @@ public class MusicFragment extends Fragment {
             searchView.onActionViewCollapsed();
         }
     }
-
+    // Resets search button to original position
     @Override
     public void onStop() {
         super.onStop();
