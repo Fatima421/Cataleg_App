@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.BooksCategory;
-import com.catrenat.wapps.Models.Serie;
-import com.catrenat.wapps.Movies.RecyclerView.Series.SeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 
 import java.util.List;
@@ -31,7 +29,7 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item_category, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_category, parent, false);
         return new CategoryViewHolder(view);
     }
 
@@ -55,7 +53,7 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
             super(itemView);
 
             bookNameCategory = itemView.findViewById(R.id.books_name_category);
-            rcvBookCategory = itemView.findViewById(R.id.rcv_book);
+            rcvBookCategory = itemView.findViewById(R.id.booksRecyclerView);
         }
     }
 
