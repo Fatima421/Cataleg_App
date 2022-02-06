@@ -36,6 +36,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import jp.wasabeef.blurry.Blurry;
+
 public class BooksDetailsFragment extends Fragment {
 
     private BookTagRecyclerViewAdapter bookTagAdapter;
@@ -64,6 +66,7 @@ public class BooksDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_book_details, container, false);
 
+        ImageView bookImageBackground = view.findViewById(R.id.imageBookBackground);
         ImageView bookImage = view.findViewById(R.id.imageBook);
         TextView bookTitle = view.findViewById(R.id.bookTitle);
         TextView bookAuthor = view.findViewById(R.id.bookAuthor);
@@ -75,7 +78,7 @@ public class BooksDetailsFragment extends Fragment {
 
         // Setting book info to the values
         bookTitle.setText(book.getTitle());
-        bookAuthor.setText(book.getAuthor());
+        bookAuthor.setText("Autor: " + book.getAuthor());
         bookSinopsis.setText(book.getDescription());
 
         bookTagAdapter = new BookTagRecyclerViewAdapter(book.getGenres());
@@ -91,6 +94,13 @@ public class BooksDetailsFragment extends Fragment {
             public void onSuccess(byte[] bytes) {
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 bookImage.setImageBitmap(bmp);
+                bookImageBackground.setImageBitmap(bmp);
+                Blurry.with(getContext())
+                        .radius(8)
+                        .sampling(6)
+                        .async()
+                        .capture(view.findViewById(R.id.imageBookBackground))
+                        .into(view.findViewById(R.id.imageBookBackground));
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -99,6 +109,8 @@ public class BooksDetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
             }
         });
+
+
 
         // Movie favourite button
         bookFavImg.setOnClickListener(new View.OnClickListener() {
