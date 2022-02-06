@@ -7,16 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesDetailsFragment;
+import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,10 +30,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecyclerViewAdapter.SeriesViewHolder> {
     private List<Serie> series;
+    private List<Serie> all_series;
     private Context context;
     private String selectedPlatform;
     private User user;
@@ -39,6 +45,8 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
         this.series = series;
         this.context = context;
         this.selectedPlatform = selectedPlatform;
+        all_series = new ArrayList<>();
+        all_series.addAll(series);
     }
 
     @NonNull
@@ -67,10 +75,9 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
                 }
             });
         }
-
-        holder.serieImage.setOnClickListener(new View.OnClickListener() {
+        holder.serieImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
 
                 // Creating the database instance

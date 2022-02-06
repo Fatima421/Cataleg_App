@@ -4,21 +4,25 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class MoviesListFragment extends Fragment {
+public class MoviesListFragment extends Fragment  {
 
     // Properties
     TabLayout tabLayout;
@@ -44,6 +48,7 @@ public class MoviesListFragment extends Fragment {
         // Bundle
         Bundle bundle = getArguments();
         selectedPlatform = (String) bundle.getSerializable("moviePlatform");
+
 
         // Creating the fragments to be able to pass bundle to each
         SeriesFragment seriesFragment = new SeriesFragment();
