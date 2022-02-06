@@ -15,10 +15,6 @@
             android:title="Preferits"
             android:icon="@drawable/ic_music_heart"/>
         <item
-            android:id="@+id/nav_settings"
-            android:title="Preferències"
-            android:icon="@drawable/settings"/>
-        <item
             android:id="@+id/nav_disconnect"
             android:title="Desconnectar"
             android:icon="@drawable/ic_menu_logout"/>

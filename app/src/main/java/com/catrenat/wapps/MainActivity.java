@@ -14,13 +14,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,9 +48,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     public static TextView headerUsername, headerBio, headerEmail;
     public static ImageView headerImage;
+    private Button catalanBtn, englishBtn;
     private Vibrator vibe;
     private BottomNavigationView bottomNav;
     private DrawerLayout drawerLayout;
@@ -94,6 +101,23 @@ public class MainActivity extends AppCompatActivity {
                                 headerBio = findViewById(R.id.headerBio);
                                 headerEmail = findViewById(R.id.headerEmail);
                                 headerImage = findViewById(R.id.headerImage);
+                                catalanBtn = findViewById(R.id.catalanBtn);
+                                englishBtn = findViewById(R.id.englishBtn);
+                                
+                                // Languages
+                                catalanBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        setLocale("ca");
+                                    }
+                                });
+
+                                englishBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        setLocale("en");
+                                    }
+                                });
 
                                 headerUsername.setText(user.getUsername());
                                 headerBio.setText(user.getBio());
@@ -212,6 +236,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    // To change app language
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(refresh);
     }
 
     // To change the ripple color
