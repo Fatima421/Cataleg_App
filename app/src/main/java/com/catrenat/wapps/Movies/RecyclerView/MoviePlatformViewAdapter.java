@@ -71,7 +71,6 @@ public class MoviePlatformViewAdapter extends RecyclerView.Adapter<MoviePlatform
             public void onClick(View view) {
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 MoviesListFragment moviesListFragment = new MoviesListFragment();
-                //SeriesFragment seriesFragment = new SeriesFragment();
 
                 // Prepares and sets bundle for Detail fragment
                 Bundle bundle = new Bundle();
