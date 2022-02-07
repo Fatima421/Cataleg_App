@@ -18,6 +18,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
@@ -74,6 +75,22 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         drawerNav = findViewById(R.id.drawer_navigation);
+        SharedPreferences prefs = this.getSharedPreferences("SharedP", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String language = prefs.getString("language", null);
+        if (language != null) {
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration config = res.getConfiguration();
+
+            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN_MR1){
+                config.setLocale(new Locale(language.toLowerCase()));
+            } else {
+                config.locale = new Locale(language.toLowerCase());
+            }
+            res.updateConfiguration(config, dm);
+        }
+
 
         // Toolbar
         setSupportActionBar(toolbar);
@@ -109,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         setLocale("ca");
+                                        editor.putString("language", "ca");
+                                        editor.commit();
                                     }
                                 });
 
@@ -116,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         setLocale("en");
+                                        editor.putString("language", "en");
+                                        editor.commit();
                                     }
                                 });
 
