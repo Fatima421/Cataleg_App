@@ -101,4 +101,8 @@
     <string name="pressToChangeImage">Click to change the image</string>
     <string name="catalan">Catalan</string>
     <string name="english">English</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="favourites">Favourites</string>
+    <string name="disconnect">Disconnect</string>
 </resources>
