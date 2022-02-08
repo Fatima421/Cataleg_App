@@ -3,6 +3,7 @@ package com.catrenat.wapps.Books;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.catrenat.wapps.Models.Serie;
-import com.catrenat.wapps.Models.SerieCategories;
-import com.catrenat.wapps.Movies.RecyclerView.Series.AllSeriesRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.catrenat.wapps.Books.RecyclerView.BooksCategoryAdapter;
 import com.catrenat.wapps.Models.Book;
@@ -34,35 +33,33 @@ import java.util.List;
 public class BooksFragment extends Fragment {
 
     private FirebaseFirestore db;
-
     RecyclerView rcvCategory;
     BooksCategoryAdapter categoryAdapter;
-
-
     private ArrayList<Book> booksList = new ArrayList();
-
     private List<BooksCategory> booksCategoriesList = new ArrayList<>();
-
     private List<Book> romanceBooks = new ArrayList<>();
     private List<Book> thrillerBooks = new ArrayList<>();
     private List<Book> childsBooks = new ArrayList<>();
     private List<Book> comediaBooks = new ArrayList<>();
     private List<Book> literaturaBooks = new ArrayList<>();
-
-
+    private SearchView searchView;
+    private MotionLayout booksMotionLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View bookView = inflater.inflate(R.layout.fragment_books, container, false);
 
+        // Properties
         TextView bookIntroText = bookView.findViewById(R.id.bookIntroText);
+        searchView = bookView.findViewById(R.id.booksSearchBar);
+        booksMotionLayout = bookView.findViewById(R.id.booksMotionLayout);
 
         // Making the welcome text fade in
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
         bookIntroText.setAnimation(animation);
 
-        rcvCategory = bookView.findViewById(R.id.rcv_category);
+        rcvCategory = bookView.findViewById(R.id.booksCategoriesRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
 
@@ -104,11 +101,45 @@ public class BooksFragment extends Fragment {
                             addCategories();
                             categoryAdapter = new BooksCategoryAdapter(booksCategoriesList, getContext());
                             rcvCategory.setAdapter(categoryAdapter);
+
+                            // Filters on search click and resets when no string or cancelled
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    categoryAdapter.filter(query);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onQueryTextChange(String query) {
+                                    if(query.isEmpty()) {
+                                        categoryAdapter.filter(query);
+                                    }
+                                    return false;
+                                }});
+
                         } else {
                             Log.d("BOOKS", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        // Calls animation on motionLayout on searchBar icon click
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click", "Se iso clic open");
+                booksMotionLayout.transitionToEnd();
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("Click", "Se iso clic close");
+                booksMotionLayout.transitionToStart();
+                return false;
+            }
+        });
 
         return bookView;
     }
@@ -153,6 +184,22 @@ public class BooksFragment extends Fragment {
         }
         if (literaturaBooks != null) {
             literaturaBooks.clear();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
+        }
+    }
+    // Resets search button to original position
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!searchView.isIconified()) {
+            searchView.onActionViewCollapsed();
         }
     }
 }

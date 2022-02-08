@@ -96,6 +96,9 @@
     <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
     <string name="emptyGameFavs">No tens cap joc en preferits</string>
     <string name="emptyBookFavs">No tens cap llibre en preferits</string>
+    <string name="modifyYourInfo">Modifica les teves dades</string>
+    <string name="save">Guardar</string>
+    <string name="pressToChangeImage">Prem per canviar la imatge</string>
     <string name="aboutImageRights">Sobre el contingut multimèdia utilitzat</string>
     <string name="aboutImagesRightsText">Les imatges dels videojocs, les pel·lícules, els àlbums i els llibres es poden utilitzar sempre que es realitzi
         un ús justificatiu de la imatge, entenent-se per ús justificatiu aquell que busca dotar d\'una informació i no beneficiar-se de

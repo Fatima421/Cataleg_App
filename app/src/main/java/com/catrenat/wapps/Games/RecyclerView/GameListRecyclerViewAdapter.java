@@ -2,6 +2,7 @@ package com.catrenat.wapps.Games.RecyclerView;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +32,13 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Game> games;
+    private ArrayList<Game> all_games;
     private Context context;
     private User user;
 
@@ -43,6 +48,8 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
     public GameListRecyclerViewAdapter(ArrayList<Game> games, Context context){
         this.games = games;
         this.context = context;
+        all_games = new ArrayList<>();
+        all_games.addAll(games);
     }
 
     @NonNull
@@ -100,6 +107,23 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
                     });
             }
         });
+    }
+
+    // SearchBar filter
+    public void filter(String string){
+        String search = string.toLowerCase();
+        if(search.length() == 0){
+            games.clear();
+            games.addAll(all_games);
+        } else {
+            games.clear();
+            for(Game game: all_games) {
+                if(game.getName().toLowerCase().contains(search)) {
+                    games.add(game);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
