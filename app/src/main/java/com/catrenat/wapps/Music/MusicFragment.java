@@ -112,7 +112,7 @@ public class MusicFragment extends Fragment {
                                                     Music music = document.toObject(Music.class);
                                                     musicArray.add(music);
                                                 }
-                                                MusicRecyclerViewAdapter adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
+                                                adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
                                                 musicRecyclerView.setAdapter(adapter);
                                             } else {
                                                 Log.w(TAG, "Error getting documents.", task.getException());
@@ -156,7 +156,9 @@ public class MusicFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(newText.isEmpty()) {
-                    adapter.filter(newText);
+                    if (adapter != null) {
+                        adapter.filter(newText);
+                    }
                 }
                 return false;
             }});

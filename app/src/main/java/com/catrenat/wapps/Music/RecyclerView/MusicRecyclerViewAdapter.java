@@ -241,9 +241,11 @@ public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecycler
                 favouriteImageDialog.setImageResource(current);
                 if (heartPressed) {
                     addFavToFirebase(music.getSongName());
+                    holder.favouriteImage.setImageResource(R.drawable.ic_music_filled_heart);
                 }
                 if (!heartPressed) {
                     deleteFavFromFirebase(music.getSongName());
+                    holder.favouriteImage.setImageResource(R.drawable.ic_music_heart);
                 }
             });
 
