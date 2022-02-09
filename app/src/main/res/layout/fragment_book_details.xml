@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toStartOf="@+id/bookShop"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/sinopsisScroll" />
 
     <TextView
         android:id="@+id/bookFavouriteText"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bookShop"
-        app:layout_constraintTop_toBottomOf="@+id/bookDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/sinopsisScroll" />
 
     <TextView
         android:id="@+id/bookShareText"
@@ -131,25 +131,31 @@
         app:layout_constraintTop_toBottomOf="@+id/bookShareImg"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/bookDescription"
-        android:layout_width="0dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sinopsisScroll"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_gravity="center_vertical|end"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:lineSpacingExtra="5dp"
         android:requiresFadingEdge="vertical"
-        android:scrollbars="vertical"
-        android:text="@string/movieSinopsis"
-        android:textColor="@color/white"
-        android:textSize="13dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookTagRecyclerView"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/bookTagRecyclerView">
+
+        <TextView
+            android:id="@+id/bookDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:lineSpacingExtra="5dp"
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="vertical"
+            android:text="@string/movieSinopsis"
+            android:textColor="@color/white"
+            android:textSize="13dp" />
+    </androidx.core.widget.NestedScrollView>
 
     <ImageView
         android:id="@+id/sinospsisLine"
@@ -161,7 +167,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/sinopsisScroll" />
 
     <ImageView
         android:id="@+id/bookShop"
@@ -171,7 +177,7 @@
         app:layout_constraintEnd_toStartOf="@+id/bookShareImg"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bookFav"
-        app:layout_constraintTop_toBottomOf="@+id/bookDescription"
+        app:layout_constraintTop_toBottomOf="@+id/sinopsisScroll"
         app:srcCompat="@drawable/shop" />
 
     <TextView
