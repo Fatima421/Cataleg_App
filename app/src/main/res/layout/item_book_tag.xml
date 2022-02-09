@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        app:cardBackgroundColor="@color/redishBlack"
+        app:cardBackgroundColor="@color/bookTagColor"
         app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

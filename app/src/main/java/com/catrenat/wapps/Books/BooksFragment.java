@@ -179,8 +179,8 @@ public class BooksFragment extends Fragment {
         if (childsBooks != null) {
             childsBooks.clear();
         }
-        if (romanceBooks != null) {
-            romanceBooks.clear();
+        if (comediaBooks != null) {
+            comediaBooks.clear();
         }
         if (literaturaBooks != null) {
             literaturaBooks.clear();
