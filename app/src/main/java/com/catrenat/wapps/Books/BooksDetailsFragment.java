@@ -90,30 +90,31 @@ public class BooksDetailsFragment extends Fragment {
         bookTagRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference photoReference= storageReference.child(book.getImagePath());
-
-        final long ONE_MEGABYTE = 1024 * 1024;
-        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                bookImage.setImageBitmap(bmp);
-                bookImageBackground.setImageBitmap(bmp);
-                if (getContext() != null) {
-                    Blurry.with(getContext())
-                            .radius(8)
-                            .sampling(6)
-                            .async()
-                            .capture(view.findViewById(R.id.imageBookBackground))
-                            .into(view.findViewById(R.id.imageBookBackground));
+        if (book.getImagePath() != null) {
+            StorageReference photoReference= storageReference.child(book.getImagePath());
+            final long ONE_MEGABYTE = 1024 * 1024;
+            photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    bookImage.setImageBitmap(bmp);
+                    bookImageBackground.setImageBitmap(bmp);
+                    if (getContext() != null) {
+                        Blurry.with(getContext())
+                                .radius(8)
+                                .sampling(6)
+                                .async()
+                                .capture(view.findViewById(R.id.imageBookBackground))
+                                .into(view.findViewById(R.id.imageBookBackground));
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
         // To be able to open the book shop link
         bookShop.setOnClickListener(new View.OnClickListener() {
