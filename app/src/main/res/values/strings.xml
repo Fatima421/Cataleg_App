@@ -112,7 +112,7 @@
         Les imatges de les sèries de les plataformes corresponents com TV3 o també de Google. Finalment, els llibres o de les pàgines de compra o de Google.
     </string>
     <string name="aboutUs">Sobre nosaltres</string>
-    <string name="aboutUsText">Nosaltres som el grup de Cat Renat, un equip de 3 persones.
+    <string name="aboutUsText">Nosaltres som el grup de Cat Renat, un equip de 2 persones.
         <b>L\'Erik Michel i la Fatima Sahar Syed.</b>
         Hem fet aquesta aplicació amb molta il·lusió i ganes, li hem dedicat hores i hores durant aquests mesos.
         Ha sigut un llarg procés en el qual ens hem divertit i après un munt, n\'hi ha hagut moments més tensos,
@@ -124,4 +124,5 @@
         un altre als jocs disponibles traduïts en català i per últim llibres catalans.\n\n
         A través d\'aquesta aplicació es pot saber en quina plataforma trobar tot aquest contingut o on poder comprar-ho.
         Facilita enllaços cap a tots els llocs i està feta amb un disseny intuïtiu i fàcil per l\'usuari.</string>
+    <string name="buy">Comprar</string>
 </resources>
