@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -98,13 +99,14 @@ public class BooksDetailsFragment extends Fragment {
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 bookImage.setImageBitmap(bmp);
                 bookImageBackground.setImageBitmap(bmp);
-                Blurry.with(getContext())
-                        .radius(8)
-                        .sampling(6)
-                        .async()
-                        .capture(view.findViewById(R.id.imageBookBackground))
-                        .into(view.findViewById(R.id.imageBookBackground));
-
+                if (getContext() != null) {
+                    Blurry.with(getContext())
+                            .radius(8)
+                            .sampling(6)
+                            .async()
+                            .capture(view.findViewById(R.id.imageBookBackground))
+                            .into(view.findViewById(R.id.imageBookBackground));
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
