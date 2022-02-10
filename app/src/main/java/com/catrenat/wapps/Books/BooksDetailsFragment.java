@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -45,6 +46,7 @@ public class BooksDetailsFragment extends Fragment {
     private Book book = new Book();
     private User user;
     private FirebaseFirestore db;
+    BottomNavigationView bottomNav;
 
     public BooksDetailsFragment() {
         // Required empty public constructor
@@ -79,6 +81,8 @@ public class BooksDetailsFragment extends Fragment {
         TextView bookShareTxt = view.findViewById(R.id.bookShareText);
         TextView bookShopText = view.findViewById(R.id.bookShopTxt);
         TextView bookFavTxt = view.findViewById(R.id.bookFavouriteText);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Setting book info to the values
         bookTitle.setText(book.getTitle());

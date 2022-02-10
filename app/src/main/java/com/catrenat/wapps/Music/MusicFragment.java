@@ -28,6 +28,7 @@ import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,6 +50,7 @@ public class MusicFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     private User user;
     private FirebaseFirestore db;
+    BottomNavigationView bottomNav;
 
     public MusicFragment() {}
 
@@ -67,6 +69,8 @@ public class MusicFragment extends Fragment {
 
         // Properties
         TextView musicIntroText = view.findViewById(R.id.musicIntroText);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Making the welcome text fade in
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);

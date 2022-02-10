@@ -22,6 +22,7 @@ import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,12 +36,15 @@ public class GamesListFragment extends Fragment {
     private String selectedPlatform;
     private GameListRecyclerViewAdapter adapter;
     private SearchView searchView;
+    BottomNavigationView bottomNav;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_games_list, container, false);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Gets data from bundle
         Bundle bundle = getArguments();

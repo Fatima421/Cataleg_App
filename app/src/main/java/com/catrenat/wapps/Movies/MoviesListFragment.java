@@ -18,6 +18,7 @@ import android.widget.SearchView;
 
 import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class MoviesListFragment extends Fragment  {
     ViewPager viewPager;
     MainAdapter adapter;
     private String selectedPlatform;
+    BottomNavigationView bottomNav;
 
     public MoviesListFragment() {
         // Required empty public constructor
@@ -62,6 +64,8 @@ public class MoviesListFragment extends Fragment  {
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         adapter = new MainAdapter(getChildFragmentManager());
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Add fragments to the adapter
         adapter.AddFragment(seriesFragment, getString(R.string.seriesFragmentName));
