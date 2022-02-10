@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +55,7 @@ public class MoviesDetailsFragment extends Fragment {
     private Documental documental;
     private FirebaseFirestore db;
     private User user;
+    BottomNavigationView bottomNav;
 
     public MoviesDetailsFragment() {
         // Required empty public constructor
@@ -104,6 +106,8 @@ public class MoviesDetailsFragment extends Fragment {
         RecyclerView movieTagRecyclerView = view.findViewById(R.id.movieTagRecyclerView);
         youTubePlayerView = view.findViewById(R.id.movieYoutubePlayer);
         seasonsAndEpisodes.setVisibility(View.VISIBLE);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         if (serie != null) {
             // Setting values to the view elements

@@ -63,6 +63,7 @@ public class GeneralFragment extends Fragment {
         booksSquare = view.findViewById(R.id.booksSquareImage);
         booksSquareView = view.findViewById(R.id.booksSquareView);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
         Animation animationFadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out_slower);
 
 

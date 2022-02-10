@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -57,6 +58,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
     private FirebaseFirestore db;
     boolean heartPressed = false;
     private User user;
+    BottomNavigationView bottomNav;
 
     public DetailGameFragment(Game game, User user) {
         this.game = game;
@@ -85,6 +87,8 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         translateString = root.findViewById(R.id.translateString);
         gameFavImage = root.findViewById(R.id.gameFavImage);
         youTubePlayerView = root.findViewById(R.id.gameYoutubePlayer);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Set game details
         gameTitle.setText(game.getName());

@@ -23,6 +23,7 @@ import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.BooksCategory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,6 +45,7 @@ public class BooksFragment extends Fragment {
     private List<Book> literaturaBooks = new ArrayList<>();
     private SearchView searchView;
     private MotionLayout booksMotionLayout;
+    BottomNavigationView bottomNav;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +56,8 @@ public class BooksFragment extends Fragment {
         TextView bookIntroText = bookView.findViewById(R.id.bookIntroText);
         searchView = bookView.findViewById(R.id.booksSearchBar);
         booksMotionLayout = bookView.findViewById(R.id.booksMotionLayout);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Making the welcome text fade in
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
