@@ -26,17 +26,23 @@ import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Music.RecyclerView.MusicRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MusicFragment extends Fragment {
@@ -111,6 +117,10 @@ public class MusicFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
+                                                // Clearing the music list
+                                                if (musicArray != null) {
+                                                    musicArray.clear();
+                                                }
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                                     Music music = document.toObject(Music.class);
