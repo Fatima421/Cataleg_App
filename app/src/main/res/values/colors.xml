@@ -22,4 +22,5 @@
     <color name="gameDetail_grey">#B9ADAD</color>
     <color name="redishBlack">#544141</color>
     <color name="bookTagColor">#A6747474</color>
+    <color name="generalBackground">#162030</color>
 </resources>
