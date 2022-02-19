@@ -343,7 +343,7 @@ public class ProfileScreen extends Fragment {
         // Create a new user with a first and last name
         String document = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // Update user data
+        // Add a new document with a generated ID
         db = FirebaseFirestore.getInstance();
         db.collection("Users").document(document)
                 .update(field, valueToUpdate)
@@ -361,12 +361,30 @@ public class ProfileScreen extends Fragment {
                         Toast.makeText(getContext(), getString(R.string.profileNotUpdated), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .document(document)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
         progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void modifyEmailAuth(String email) {
+        //AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //user.reauthenticate(credential);
         user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -381,7 +399,9 @@ public class ProfileScreen extends Fragment {
     }
 
     private void modifyPasswordAuth(String password) {
+        //AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //user.reauthenticate(credential);
         user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
