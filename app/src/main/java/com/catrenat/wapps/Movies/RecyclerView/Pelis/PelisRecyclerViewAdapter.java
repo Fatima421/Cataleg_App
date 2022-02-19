@@ -72,6 +72,12 @@ public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecycler
         holder.pelisImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                // Condition to prevent double fragment stack bug
+                if(holder.pelisImage.hasFocus()) {
+                    holder.pelisImage.clearFocus();
+                    return;
+                }
+
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 // Creating the database instance
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
