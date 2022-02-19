@@ -57,16 +57,13 @@ public class ProfileScreen extends Fragment {
     private Button saveBtn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private String username;
-    private String bio;
-    private String email;
-    private String password;
-    private String passwordRep;
+    private String username, bio, email, password, passwordRep;
     private User user;
     private ImageView profileImage;
     private Uri imageUri;
     private Bitmap bitmap;
     private String currentEmail, currentPass;
+    private ProgressBar progressBar;
 
     public ProfileScreen() {
         // Required empty public constructor
@@ -100,6 +97,7 @@ public class ProfileScreen extends Fragment {
         bioProfileTxt = view.findViewById(R.id.etProfileBio);
         saveBtn = view.findViewById(R.id.saveBtnProfile);
         profileImage = view.findViewById(R.id.profileImage);
+        progressBar = view.findViewById(R.id.progressUpdateProfile);
         TextView changeImageText = view.findViewById(R.id.changeImageText);
         changeImageText.setVisibility(View.VISIBLE);
 
@@ -155,18 +153,17 @@ public class ProfileScreen extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (saveUser()) {
                     if (!username.isEmpty()) {
                         modifyUserInFirebase(username, "username");
                         MainActivity.headerUsername.setText(username);
                     }
                     if (!email.isEmpty()) {
-                        modifyUserInFirebase(email, "email");
                         modifyEmailAuth(email);
                         MainActivity.headerEmail.setText(email);
                     }
                     if (!password.isEmpty()) {
-                        modifyUserInFirebase(password, "password");
                         modifyPasswordAuth(password);
                     }
                     if (!bio.isEmpty()) {
@@ -354,12 +351,14 @@ public class ProfileScreen extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG", "DocumentSnapshot successfully written!");
+                        Toast.makeText(getContext(), getString(R.string.profileUpdated), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("TAG", "Error writing document", e);
+                        Toast.makeText(getContext(), getString(R.string.profileNotUpdated), Toast.LENGTH_SHORT).show();
                     }
                 });
         db = FirebaseFirestore.getInstance();
@@ -379,12 +378,13 @@ public class ProfileScreen extends Fragment {
                         }
                     }
                 });
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void modifyEmailAuth(String email) {
-        AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
+        //AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.reauthenticate(credential);
+        //user.reauthenticate(credential);
         user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -395,12 +395,13 @@ public class ProfileScreen extends Fragment {
                 }
             }
         });
+        modifyUserInFirebase(email, "email");
     }
 
     private void modifyPasswordAuth(String password) {
-        AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
+        //AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPass);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.reauthenticate(credential);
+        //user.reauthenticate(credential);
         user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -411,5 +412,6 @@ public class ProfileScreen extends Fragment {
                 }
             }
         });
+        modifyUserInFirebase(password, "password");
     }
 }
