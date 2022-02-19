@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/generalBackground"
     tools:context=".Favourites.GeneralFavFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/seeFavsText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/notosanshk_bold"
-        android:gravity="center"
-        android:text="@string/seeFavsAgain"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/seeFavsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/notosanshk_bold"
+            android:gravity="center"
+            android:text="@string/seeFavsAgain"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/musicFavSection"
-        android:layout_width="160dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/music_fav"
-        app:layout_constraintEnd_toStartOf="@+id/movieFavSection"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seeFavsText" />
+        <ImageView
+            android:id="@+id/musicFavSection"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="78dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/music_fav"
+            app:layout_constraintEnd_toStartOf="@+id/movieFavSection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seeFavsText" />
 
-    <ImageView
-        android:id="@+id/movieFavSection"
-        android:layout_width="160dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginEnd="42dp"
-        android:src="@drawable/movie_fav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/musicFavSection"
-        app:layout_constraintTop_toBottomOf="@+id/seeFavsText" />
+        <ImageView
+            android:id="@+id/movieFavSection"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="78dp"
+            android:layout_marginEnd="42dp"
+            android:src="@drawable/movie_fav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/musicFavSection"
+            app:layout_constraintTop_toBottomOf="@+id/seeFavsText" />
 
-    <ImageView
-        android:id="@+id/gameFavSection"
-        android:layout_width="160dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/game_fav"
-        app:layout_constraintEnd_toStartOf="@+id/bookFavSection"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musicFavSection" />
+        <ImageView
+            android:id="@+id/gameFavSection"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/game_fav"
+            app:layout_constraintEnd_toStartOf="@+id/bookFavSection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/musicFavSection" />
 
-    <ImageView
-        android:id="@+id/bookFavSection"
-        android:layout_width="160dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="42dp"
-        android:src="@drawable/book_fav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gameFavSection"
-        app:layout_constraintTop_toBottomOf="@+id/movieFavSection" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/bookFavSection"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="42dp"
+            android:src="@drawable/book_fav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gameFavSection"
+            app:layout_constraintTop_toBottomOf="@+id/movieFavSection" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
