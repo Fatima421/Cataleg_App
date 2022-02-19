@@ -9,14 +9,18 @@
         <entry key="..\:/Users/bymre/Documents/GitHub/Wapps/app/src/main/res/layout/item_book_tag.xml" value="0.151953125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_detail_game.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_detail_game.xml" value="0.2219178082191781" />
         <entry key="app/src/main/res/layout/fragment_games.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/layout/fragment_games_list.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/fragment_general.xml" value="0.260546875" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_movies_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_music.xml" value="0.260546875" />
         <entry key="app/src/main/res/layout/fragment_music_artist.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/header.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_book_tag.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/layout/item_game_platform.xml" value="0.260546875" />
+        <entry key="app/src/main/res/layout/item_game_platformlogo.xml" value="0.260546875" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.11481481481481481" />
       </map>
     </option>
