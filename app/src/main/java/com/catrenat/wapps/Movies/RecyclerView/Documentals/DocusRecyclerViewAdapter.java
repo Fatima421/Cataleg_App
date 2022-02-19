@@ -68,9 +68,15 @@ public class DocusRecyclerViewAdapter extends RecyclerView.Adapter<DocusRecycler
             });
         }
 
-        holder.docusImage.setOnClickListener(new View.OnClickListener() {
+        holder.docusImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
+                // Condition to prevent double fragment stack bug
+                if(holder.docusImage.hasFocus()) {
+                    holder.docusImage.clearFocus();
+                    return;
+                }
+
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 // Creating the database instance
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
