@@ -126,4 +126,6 @@
         Facilita enllaços cap a tots els llocs i està feta amb un disseny intuïtiu i fàcil per l\'usuari.</string>
     <string name="buy">Comprar</string>
     <string name="details">Videojoc detalls</string>
+    <string name="profileUpdated">Les dades han sigut modificades correctament</string>
+    <string name="profileNotUpdated">Les dades no han pogut ser modificades</string>
 </resources>
