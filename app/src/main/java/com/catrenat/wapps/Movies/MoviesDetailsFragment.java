@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.Serie;
@@ -34,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
@@ -45,6 +47,8 @@ import java.util.ArrayList;
 
 public class MoviesDetailsFragment extends Fragment {
     // Properties
+    private TextView movieTitle, seasonsAndEpisodes, movieSinopsis, movieShareTxt, moviePlatformTxt, detailHeader;
+    private ImageView movieShareImg, moviePlatformImg, favouriteImg, movieImage;
     private Serie serie;
     private Pelis peli;
     private ArrayList<String> genres;
@@ -95,23 +99,30 @@ public class MoviesDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movies_details, container, false);
 
         // View Elements
-        TextView movieTitle = view.findViewById(R.id.movieTitle);
-        TextView seasonsAndEpisodes = view.findViewById(R.id.episodesAndSeasons);
-        TextView movieSinopsis = view.findViewById(R.id.movieSinopsis);
+        detailHeader = view.findViewById(R.id.detailsHeader);
+        movieTitle = view.findViewById(R.id.movieTitle);
+        seasonsAndEpisodes = view.findViewById(R.id.episodesAndSeasons);
+
+        movieSinopsis = view.findViewById(R.id.movieSinopsis);
         movieSinopsis.setMovementMethod(new ScrollingMovementMethod());
-        TextView movieShareTxt = view.findViewById(R.id.movieShareText);
-        ImageView movieShareImg = view.findViewById(R.id.movieShareImg);
-        TextView moviePlatformTxt = view.findViewById(R.id.moviePlatformTxt);
-        ImageView moviePlatformImg = view.findViewById(R.id.moviePlatformImg);
-        ImageView favouriteImg = view.findViewById(R.id.movieFav);
+
+        movieImage = view.findViewById(R.id.imageMovie);
+        movieShareTxt = view.findViewById(R.id.movieShareText);
+        movieShareImg = view.findViewById(R.id.movieShareImg);
+        moviePlatformTxt = view.findViewById(R.id.moviePlatformTxt);
+        moviePlatformImg = view.findViewById(R.id.moviePlatformImg);
+        favouriteImg = view.findViewById(R.id.movieFav);
         RecyclerView movieTagRecyclerView = view.findViewById(R.id.movieTagRecyclerView);
+
         youTubePlayerView = view.findViewById(R.id.movieYoutubePlayer);
         seasonsAndEpisodes.setVisibility(View.VISIBLE);
+
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
 
         if (serie != null) {
             // Setting values to the view elements
+            detailHeader.setText(getString(R.string.detailsSerie));
             movieTitle.setText(serie.getName());
             if (serie.getSeasons().equals("1")) {
                 seasonsAndEpisodes.setText(serie.getSeasons() + " "+getString(R.string.season)+" "+ serie.getEpisodes() + " "+getString(R.string.episodes)+" ");
@@ -124,6 +135,7 @@ public class MoviesDetailsFragment extends Fragment {
 
         } else if (peli != null) {
             // Setting values to the view elements
+            detailHeader.setText(getString(R.string.detailsMovie));
             movieTitle.setText(peli.getName());
             movieSinopsis.setText(peli.getSinopsis());
             seasonsAndEpisodes.setVisibility(View.GONE);
@@ -132,6 +144,7 @@ public class MoviesDetailsFragment extends Fragment {
 
         } else if (documental != null) {
             // Setting values to the view elements
+            detailHeader.setText(getString(R.string.detailsDocu));
             movieTitle.setText(documental.getName());
             if (documental.getSeasons().equals("1")) {
                 seasonsAndEpisodes.setText( documental.getSeasons()+" "+getString(R.string.season)+" "+ documental.getEpisodes() + " "+getString(R.string.episodes)+" ");
@@ -235,14 +248,35 @@ public class MoviesDetailsFragment extends Fragment {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String videoId = "";
+                String imageURI = "";
                 if (serie != null) {
                     videoId = serie.getYoutubeUrl();
+                    imageURI = serie.getImagePath();
                 } else if (peli != null) {
                     videoId = peli.getYoutubeUrl();
+                    imageURI = peli.getImagePath();
                 } else if (documental != null) {
                     videoId = documental.getYoutubeUrl();
+                    imageURI = documental.getImagePath();
                 }
-                youTubePlayer.cueVideo(videoId, 0);
+                if(!videoId.isEmpty()) {
+                    youTubePlayer.cueVideo(videoId, 0);
+                } else {
+                    youTubePlayerView.setVisibility(View.INVISIBLE);
+                    movieImage.setVisibility(View.VISIBLE);
+                    FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com")
+                            .getReference()
+                            .child(imageURI).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Load image with glide
+                            Glide.with(getContext())
+                                    .load(uri.toString())
+                                    .into(movieImage);
+                            Log.i("IMAGEGLIDE", uri.toString());
+                        }
+                    });
+                }
             }
         });
 

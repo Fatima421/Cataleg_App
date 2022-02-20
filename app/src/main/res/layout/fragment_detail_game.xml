@@ -333,7 +333,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="85dp"
             android:fontFamily="@font/notosanshk_bold"
-            android:text="@string/details"
+            android:text="@string/detailsGame"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view2"
