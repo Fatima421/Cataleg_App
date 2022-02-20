@@ -125,7 +125,10 @@
         A través d\'aquesta aplicació es pot saber en quina plataforma trobar tot aquest contingut o on poder comprar-ho.
         Facilita enllaços cap a tots els llocs i està feta amb un disseny intuïtiu i fàcil per l\'usuari.</string>
     <string name="buy">Comprar</string>
-    <string name="details">Videojoc detalls</string>
+    <string name="detailsGame">Videojoc detalls</string>
     <string name="profileUpdated">Les dades han sigut modificades correctament</string>
     <string name="profileNotUpdated">Les dades no han pogut ser modificades</string>
+    <string name="detailsSerie">Serie detalls</string>
+    <string name="detailsMovie">Pel·licula detalls</string>
+    <string name="detailsDocu">Documental detalls</string>
 </resources>
