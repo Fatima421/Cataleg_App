@@ -134,4 +134,6 @@
     <string name="music">Música</string>
     <string name="movies">Audio-visuals</string>
     <string name="books">LLibres</string>
+    <string name="history">Històric</string>
+    <string name="searchTitle">Cerca per títol</string>
 </resources>
