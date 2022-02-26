@@ -131,4 +131,7 @@
     <string name="detailsSerie">Serie detalls</string>
     <string name="detailsMovie">Pel·licula detalls</string>
     <string name="detailsDocu">Documental detalls</string>
+    <string name="music">Música</string>
+    <string name="movies">Audio-visuals</string>
+    <string name="books">LLibres</string>
 </resources>
