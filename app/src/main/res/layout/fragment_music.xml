@@ -15,6 +15,19 @@
         app:layoutDescription="@xml/fragment_music_xml_constraintlayout_scene">
 
         <TextView
+            android:id="@+id/musicSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            android:fontFamily="@font/notosanshk_bold"
+            android:text="@string/tapDetail"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/musicIntroText" />
+
+        <TextView
             android:id="@+id/musicIntroText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

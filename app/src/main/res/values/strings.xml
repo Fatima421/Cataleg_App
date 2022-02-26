@@ -136,4 +136,6 @@
     <string name="books">LLibres</string>
     <string name="history">Històric</string>
     <string name="searchTitle">Cerca per títol</string>
+    <string name="generalSubtitle">Toqueu la icona de la categoria desitjada</string>
+    <string name="tapDetail">Toqueu per a més detall</string>
 </resources>
