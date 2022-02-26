@@ -249,7 +249,7 @@
                 android:id="@+id/translateImage"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/share_filled"
+                android:src="@drawable/link_filled"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -311,7 +311,7 @@
                 android:id="@+id/shareImage"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/link_filled"
+                android:src="@drawable/share_filled"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
