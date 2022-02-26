@@ -131,4 +131,6 @@
     <string name="detailsSerie">Serie detalls</string>
     <string name="detailsMovie">Pel·licula detalls</string>
     <string name="detailsDocu">Documental detalls</string>
+    <string name="history">Històric</string>
+    <string name="searchTitle">Cerca per títol</string>
 </resources>

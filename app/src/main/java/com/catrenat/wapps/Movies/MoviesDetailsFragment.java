@@ -32,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,6 +45,9 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MoviesDetailsFragment extends Fragment {
     // Properties
@@ -554,6 +558,38 @@ public class MoviesDetailsFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void addDocuOnFirebase() {
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("category", "");
+        user.put("episodes", "");
+        user.put("genres", Arrays.asList(""));
+        user.put("imagePath", "moviesImages/docusImages/");
+        user.put("name", "");
+        user.put("platform", Arrays.asList(""));
+        user.put("platformUrl", Arrays.asList(""));
+        user.put("seasons", "");
+        user.put("sinopsis", "");
+        user.put("youtubeUrl", "");
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Documental")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error adding document", e);
+                    }
+                });
     }
 
 }
