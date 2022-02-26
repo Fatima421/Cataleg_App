@@ -73,5 +73,73 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gameFavSection"
             app:layout_constraintTop_toBottomOf="@+id/movieFavSection" />
+
+        <TextView
+            android:id="@+id/musicFavTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/music"
+            android:fontFamily="@font/notosanshk_medium"
+            android:textColor="#26CBFD"
+            android:textSize="16dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            app:layout_constraintBottom_toBottomOf="@+id/musicFavSection"
+            app:layout_constraintEnd_toEndOf="@+id/musicFavSection"
+            app:layout_constraintStart_toStartOf="@+id/musicFavSection"
+            app:layout_constraintTop_toTopOf="@+id/musicFavSection" />
+
+        <TextView
+            android:id="@+id/moviesFavTxt"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanshk_medium"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:text="@string/movies"
+            android:textColor="#F13938"
+            android:textColorHighlight="#000000"
+            app:layout_constraintBottom_toBottomOf="@+id/movieFavSection"
+            app:layout_constraintEnd_toEndOf="@+id/movieFavSection"
+            app:layout_constraintStart_toStartOf="@+id/movieFavSection"
+            app:layout_constraintTop_toTopOf="@+id/movieFavSection" />
+
+        <TextView
+            android:id="@+id/gamesFavTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanshk_medium"
+            android:text="@string/games"
+            android:textColor="#E325F0"
+            android:textSize="14dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            app:layout_constraintBottom_toBottomOf="@+id/gameFavSection"
+            app:layout_constraintEnd_toEndOf="@+id/gameFavSection"
+            app:layout_constraintStart_toStartOf="@+id/gameFavSection"
+            app:layout_constraintTop_toTopOf="@+id/gameFavSection" />
+
+        <TextView
+            android:id="@+id/bookFavTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/books"
+            android:textColor="#FCC715"
+            android:fontFamily="@font/notosanshk_medium"
+            android:textSize="16dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            app:layout_constraintBottom_toBottomOf="@+id/bookFavSection"
+            app:layout_constraintEnd_toEndOf="@+id/bookFavSection"
+            app:layout_constraintStart_toStartOf="@+id/bookFavSection"
+            app:layout_constraintTop_toTopOf="@+id/bookFavSection" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
