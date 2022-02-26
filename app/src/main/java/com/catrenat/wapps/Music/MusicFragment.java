@@ -39,6 +39,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,12 +77,16 @@ public class MusicFragment extends Fragment {
 
         // Properties
         TextView musicIntroText = view.findViewById(R.id.musicIntroText);
+        TextView musicSubtitleText = view.findViewById(R.id.musicSubtitle);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
 
         // Making the welcome text fade in
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        musicIntroText.setAnimation(animation);
+        Animation animationTitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        musicIntroText.setAnimation(animationTitle);
+
+        Animation animationSubtitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        musicSubtitleText.setAnimation(animationSubtitle);
 
         // Initializing the RecyclerView for the list
         musicRecyclerView = view.findViewById(R.id.musicRecyclerView);

@@ -54,14 +54,19 @@ public class BooksFragment extends Fragment {
 
         // Properties
         TextView bookIntroText = bookView.findViewById(R.id.bookIntroText);
+        TextView bookSubtitleText = bookView.findViewById(R.id.booksSubtitle);
         searchView = bookView.findViewById(R.id.booksSearchBar);
         booksMotionLayout = bookView.findViewById(R.id.booksMotionLayout);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
 
         // Making the welcome text fade in
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        bookIntroText.setAnimation(animation);
+        Animation animationTitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        bookIntroText.setAnimation(animationTitle);
+
+        Animation animationSubtitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        bookSubtitleText.setAnimation(animationSubtitle);
+
 
         rcvCategory = bookView.findViewById(R.id.booksCategoriesRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
