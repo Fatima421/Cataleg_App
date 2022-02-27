@@ -57,10 +57,9 @@
     <TextView
         android:id="@+id/headerBio"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="-5dp"
         android:fontFamily="@font/notosanshk_regular"
-        android:hint="Frase de bio"
+        android:layout_marginTop="-5dp"
+        android:layout_height="32dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/headerUsername"
