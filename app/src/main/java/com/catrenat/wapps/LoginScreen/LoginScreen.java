@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,14 +19,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.catrenat.wapps.MainActivity;
+import com.catrenat.wapps.Models.User;
+import com.catrenat.wapps.OnboardingActivity;
 import com.catrenat.wapps.R;
 import com.catrenat.wapps.RegisterActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class LoginScreen extends AppCompatActivity {
 private EditText emailTxt, passwordTxt;
@@ -33,6 +44,7 @@ private Button loginBtn;
 private FirebaseAuth mAuth;
 private CheckBox rememberBox;
 private SharedPreferences prefs;
+private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,3 +161,35 @@ private SharedPreferences prefs;
         
     }
 }
+
+/*
+db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        User user = document.toObject(User.class);
+                                        if(user.getFirstTime()) {
+                                            user.setFirstTime(false);
+                                            db.collection("Users")
+                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                    .set(user);
+                                            startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
+                                        } else {
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        }
+
+                                    } else {
+                                        Log.d("FireStore", "No such document");
+                                    }
+                                } else {
+                                    Log.d("FireStore", "get failed with ", task.getException());
+                                }
+                            }
+                        });
+ */
