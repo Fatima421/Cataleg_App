@@ -68,6 +68,7 @@ public class PelisFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pelis, container, false);
         TextView noMovieTxt = view.findViewById(R.id.noMovieTxt);
+        noMovieTxt.setText(getResources().getText(R.string.noMovie));
         noMovieTxt.setVisibility(view.GONE);
 
         // Properties
@@ -108,19 +109,19 @@ public class PelisFragment extends Fragment {
                                 noMovieTxt.setAnimation(animation);
                             }
                             for (int i = 0; i < pelisList.size(); i++) {
-                                if (pelisList.get(i).getCategory().equals(getString(R.string.action))) {
+                                if (pelisList.get(i).getCategory().equals("Acció")) {
                                     actionPelis.add(pelisList.get(i));
                                 }
-                                if (pelisList.get(i).getCategory().equals(getString(R.string.romance))) {
+                                if (pelisList.get(i).getCategory().equals("Romanç")) {
                                     romancePelis.add(pelisList.get(i));
                                 }
-                                if (pelisList.get(i).getCategory().equals(getString(R.string.comedy))) {
+                                if (pelisList.get(i).getCategory().equals("Comèdia")) {
                                     comedyPelis.add(pelisList.get(i));
                                 }
-                                if (pelisList.get(i).getCategory().equals(getString(R.string.drama))) {
+                                if (pelisList.get(i).getCategory().equals("Drama")) {
                                     dramaPelis.add(pelisList.get(i));
                                 }
-                                if (pelisList.get(i).getCategory().equals(getString(R.string.thriller))) {
+                                if (pelisList.get(i).getCategory().equals("Suspens")) {
                                     thrillerPelis.add(pelisList.get(i));
                                 }
                             }

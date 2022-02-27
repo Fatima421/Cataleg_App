@@ -105,4 +105,42 @@
     <string name="profile">Profile</string>
     <string name="favourites">Favourites</string>
     <string name="disconnect">Disconnect</string>
+    <string name="aboutImageRights">About the multimedia content used</string>
+    <string name="aboutImagesRightsText">Images from video games, movies, albums, and books can be used as long as
+        there is a justifiable use of the image, we can understand justifiable use as the one that seeks to provide information and not benefit from
+        exploitation of this image. Said by Yasmina I. Glez. Müller, Canary Islands lawyer specialized in Intellectual and Industrial Property.\n\nRegarding the music and trailers used in the app are taken from a version of the official YouTube API.
+        This app was not created for commercial use, it is purely informative, so the use of the videos is justified.
+        The code used for the videos has been taken from Pierfrancesco Soffritti\'s GitHub: <b>https://github.com/PierfrancescoSoffritti/android-youtube-player</b>
+        in his GitHub you can find a more detailed explanation of YouTube\'s terms and conditions.\n\n
+        The icons used in this application have been created by us or taken from the following links: https://freeicons.io/, https://icons8.com/icons/, https://www.flaticon.com/.\n\n
+        The images for the albums have been taken from Google or Spotify. The images for the video games are taken from the official websites or other platforms like Steam.
+        Series images are taken from platforms such as TV3 or from google. Finally, the images for the books are taken from Google or from their shopping page
+    </string>
+    <string name="aboutUs">About Us</string>
+    <string name="aboutUsText"> We are a group named Cat Renat, a team of 2 people.
+        <b>Erik Michel and Fatima Sahar Syed.</b>
+        We have made this app with great enthusiasm and desire, we have dedicated hours and hours during these months.
+        It has been a long process in which we have had fun and learned a lot, there have been more tense moments
+        where things didn\'t come out as we wished or simply we just didn\'t have enough time, but in the end, we managed to make an app with all the values that we want to convey.</string>
+    <string name="aboutApp">About the app</string>
+    <string name="aboutAppText">
+        Our app has been created to spread content in Catalan and at the same time promote and encourage the use of the Catalan language.
+        \n\nIt is aimed at the general audience, there is no age restriction, anyone can inform themselves through the sections created.
+        For this reason, there is also a variety of sections, we have a section dedicated to Catalan music, another to Catalan series, films, and documentaries, another about the available games translated to Catalan, and finally Catalan books.\n\n
+        Through this app, you can find out on which platform is all this content or where to buy it.
+        It provides links to all sites, and it\'s made with an intuitive and user-friendly design.</string>
+    <string name="buy">Buy</string>
+    <string name="detailsGame">Video game details</string>
+    <string name="profileUpdated">The data has been modified succesfully</string>
+    <string name="profileNotUpdated">The data could not be modified</string>
+    <string name="detailsSerie">Series details</string>
+    <string name="detailsMovie">Movie details</string>
+    <string name="detailsDocu">Documentary details</string>
+    <string name="music">Music</string>
+    <string name="movies">Audio-visuals</string>
+    <string name="books">Books</string>
+    <string name="history">Historic</string>
+    <string name="searchTitle">Search by title</string>
+    <string name="generalSubtitle">Tap the icon for the desired category</string>
+    <string name="tapDetail">Touch for more detail</string>
 </resources>

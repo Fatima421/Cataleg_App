@@ -67,6 +67,7 @@ public class DocusFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_docus, container, false);
         TextView noDocusText = view.findViewById(R.id.noDocumentalTxt);
+        noDocusText.setText(getResources().getText(R.string.noDocumental));
         noDocusText.setVisibility(view.GONE);
 
         // Properties
@@ -107,19 +108,19 @@ public class DocusFragment extends Fragment {
                                 noDocusText.setAnimation(animation);
                             }
                             for (int i = 0; i < documentals.size(); i++) {
-                                if (documentals.get(i).getCategory().equals(getString(R.string.nature))) {
+                                if (documentals.get(i).getCategory().equals("Naturalesa")) {
                                     natureDocus.add(documentals.get(i));
                                 }
-                                if (documentals.get(i).getCategory().equals(getString(R.string.crime))) {
+                                if (documentals.get(i).getCategory().equals("Crims i misteri")) {
                                     crimeDocus.add(documentals.get(i));
                                 }
-                                if (documentals.get(i).getCategory().equals(getString(R.string.technology))) {
+                                if (documentals.get(i).getCategory().equals("Tecnologia")) {
                                     technologyDocus.add(documentals.get(i));
                                 }
-                                if (documentals.get(i).getCategory().equals(getString(R.string.health))) {
+                                if (documentals.get(i).getCategory().equals("Salut")) {
                                     healthDocus.add(documentals.get(i));
                                 }
-                                if (documentals.get(i).getCategory().equals(getString(R.string.history))) {
+                                if (documentals.get(i).getCategory().equals("Històric")) {
                                     historyDocus.add(documentals.get(i));
                                 }
                             }
