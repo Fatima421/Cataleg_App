@@ -40,6 +40,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putBoolean("login", false);
                                 editor.commit();
+                                FirebaseAuth.getInstance().signOut();
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), LoginScreen.class));
                             }
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
+
         });
 
         // Bottom navigation selection fragment
