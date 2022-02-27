@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,12 +24,12 @@ import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.RecyclerView.BookTagRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.User;
-import com.catrenat.wapps.Movies.RecyclerView.MovieTagRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -45,6 +46,7 @@ public class BooksDetailsFragment extends Fragment {
     private Book book = new Book();
     private User user;
     private FirebaseFirestore db;
+    BottomNavigationView bottomNav;
 
     public BooksDetailsFragment() {
         // Required empty public constructor
@@ -75,6 +77,12 @@ public class BooksDetailsFragment extends Fragment {
         ImageView bookFavImg = view.findViewById(R.id.bookFav);
         ImageView bookShareImg = view.findViewById(R.id.bookShareImg);
         RecyclerView bookTagRecyclerView = view.findViewById(R.id.bookTagRecyclerView);
+        ImageView bookShop = view.findViewById(R.id.bookShop);
+        TextView bookShareTxt = view.findViewById(R.id.bookShareText);
+        TextView bookShopText = view.findViewById(R.id.bookShopTxt);
+        TextView bookFavTxt = view.findViewById(R.id.bookFavouriteText);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Setting book info to the values
         bookTitle.setText(book.getTitle());
@@ -86,34 +94,71 @@ public class BooksDetailsFragment extends Fragment {
         bookTagRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference photoReference= storageReference.child(book.getImagePath());
+        if (book.getImagePath() != null) {
+            StorageReference photoReference= storageReference.child(book.getImagePath());
+            final long ONE_MEGABYTE = 1024 * 1024;
+            photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    bookImage.setImageBitmap(bmp);
+                    bookImageBackground.setImageBitmap(bmp);
+                    if (getContext() != null) {
+                        Blurry.with(getContext())
+                                .radius(8)
+                                .sampling(6)
+                                .async()
+                                .capture(view.findViewById(R.id.imageBookBackground))
+                                .into(view.findViewById(R.id.imageBookBackground));
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
-        final long ONE_MEGABYTE = 1024 * 1024;
-        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        // To be able to open the book shop link
+        bookShop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                bookImage.setImageBitmap(bmp);
-                bookImageBackground.setImageBitmap(bmp);
-                Blurry.with(getContext())
-                        .radius(8)
-                        .sampling(6)
-                        .async()
-                        .capture(view.findViewById(R.id.imageBookBackground))
-                        .into(view.findViewById(R.id.imageBookBackground));
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+                if (book.getUrl() != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getUrl()));
+                    startActivity(browserIntent);
+                }
             }
         });
 
+        bookShopText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (book.getUrl() != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getUrl()));
+                    startActivity(browserIntent);
+                }
+            }
+        });
 
-
-        // Movie favourite button
+        // Book favourite button
         bookFavImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
+                heartPressed = current != R.drawable.ic_music_heart;
+                bookFavImg.setImageResource(current);
+                if (book != null) {
+                    if (heartPressed) {
+                        addFavToFirebase(book.getTitle());
+                    } else {
+                        deleteFavFromFirebase(book.getTitle());
+                    }
+                }
+            }
+        });
+
+        bookFavTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int current = (!heartPressed) ? R.drawable.ic_music_filled_heart : R.drawable.ic_music_heart;
@@ -140,7 +185,15 @@ public class BooksDetailsFragment extends Fragment {
             }
         }
 
+        // To be able to share a book
         bookShareImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareBookLink();
+            }
+        });
+
+        bookShareTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareBookLink();
@@ -150,7 +203,7 @@ public class BooksDetailsFragment extends Fragment {
         return view;
     }
 
-    // Share movie
+    // Share Book
     public void shareBookLink() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);

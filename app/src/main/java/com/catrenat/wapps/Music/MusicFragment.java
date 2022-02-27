@@ -26,16 +26,25 @@ import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Music.RecyclerView.MusicRecyclerViewAdapter;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MusicFragment extends Fragment {
@@ -49,6 +58,7 @@ public class MusicFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     private User user;
     private FirebaseFirestore db;
+    BottomNavigationView bottomNav;
 
     public MusicFragment() {}
 
@@ -67,10 +77,16 @@ public class MusicFragment extends Fragment {
 
         // Properties
         TextView musicIntroText = view.findViewById(R.id.musicIntroText);
+        TextView musicSubtitleText = view.findViewById(R.id.musicSubtitle);
+        bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
 
         // Making the welcome text fade in
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        musicIntroText.setAnimation(animation);
+        Animation animationTitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        musicIntroText.setAnimation(animationTitle);
+
+        Animation animationSubtitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        musicSubtitleText.setAnimation(animationSubtitle);
 
         // Initializing the RecyclerView for the list
         musicRecyclerView = view.findViewById(R.id.musicRecyclerView);
@@ -107,12 +123,16 @@ public class MusicFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
+                                                // Clearing the music list
+                                                if (musicArray != null) {
+                                                    musicArray.clear();
+                                                }
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                                     Music music = document.toObject(Music.class);
                                                     musicArray.add(music);
                                                 }
-                                                MusicRecyclerViewAdapter adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
+                                                adapter = new MusicRecyclerViewAdapter(musicRecyclerView, musicArray, getContext(), youTubePlayerView, user);
                                                 musicRecyclerView.setAdapter(adapter);
                                             } else {
                                                 Log.w(TAG, "Error getting documents.", task.getException());
@@ -156,7 +176,9 @@ public class MusicFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(newText.isEmpty()) {
-                    adapter.filter(newText);
+                    if (adapter != null) {
+                        adapter.filter(newText);
+                    }
                 }
                 return false;
             }});

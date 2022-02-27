@@ -58,10 +58,23 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
-                android:queryHint="Busca">
+                android:queryHint="Busca per títol">
 
             </SearchView>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/gamesSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            android:fontFamily="@font/notosanshk_bold"
+            android:text="@string/tapDetail"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gamesWelcomeText" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 

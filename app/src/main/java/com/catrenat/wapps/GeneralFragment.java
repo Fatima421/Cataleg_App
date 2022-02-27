@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GeneralFragment extends Fragment {
 
-    private TextView welcomeText;
+    private TextView welcomeText, subtitleText;
     private ImageView musicSquare;
     private View musicSquareView;
     private ImageView seriesSquare;
@@ -54,6 +54,7 @@ public class GeneralFragment extends Fragment {
 
         // Properties
         welcomeText = view.findViewById(R.id.welcomeGeneralFragment);
+        subtitleText = view.findViewById(R.id.generalSubTitleTextview);
         musicSquare = view.findViewById(R.id.musicSquareImage);
         musicSquareView = view.findViewById(R.id.musicSquareView);
         seriesSquare = view.findViewById(R.id.seriesSquareImage);
@@ -63,12 +64,15 @@ public class GeneralFragment extends Fragment {
         booksSquare = view.findViewById(R.id.booksSquareImage);
         booksSquareView = view.findViewById(R.id.booksSquareView);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
         Animation animationFadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out_slower);
 
 
         // Making the welcome text fade in
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        welcomeText.setAnimation(animation);
+        Animation animationTitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        welcomeText.setAnimation(animationTitle);
+        Animation animationSubtitle = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        subtitleText.setAnimation(animationSubtitle);
 
         // Creating an animation to change the image contrast
         ValueAnimator imageContrast = (ValueAnimator) AnimatorInflater.loadAnimator(getContext(), R.animator.image_contrast);
@@ -212,6 +216,7 @@ public class GeneralFragment extends Fragment {
         welcomeText.setAnimation(animationFadeOut);
         img.setVisibility(img.INVISIBLE);
         welcomeText.setVisibility(welcomeText.INVISIBLE);
+        subtitleText.setVisibility(welcomeText.INVISIBLE);
     }
 
     // Wait a few seconds before changing screen

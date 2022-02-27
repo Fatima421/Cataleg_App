@@ -78,6 +78,12 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
         holder.serieImage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                // Condition to prevent double fragment stack bug
+                if(holder.serieImage.hasFocus()) {
+                    holder.serieImage.clearFocus();
+                    return;
+                }
+
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
 
                 // Creating the database instance

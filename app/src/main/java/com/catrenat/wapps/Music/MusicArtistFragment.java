@@ -72,32 +72,34 @@ public class MusicArtistFragment extends Fragment {
         // Getting the artist from music list
         Map<String, Object> artist = music.getArtist();
 
-        for (Map.Entry<String, Object> entry: artist.entrySet()) {
+        if (artist != null) {
+            for (Map.Entry<String, Object> entry: artist.entrySet()) {
 
-            if (entry.getKey().equals("artistImageUrl")) {
-                // Image loader from firebase using glide
-                if (!entry.getValue().toString().isEmpty()) {
-                    StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
-                    storageReference.child(entry.getValue().toString()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Glide.with(getContext())
-                                    .load(uri.toString())
-                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(artistImage);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.i("IMAGE", e.toString());
-                        }
-                    });
+                if (entry.getKey().equals("artistImageUrl")) {
+                    // Image loader from firebase using glide
+                    if (!entry.getValue().toString().isEmpty()) {
+                        StorageReference storageReference = FirebaseStorage.getInstance("gs://catrenat-3e277.appspot.com").getReference();
+                        storageReference.child(entry.getValue().toString()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(getContext())
+                                        .load(uri.toString())
+                                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(artistImage);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.i("IMAGE", e.toString());
+                            }
+                        });
+                    }
                 }
-            }
-            if (entry.getKey().equals("songArtist")) {
-                if (!entry.getValue().toString().isEmpty()) {
-                    artistName.setText(entry.getValue().toString());
+                if (entry.getKey().equals("songArtist")) {
+                    if (!entry.getValue().toString().isEmpty()) {
+                        artistName.setText(entry.getValue().toString());
+                    }
                 }
             }
         }

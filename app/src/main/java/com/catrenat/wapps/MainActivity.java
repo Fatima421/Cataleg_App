@@ -32,6 +32,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.BooksFragment;
 import com.catrenat.wapps.Favourites.GeneralFavFragment;
+import com.catrenat.wapps.Information.InformationFragment;
 import com.catrenat.wapps.LoginScreen.LoginScreen;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesFragment;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         // Properties
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setVisibility(View.VISIBLE);
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         drawerNav = findViewById(R.id.drawer_navigation);
@@ -176,16 +178,25 @@ public class MainActivity extends AppCompatActivity {
                         vibe.vibrate(3);
                         fragment = new GeneralFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        bottomNav.setVisibility(View.VISIBLE);
                         break;
                     case R.id.nav_profile:
                         vibe.vibrate(3);
                         fragment = new ProfileScreen(user);
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        bottomNav.setVisibility(View.GONE);
                         break;
                     case R.id.nav_favourites:
                         vibe.vibrate(3);
                         fragment = new GeneralFavFragment();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        bottomNav.setVisibility(View.GONE);
+                        break;
+                    case R.id.nav_information:
+                        vibe.vibrate(3);
+                        fragment = new InformationFragment();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        bottomNav.setVisibility(View.GONE);
                         break;
                     case R.id.nav_disconnect:
                         vibe.vibrate(3);
@@ -213,7 +224,9 @@ public class MainActivity extends AppCompatActivity {
                         dialog.show();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                if (item.getItemId() != R.id.nav_disconnect) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                }
                 return true;
             }
         });

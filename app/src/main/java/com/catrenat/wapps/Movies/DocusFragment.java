@@ -48,7 +48,7 @@ public class DocusFragment extends Fragment {
     private List<Documental> crimeDocus = new ArrayList<>();
     private List<Documental> technologyDocus = new ArrayList<>();
     private List<Documental> healthDocus = new ArrayList<>();
-    private List<Documental> foodDocus = new ArrayList<>();
+    private List<Documental> historyDocus = new ArrayList<>();
     private FirebaseFirestore db;
     private String selectedPlatform;
     private SearchView searchView;
@@ -119,8 +119,8 @@ public class DocusFragment extends Fragment {
                                 if (documentals.get(i).getCategory().equals(getString(R.string.health))) {
                                     healthDocus.add(documentals.get(i));
                                 }
-                                if (documentals.get(i).getCategory().equals(getString(R.string.food))) {
-                                    foodDocus.add(documentals.get(i));
+                                if (documentals.get(i).getCategory().equals(getString(R.string.history))) {
+                                    historyDocus.add(documentals.get(i));
                                 }
                             }
                             // Initializing the RecyclerView for the movie categories list
@@ -185,8 +185,8 @@ public class DocusFragment extends Fragment {
         if (!healthDocus.isEmpty()) {
             docusCategories.add(new DocusCategories(getString(R.string.health), healthDocus));
         }
-        if (!foodDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.food), foodDocus));
+        if (!historyDocus.isEmpty()) {
+            docusCategories.add(new DocusCategories(getString(R.string.history), historyDocus));
         }
     }
 
@@ -241,8 +241,8 @@ public class DocusFragment extends Fragment {
         if (healthDocus != null) {
             healthDocus.clear();
         }
-        if (foodDocus != null) {
-            foodDocus.clear();
+        if (historyDocus != null) {
+            historyDocus.clear();
         }
     }
     // Resets search button to original position
