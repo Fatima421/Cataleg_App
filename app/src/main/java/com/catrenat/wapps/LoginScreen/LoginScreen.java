@@ -1,5 +1,7 @@
 package com.catrenat.wapps.LoginScreen;
 
+import static java.lang.Thread.sleep;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,7 @@ import android.content.res.ColorStateList;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.EditText;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +72,7 @@ private FirebaseAuth mAuth;
 private CheckBox rememberBox;
 private SharedPreferences prefs;
 private FirebaseAuth mFirebaseAuth;
+private ProgressBar progressBar;
 private GoogleSignInClient mGoogleSignInClient;
 private static final String TAG = "SignInActivity";
 private static final int RC_SIGN_IN = 101;
@@ -89,6 +94,7 @@ private static final int RC_SIGN_IN = 101;
         googleSignIn = findViewById(R.id.loginGoogleIcon);
         fbSignIn = findViewById(R.id.loginFbIcon);
         twitterSignIn = findViewById(R.id.loginTwitterIcon);
+        progressBar = findViewById(R.id.progressLogin);
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -166,6 +172,7 @@ private static final int RC_SIGN_IN = 101;
     // Sign in with Google
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        isLoading(true);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -213,8 +220,6 @@ private static final int RC_SIGN_IN = 101;
 
     // Moves you to the next screen
     private void updateUI(FirebaseUser user) {
-        Intent goToMainScreen = new Intent(this, MainActivity.class);
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Users");
         Query query = usersRef.whereEqualTo("email", user.getEmail());
@@ -227,6 +232,9 @@ private static final int RC_SIGN_IN = 101;
 
                         if(email.equals(user.getEmail())){
                             Log.d(TAG, "User Exists");
+                            isLoading(false);
+                            LoginScreen.this.finish();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                     }
                 }
@@ -237,9 +245,6 @@ private static final int RC_SIGN_IN = 101;
                 }
             }
         });
-
-        startActivity(goToMainScreen);
-        LoginScreen.this.finish();
     }
 
 
@@ -267,6 +272,10 @@ private static final int RC_SIGN_IN = 101;
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+        // Starts MainActivity
+        isLoading(false);
+        LoginScreen.this.finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 
@@ -316,6 +325,7 @@ private static final int RC_SIGN_IN = 101;
             return;
         }
 
+        isLoading(true);
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -327,6 +337,7 @@ private static final int RC_SIGN_IN = 101;
                     saveLoginState();
                 }
                 finish();
+                isLoading(false);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -367,6 +378,30 @@ private static final int RC_SIGN_IN = 101;
         AlertDialog alertDialog = builder.create();
         // Show the Alert Dialog box
         alertDialog.show();
+    }
+
+    private void isLoading(boolean isLoading) {
+        if(isLoading) {
+            progressBar.setVisibility(View.VISIBLE);
+            passwordTxt.setEnabled(false);
+            emailTxt.setEnabled(false);
+            registerTxt.setEnabled(false);
+            loginBtn.setEnabled(false);
+            rememberBox.setEnabled(false);
+            googleSignIn.setEnabled(false);
+            fbSignIn.setEnabled(false);
+            twitterSignIn.setEnabled(false);
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+            passwordTxt.setEnabled(true);
+            emailTxt.setEnabled(true);
+            registerTxt.setEnabled(true);
+            loginBtn.setEnabled(true);
+            rememberBox.setEnabled(true);
+            googleSignIn.setEnabled(true);
+            fbSignIn.setEnabled(true);
+            twitterSignIn.setEnabled(true);
+        }
     }
 
 }
