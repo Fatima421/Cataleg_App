@@ -122,11 +122,11 @@
                 android:id="@+id/generalSubTitleTextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="-15dp"
                 android:fontFamily="@font/notosanshk_bold"
                 android:text="@string/generalSubtitle"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/welcomeGeneralFragment"
                 app:layout_constraintStart_toStartOf="@+id/welcomeGeneralFragment"
                 app:layout_constraintTop_toBottomOf="@+id/welcomeGeneralFragment" />
