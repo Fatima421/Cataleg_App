@@ -106,19 +106,19 @@ public class SeriesFragment extends Fragment {
                                 noSeriesTxt.setAnimation(animation);
                             }
                             for (int i = 0; i < seriesList.size(); i++) {
-                                if (seriesList.get(i).getCategory().equals(getString(R.string.action))) {
+                                if (seriesList.get(i).getCategory().equals("Acció")) {
                                     actionSeries.add(seriesList.get(i));
                                 }
-                                if (seriesList.get(i).getCategory().equals(getString(R.string.romance))) {
+                                if (seriesList.get(i).getCategory().equals("Romanç")) {
                                     romanceSeries.add(seriesList.get(i));
                                 }
-                                if (seriesList.get(i).getCategory().equals(getString(R.string.comedy))) {
+                                if (seriesList.get(i).getCategory().equals("Comèdia")) {
                                     comedySeries.add(seriesList.get(i));
                                 }
-                                if (seriesList.get(i).getCategory().equals(getString(R.string.drama))) {
+                                if (seriesList.get(i).getCategory().equals("Drama")) {
                                     dramaSeries.add(seriesList.get(i));
                                 }
-                                if (seriesList.get(i).getCategory().equals(getString(R.string.thriller))) {
+                                if (seriesList.get(i).getCategory().equals("Suspens")) {
                                     thrillerSeries.add(seriesList.get(i));
                                 }
                             }
@@ -152,14 +152,12 @@ public class SeriesFragment extends Fragment {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Click", "Se iso clic open");
                 seriesMotionLayout.transitionToEnd();
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d("Click", "Se iso clic close");
                 seriesMotionLayout.transitionToStart();
                 return false;
             }

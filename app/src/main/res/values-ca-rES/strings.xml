@@ -9,7 +9,7 @@
     <string name="user">Usuari</string>
     <string name="forgotPassword">Has oblidat la contrasenya?</string>
     <string name="registerIfNoAcc">No tens compte?</string>
-    <string name="connect">O bé</string>
+    <string name="connect">O connecta amb</string>
     <string name="register">Registra\'t</string>
     <string name="registerBtn">Registrar</string>
     <string name="usernameRequired">Introdueix un nom d\'usuari</string>
@@ -102,20 +102,20 @@
     <string name="catalan">Català</string>
     <string name="english">Anglès</string>
     <string name="home">Inici</string>
-    <string name="profile">Profile</string>
+    <string name="profile">Perfil</string>
     <string name="favourites">Preferits</string>
     <string name="disconnect">Desconnectar</string>
     <string name="aboutImageRights">Sobre el contingut multimèdia utilitzat</string>
     <string name="aboutImagesRightsText">Les imatges dels videojocs, les pel·lícules, els àlbums i els llibres es poden utilitzar sempre que es realitzi
         un ús justificatiu de la imatge, entenent-se per ús justificatiu aquell que busca dotar d\'una informació i no beneficiar-se de
         l\'explotació d\'aquesta imatge, s\'hauria de considerar un ús autoritzat. Dit per Yasmina I. Glez. Müller,
-        advocada Canària especialitzada en Propietat Intel·lectual i Industrial.\n\nRespecte a la música i tràilers utilitzats en l\'aplicació són trets d\'una versió de l\'api oficial de YouTube.
+        advocada Canària especialitzada en Propietat Intel·lectual i Industrial.\n\nRespecte a la música i tràilers utilitzats en l\'aplicació són trets d\'una versió de l\'API oficial de YouTube.
         Aquesta aplicació no ha sigut creada per ús comercial, és una aplicació merament informativa, per tant, es justifica l\'ús dels vídeos.
         El codi utilitzat pels vídeos ha sigut tret del GitHub de Pierfrancesco Soffritti: <b>https://github.com/PierfrancescoSoffritti/android-youtube-player</b>
         en el seu GitHub trobareu una explicació més extensa sobre els termes i condicions d\ús de YouTube.\n\n
         Les icones utilitzades en aquesta aplicació han sigut creades per nosaltres o tretes dels següents enllaços: https://freeicons.io/, https://icons8.com/icons/, https://www.flaticon.com/.\n\n
         Les imatges pels àlbums han sigut tretes de Google i de Spotify. Les imatges pels jocs de les pàgines oficials o de plataformes com Steam.
-        Les imatges de les sèries de les plataformes corresponents com TV3 o també de Google. Finalment, els llibres o de les pàgines de compra o de Google.
+        Les imatges de les sèries de les plataformes corresponents com TV3 o també de Google. Finalment, els llibres, o de les pàgines de compra o de Google.
     </string>
     <string name="aboutUs">Sobre nosaltres</string>
     <string name="aboutUsText">Nosaltres som el grup de Cat Renat, un equip de 2 persones.
