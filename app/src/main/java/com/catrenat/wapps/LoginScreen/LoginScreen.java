@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.catrenat.wapps.MainActivity;
+import com.catrenat.wapps.OnboardingActivity;
 import com.catrenat.wapps.R;
 import com.catrenat.wapps.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -260,7 +261,7 @@ private static final int RC_SIGN_IN = 101;
         // Starts MainActivity
         isLoading(false);
         LoginScreen.this.finish();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, OnboardingActivity.class));
     }
 
 
