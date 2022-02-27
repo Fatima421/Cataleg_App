@@ -355,7 +355,7 @@ private static final int RC_SIGN_IN = 101;
         // Set Alert Title
         builder.setTitle(getResources().getString(R.string.alertLoginTitle));
         builder.setCancelable(false);
-        builder.setNegativeButton("Vale", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Tancar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // If user click no
