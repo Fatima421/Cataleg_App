@@ -155,14 +155,12 @@ public class PelisFragment extends Fragment {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Click", "Se iso clic open");
                 moviesMotionLayout.transitionToEnd();
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d("Click", "Se iso clic close");
                 moviesMotionLayout.transitionToStart();
                 return false;
             }

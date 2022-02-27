@@ -102,7 +102,7 @@
     <string name="catalan">Català</string>
     <string name="english">Anglès</string>
     <string name="home">Inici</string>
-    <string name="profile">Profile</string>
+    <string name="profile">Perfil</string>
     <string name="favourites">Preferits</string>
     <string name="disconnect">Desconnectar</string>
     <string name="aboutImageRights">Sobre el contingut multimèdia utilitzat</string>
@@ -151,4 +151,7 @@
     <string name="OnboardingText4">\u25A0 Modifica el teu usuari a gust a través del menu lateral</string>
     <string name="goStart">Ara sí!</string>
     <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
+    <string name="childBooks">Llibres infantils</string>
+    <string name="literature">Literatura</string>
+    <string name="information">Informació</string>
 </resources>

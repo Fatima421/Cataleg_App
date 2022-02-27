@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_general:
                         vibe.vibrate(3);
                         fragment = new GeneralFragment();
+
                         break;
 
                     case R.id.nav_games:

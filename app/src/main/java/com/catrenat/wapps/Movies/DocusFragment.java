@@ -154,14 +154,12 @@ public class DocusFragment extends Fragment {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Click", "Se iso clic open");
                 docusMotionLayout.transitionToEnd();
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d("Click", "Se iso clic close");
                 docusMotionLayout.transitionToStart();
                 return false;
             }

@@ -151,4 +151,7 @@
     <string name="OnboardingText4">\u25A0 Modifica el teu usuari a gust a través del menu lateral</string>
     <string name="goStart">Ara sí!</string>
     <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
+    <string name="childBooks">Llibres infantils</string>
+    <string name="literature">Literatura</string>
+    <string name="information">Informació</string>
 </resources>

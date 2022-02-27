@@ -16,7 +16,7 @@
             android:icon="@drawable/ic_music_heart"/>
         <item
             android:id="@+id/nav_information"
-            android:title="Informació"
+            android:title="@string/information"
             android:icon="@drawable/info"/>
         <item
             android:id="@+id/nav_disconnect"
