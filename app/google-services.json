@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "472127925999-f4c5g7ra4k6vtd84rdiv4em9n59ep18u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.catrenat.wapps",
+            "certificate_hash": "dfa65cd4be8507cabe2b2a462c67892b530eec41"
+          }
+        },
+        {
           "client_id": "472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com",
           "client_type": 3
         }

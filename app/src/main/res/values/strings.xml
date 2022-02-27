@@ -138,4 +138,7 @@
     <string name="searchTitle">Cerca per títol</string>
     <string name="generalSubtitle">Toqueu la icona de la categoria desitjada</string>
     <string name="tapDetail">Toqueu per a més detall</string>
+    <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
+    <string name="alertLoginMssg">Aquesta funció no està disponible encara, però ho estarà en futures implementacions.</string>
+    <string name="alertLoginTitle">Avís</string>
 </resources>
