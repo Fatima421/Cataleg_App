@@ -42,58 +42,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/loginWhiteBoxFb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/loginWhiteBoxGoogle"
-                app:srcCompat="@drawable/white_box" />
-
-            <ImageView
-                android:id="@+id/loginFbIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/loginWhiteBoxFb"
-                app:layout_constraintTop_toTopOf="@+id/loginWhiteBoxFb"
-                app:srcCompat="@drawable/ic_fb_icon" />
-
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/loginWhiteBoxGoogle"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginConnectTxt"
-                app:srcCompat="@drawable/white_box" />
+                app:layout_constraintTop_toBottomOf="@+id/loginConnectTxt">
 
-            <ImageView
-                android:id="@+id/loginWhiteBoxTwitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="56dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/loginWhiteBoxGoogle"
-                app:srcCompat="@drawable/white_box" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/loginTwitterIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_twitter_icon"
-                app:layout_constraintEnd_toEndOf="@+id/loginWhiteBoxTwitter"
-                app:layout_constraintTop_toTopOf="@+id/loginWhiteBoxTwitter" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="#1E79B8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/loginGoogleIcon">
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/loginGoogleIcon"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/loginWhiteBoxGoogle"
-                app:layout_constraintTop_toTopOf="@+id/loginWhiteBoxGoogle"
-                app:srcCompat="@drawable/ic_google" />
+                    <ImageView
+                        android:id="@+id/loginGoogleIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_google" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanshk_bold"
+                        android:text="Connecta amb Google"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/loginGoogleIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <View
                 android:id="@+id/separatorBlueLogin"

@@ -2,6 +2,8 @@ package com.catrenat.wapps.LoginScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +52,7 @@ import java.util.Map;
 
 public class LoginScreen extends AppCompatActivity {
 private EditText emailTxt, passwordTxt;
-private ImageView googleSignIn, fbSignIn, twitterSignIn;
+private CardView googleSignIn;
 private TextView registerTxt;
 private Button loginBtn;
 private FirebaseAuth mAuth;
@@ -77,28 +79,11 @@ private static final int RC_SIGN_IN = 101;
         registerTxt = findViewById(R.id.registerTxt);
         loginBtn = findViewById(R.id.loginBtn);
         rememberBox = findViewById(R.id.remember_checkBox);
-        googleSignIn = findViewById(R.id.loginGoogleIcon);
-        fbSignIn = findViewById(R.id.loginFbIcon);
-        twitterSignIn = findViewById(R.id.loginTwitterIcon);
+        googleSignIn = findViewById(R.id.loginWhiteBoxGoogle);
         progressBar = findViewById(R.id.progressLogin);
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        // If fb or twitter sign in button is clicked
-        fbSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInAlert();
-            }
-        });
-
-        twitterSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInAlert();
-            }
-        });
 
         // To be able to change lock icon color when focused
         passwordTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -158,7 +143,6 @@ private static final int RC_SIGN_IN = 101;
     // Sign in with Google
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        isLoading(true);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -167,7 +151,6 @@ private static final int RC_SIGN_IN = 101;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -185,6 +168,7 @@ private static final int RC_SIGN_IN = 101;
 
     // Asks for google credentials
     private void firebaseAuthWithGoogle(String idToken) {
+        isLoading(true);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -342,6 +326,7 @@ private static final int RC_SIGN_IN = 101;
         editor.commit();
     }
 
+    /*
     private void signInAlert() {
         // AlertDialog Builder class
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginScreen.this);
@@ -366,6 +351,8 @@ private static final int RC_SIGN_IN = 101;
         alertDialog.show();
     }
 
+     */
+
     private void isLoading(boolean isLoading) {
         if(isLoading) {
             progressBar.setVisibility(View.VISIBLE);
@@ -375,8 +362,6 @@ private static final int RC_SIGN_IN = 101;
             loginBtn.setEnabled(false);
             rememberBox.setEnabled(false);
             googleSignIn.setEnabled(false);
-            fbSignIn.setEnabled(false);
-            twitterSignIn.setEnabled(false);
         } else {
             progressBar.setVisibility(View.INVISIBLE);
             passwordTxt.setEnabled(true);
@@ -385,8 +370,6 @@ private static final int RC_SIGN_IN = 101;
             loginBtn.setEnabled(true);
             rememberBox.setEnabled(true);
             googleSignIn.setEnabled(true);
-            fbSignIn.setEnabled(true);
-            twitterSignIn.setEnabled(true);
         }
     }
 
