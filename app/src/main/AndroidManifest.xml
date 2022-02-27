@@ -9,8 +9,10 @@
     <queries>
         <intent>
             <action android:name="com.google.android.youtube.api.service.START" />
+
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
+
         <package android:name="cat.tv3.eng.tresac" />
         <package android:name="com.disney.disneyplus" />
     </queries>
@@ -23,11 +25,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wapps">
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="true"
+            android:noHistory="true"/>
+        <activity
             android:name=".SplashScreen.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
