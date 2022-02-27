@@ -144,4 +144,11 @@
     <string name="searchTitle">Cerca per títol</string>
     <string name="generalSubtitle">Toqueu la icona de la categoria desitjada</string>
     <string name="tapDetail">Toqueu per a més detall</string>
+    <string name="beforeStart">Abans de començar</string>
+    <string name="OnboardingText1">\u25A0 Busca i filtra els resultats amb el buscador</string>
+    <string name="OnboardingText2">\u25A0 Guarda el teu contingut d\'interès posant-ho en preferits</string>
+    <string name="OnboardingText3">\u25A0 Mira els tràilers dels videojocs i audiovisuals</string>
+    <string name="OnboardingText4">\u25A0 Modifica el teu usuari a gust a través del menu lateral</string>
+    <string name="goStart">Ara sí!</string>
+    <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
 </resources>
