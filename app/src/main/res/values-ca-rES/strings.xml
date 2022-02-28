@@ -1,0 +1,158 @@
+<resources>
+    <string name="app_name">CATàleg</string>
+    <string name="todo">TODO</string>
+    <string name="welcome">Benvingut!</string>
+    <string name="login">Inicia Sessió</string>
+    <string name="email">Correo</string>
+    <string name="password">Contrasenya</string>
+    <string name="passwordRep">Repeteix contrasenya</string>
+    <string name="user">Usuari</string>
+    <string name="forgotPassword">Has oblidat la contrasenya?</string>
+    <string name="registerIfNoAcc">No tens compte?</string>
+    <string name="connect">O connecta amb</string>
+    <string name="register">Registra\'t</string>
+    <string name="registerBtn">Registrar</string>
+    <string name="usernameRequired">Introdueix un nom d\'usuari</string>
+    <string name="emailRequired">Introdueix un correu electrònic</string>
+    <string name="emailNotValid">Introdueix un correu electrònic vàlid</string>
+    <string name="passwordRequired">Introdueix una contrasenya</string>
+    <string name="passwordMinLength">La longitud mínima ha de ser de 6 caràcters</string>
+    <string name="passwordNotEqual">Les contrasenyes no coincideixen</string>
+    <string name="loggedSuccessfully">S\'ha iniciat sessió correctament.</string>
+    <string name="wrongEmailPass">Correu electrònic o contrasenya incorrectes</string>
+    <string name="registerSuccessful">L\'usuari s\'ha registrat correctament</string>
+    <string name="registerFailed">No s\'ha pogut registrar! Torna-ho a provar!</string>
+    <string name="passwordConfirm">Confirma contrasenya</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcomeGeneralScreen">Benvingut a Catàleg, accedeix al nostre contingut i comença a navegar</string>
+    <string name="songName">Nom de la canço</string>
+    <string name="songArtist">Artista de la canço</string>
+    <string name="welcomeMusicScreen">Descobreix la música catalana</string>
+    <string name="welcomeGameScreen">Descobreix els videojocs en català</string>
+    <string name="welcomeMovieScreen">Selecciona una plataforma d\'interés</string>
+    <string name="welcomeBookScreen">Descobreix els llibres catalans</string>
+    <string name="choosePlatform">Escull una plataforma</string>
+    <string name="rememberMe">Recorda\'m</string>
+    <string name="favourite">T\'agrada</string>
+    <string name="moreOfTheArtist">Més de l\'artista</string>
+    <string name="listenInYoutube">Escolta-la a YouTube</string>
+    <string name="share">Compartir</string>
+    <string name="bio">Bio (Opcional)</string>
+    <string name="bioMaxLength">La longitud màxima és de 15 caràcters</string>
+    <string name="drawer_open">Drawer Obert</string>
+    <string name="drawer_close">Drawer Tancat</string>
+    <string name="alert_logout_title">Vols desconnectar?</string>
+    <string name="alert_logout_message">Recorda que es tancarà la teva sessió i sortiràs de l\'aplicació.</string>
+    <string name="albumName">Nom de l\'album</string>
+    <string name="albumYear">Any ·</string>
+    <string name="albumType">Tipus de títol</string>
+    <string name="titlesArtist">Més títols en català</string>
+    <string name="seriesFragmentName">Sèries</string>
+    <string name="moviesFragmentName">Pel·lícules</string>
+    <string name="docsFragmentName">Documentals</string>
+    <string name="games">Videojocs</string>
+    <string name="category">Categoria</string>
+    <string name="action">Acció</string>
+    <string name="romance">Romanç</string>
+    <string name="comedy">Comèdia</string>
+    <string name="drama">Drama</string>
+    <string name="thriller">Suspens</string>
+    <string name="nature">Naturalesa</string>
+    <string name="crime">Crims i misteri</string>
+    <string name="technology">Tecnologia</string>
+    <string name="health">Salut</string>
+    <string name="food">Alimentació</string>
+    <string name="gameReleaseDate">DATA DE LLANÇAMENT:</string>
+    <string name="gameDeveloper">DESENVOLUPADOR:</string>
+    <string name="gameEditor">EDITOR:</string>
+    <string name="gameMore">Ves-hi</string>
+    <string name="gameShare">Compartir</string>
+    <string name="gameTranslate">Traducció</string>
+    <string name="movieTitle">Títol de pel·lícula</string>
+    <string name="seasonsAndEpisodes">X temporades X capítols</string>
+    <string name="movieSinopsis">Aquest es un text de prova per la descripció d\'una sèrie.</string>
+    <string name="seasons">temporades</string>
+    <string name="season">temporada</string>
+    <string name="episodes">capítols</string>
+    <string name="episode">capítol</string>
+    <string name="watchIt">Ves a la plataforma</string>
+    <string name="more">més</string>
+    <string name="netflix">Netflix</string>
+    <string name="tv3">TV3</string>
+    <string name="disney">Disney</string>
+    <string name="primeVideo">Prime Video</string>
+    <string name="super3">Super 3</string>
+    <string name="filmin">Filmin</string>
+    <string name="exitAlert">Sortir?</string>
+    <string name="exitMessage">Estàs segur de què vols sortir?</string>
+    <string name="accept">Acceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="noSerie">Cap sèrie en català trobada en aquesta plataforma</string>
+    <string name="noMovie">Cap pel·lícula en català trobada en aquesta plataforma</string>
+    <string name="noDocumental">Cap documental en català trobat en aquesta plataforma</string>
+    <string name="seeFavsAgain">Torna a mirar els teus preferits de cada secció</string>
+    <string name="emptyMusicFavs">No tens cap música en preferits</string>
+    <string name="favIntro">Aquests son els teus preferits</string>
+    <string name="emptyMovieFavs">No tens cap pel·lícula, serie o documental en preferits</string>
+    <string name="emptyGameFavs">No tens cap joc en preferits</string>
+    <string name="emptyBookFavs">No tens cap llibre en preferits</string>
+    <string name="modifyYourInfo">Modifica les teves dades</string>
+    <string name="save">Guardar</string>
+    <string name="pressToChangeImage">Prem per canviar la imatge</string>
+    <string name="catalan">Català</string>
+    <string name="english">Anglès</string>
+    <string name="home">Inici</string>
+    <string name="profile">Perfil</string>
+    <string name="favourites">Preferits</string>
+    <string name="disconnect">Desconnectar</string>
+    <string name="aboutImageRights">Sobre el contingut multimèdia utilitzat</string>
+    <string name="aboutImagesRightsText">Les imatges dels videojocs, les pel·lícules, els àlbums i els llibres es poden utilitzar sempre que es realitzi
+        un ús justificatiu de la imatge, entenent-se per ús justificatiu aquell que busca dotar d\'una informació i no beneficiar-se de
+        l\'explotació d\'aquesta imatge, s\'hauria de considerar un ús autoritzat. Dit per Yasmina I. Glez. Müller,
+        advocada Canària especialitzada en Propietat Intel·lectual i Industrial.\n\nRespecte a la música i tràilers utilitzats en l\'aplicació són trets d\'una versió de l\'API oficial de YouTube.
+        Aquesta aplicació no ha sigut creada per ús comercial, és una aplicació merament informativa, per tant, es justifica l\'ús dels vídeos.
+        El codi utilitzat pels vídeos ha sigut tret del GitHub de Pierfrancesco Soffritti: <b>https://github.com/PierfrancescoSoffritti/android-youtube-player</b>
+        en el seu GitHub trobareu una explicació més extensa sobre els termes i condicions d\ús de YouTube.\n\n
+        Les icones utilitzades en aquesta aplicació han sigut creades per nosaltres o tretes dels següents enllaços: https://freeicons.io/, https://icons8.com/icons/, https://www.flaticon.com/.\n\n
+        Les imatges pels àlbums han sigut tretes de Google i de Spotify. Les imatges pels jocs de les pàgines oficials o de plataformes com Steam.
+        Les imatges de les sèries de les plataformes corresponents com TV3 o també de Google. Finalment, els llibres, o de les pàgines de compra o de Google.
+    </string>
+    <string name="aboutUs">Sobre nosaltres</string>
+    <string name="aboutUsText">Nosaltres som el grup de Cat Renat, un equip de 2 persones.
+        <b>L\'Erik Michel i la Fatima Sahar Syed.</b>
+        Hem fet aquesta aplicació amb molta il·lusió i ganes, li hem dedicat hores i hores durant aquests mesos.
+        Ha sigut un llarg procés en el qual ens hem divertit i après un munt, n\'hi ha hagut moments més tensos,
+        on les coses no sortien o simplement anàvem justos de temps, però al final hem aconseguit fer una aplicació amb tots els valors que volem transmetre.</string>
+    <string name="aboutApp">Sobre l\'aplicació</string>
+    <string name="aboutAppText">La nostra aplicació ha sigut creada amb la intenció de difondre continguts en català i a la vegada poder promocionar i impulsar l\'ús de la llengua catalana.
+        \n\nEstà enfocada a l\'audiència general, no n\'hi ha restricció d\'edat, qualsevol pot informar-se via les seccions creades.
+        Raó per la qual també n\'hi ha variació de seccions, tenim una secció dedicada a la música catalana, un altre a les sèries, pel·lícules i documentals catalans,
+        un altre als jocs disponibles traduïts en català i per últim llibres catalans.\n\n
+        A través d\'aquesta aplicació es pot saber en quina plataforma trobar tot aquest contingut o on poder comprar-ho.
+        Facilita enllaços cap a tots els llocs i està feta amb un disseny intuïtiu i fàcil per l\'usuari.</string>
+    <string name="buy">Comprar</string>
+    <string name="detailsGame">Videojoc detalls</string>
+    <string name="profileUpdated">Les dades han sigut modificades correctament</string>
+    <string name="profileNotUpdated">Les dades no han pogut ser modificades</string>
+    <string name="detailsSerie">Serie detalls</string>
+    <string name="detailsMovie">Pel·licula detalls</string>
+    <string name="detailsDocu">Documental detalls</string>
+    <string name="music">Música</string>
+    <string name="movies">Audio-visuals</string>
+    <string name="books">LLibres</string>
+    <string name="history">Històric</string>
+    <string name="searchTitle">Cerca per títol</string>
+    <string name="generalSubtitle">Toqueu la icona de la categoria desitjada</string>
+    <string name="tapDetail">Toqueu per a més detall</string>
+    <string name="beforeStart">Abans de començar</string>
+    <string name="OnboardingText1">\u25A0 Busca i filtra els resultats amb el buscador</string>
+    <string name="OnboardingText2">\u25A0 Guarda el teu contingut d\'interès posant-ho en preferits</string>
+    <string name="OnboardingText3">\u25A0 Mira els tràilers dels videojocs i audiovisuals</string>
+    <string name="OnboardingText4">\u25A0 Modifica el teu usuari a gust a través del menu lateral</string>
+    <string name="goStart">Ara sí!</string>
+    <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
+    <string name="childBooks">Llibres infantils</string>
+    <string name="literature">Literatura</string>
+    <string name="information">Informació</string>
+    <string name="author">Autor</string>
+</resources>

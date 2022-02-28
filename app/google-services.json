@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "472127925999",
+    "firebase_url": "https://catrenat-3e277-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "catrenat-3e277",
+    "storage_bucket": "catrenat-3e277.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472127925999:android:29e1df4fb2f962125cf51a",
+        "android_client_info": {
+          "package_name": "com.catrenat.wapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472127925999-0m1kl1qbnvptlgag3koegoa8f1tt6uq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.catrenat.wapps",
+            "certificate_hash": "fe060e46a9091d522ed26f6dacdd7d140d85a783"
+          }
+        },
+        {
+          "client_id": "472127925999-f4c5g7ra4k6vtd84rdiv4em9n59ep18u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.catrenat.wapps",
+            "certificate_hash": "dfa65cd4be8507cabe2b2a462c67892b530eec41"
+          }
+        },
+        {
+          "client_id": "472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQj4jSXgjiR5obZ8OIYaN4Rl5GzYkguO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

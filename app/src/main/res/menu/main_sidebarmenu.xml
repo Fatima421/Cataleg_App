@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"
+            android:icon="@drawable/ic_menu_home"/>
+        <item
+            android:id="@+id/nav_profile"
+            android:title="@string/profile"
+            android:icon="@drawable/person"/>
+        <item
+            android:id="@+id/nav_favourites"
+            android:title="@string/favourites"
+            android:icon="@drawable/ic_music_heart"/>
+        <item
+            android:id="@+id/nav_information"
+            android:title="@string/information"
+            android:icon="@drawable/info"/>
+        <item
+            android:id="@+id/nav_disconnect"
+            android:title="@string/disconnect"
+            android:icon="@drawable/ic_menu_logout"/>
+    </group>
+
+</menu>

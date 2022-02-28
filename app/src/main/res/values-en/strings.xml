@@ -1,0 +1,157 @@
+<resources>
+    <string name="app_name">CATàleg</string>
+    <string name="todo">TODO</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="passwordRep">Repeat password</string>
+    <string name="user">User</string>
+    <string name="forgotPassword">Forgot your password?</string>
+    <string name="registerIfNoAcc">Don\'t have an account?</string>
+    <string name="connect">Or connect with</string>
+    <string name="register">Register</string>
+    <string name="registerBtn">Register</string>
+    <string name="usernameRequired">Add a username</string>
+    <string name="emailRequired">Add an email</string>
+    <string name="emailNotValid">Add a valid email</string>
+    <string name="passwordRequired">Add a password</string>
+    <string name="passwordMinLength">The password must be at least 6 characters long</string>
+    <string name="passwordNotEqual">The passwords don\'t match</string>
+    <string name="loggedSuccessfully">You have logged in correctly.</string>
+    <string name="wrongEmailPass">Email or password wrong</string>
+    <string name="registerSuccessful">The user has been registered correctly</string>
+    <string name="registerFailed">Unable to register! Try again!</string>
+    <string name="passwordConfirm">Confirm password</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcomeGeneralScreen">Welcome to Catàleg, see our content and start discovering</string>
+    <string name="songName">Song name</string>
+    <string name="songArtist">Song artist</string>
+    <string name="welcomeMusicScreen">Discover catalan music</string>
+    <string name="welcomeGameScreen">Discover games in catalan</string>
+    <string name="welcomeMovieScreen">Select a platform</string>
+    <string name="welcomeBookScreen">Discover catalan books</string>
+    <string name="choosePlatform">Select a platform</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="favourite">Favourite</string>
+    <string name="moreOfTheArtist">More of the artist</string>
+    <string name="listenInYoutube">Listen in YouTube</string>
+    <string name="share">Share</string>
+    <string name="bio">Bio (Optional)</string>
+    <string name="bioMaxLength">Tha maximum length is of 15 characters</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Closed</string>
+    <string name="alert_logout_title">Do you want to disconnect?</string>
+    <string name="alert_logout_message">Remember that it will close your session and you will be taken out of the app.</string>
+    <string name="albumName">Name of the album</string>
+    <string name="albumYear">Year ·</string>
+    <string name="albumType">Type of title</string>
+    <string name="titlesArtist">More titles in catalan</string>
+    <string name="seriesFragmentName">Series</string>
+    <string name="moviesFragmentName">Movies</string>
+    <string name="docsFragmentName">Documentaries</string>
+    <string name="games">Games</string>
+    <string name="category">Categories</string>
+    <string name="action">Action</string>
+    <string name="romance">Romance</string>
+    <string name="comedy">Comedy</string>
+    <string name="drama">Drama</string>
+    <string name="thriller">Suspense</string>
+    <string name="nature">Nature</string>
+    <string name="crime">Crimes and Mysteries</string>
+    <string name="technology">Technology</string>
+    <string name="health">Health</string>
+    <string name="food">Food</string>
+    <string name="gameReleaseDate">RELEASE DATE:</string>
+    <string name="gameDeveloper">DEVELOPER:</string>
+    <string name="gameEditor">EDITOR:</string>
+    <string name="gameMore">Go</string>
+    <string name="gameShare">Share</string>
+    <string name="gameTranslate">Translation</string>
+    <string name="movieTitle">Movie title</string>
+    <string name="seasonsAndEpisodes">X seasons X episodes</string>
+    <string name="movieSinopsis">This is a testing text for the series description.</string>
+    <string name="seasons">seasons</string>
+    <string name="season">season</string>
+    <string name="episodes">episodes</string>
+    <string name="episode">episode</string>
+    <string name="watchIt">Go to the platform</string>
+    <string name="more">more</string>
+    <string name="netflix">Netflix</string>
+    <string name="tv3">TV3</string>
+    <string name="disney">Disney</string>
+    <string name="primeVideo">Prime Video</string>
+    <string name="super3">Super 3</string>
+    <string name="filmin">Filmin</string>
+    <string name="exitAlert">Exit?</string>
+    <string name="exitMessage">Are you sure you want to exit?</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="noSerie">No series in catalan found on this platform</string>
+    <string name="noMovie">No movies in catalan found on this platform</string>
+    <string name="noDocumental">No documentaries in catalan found on this platform</string>
+    <string name="seeFavsAgain">Check your favourites of every section</string>
+    <string name="emptyMusicFavs">You don\'t have any music in favourites</string>
+    <string name="favIntro">These are your favourites</string>
+    <string name="emptyMovieFavs">You don\'t have any movies, series or documentaries in your favourites</string>
+    <string name="emptyGameFavs">You don\'t have any games in favourites</string>
+    <string name="emptyBookFavs">You don\'t have any books in favourites</string>
+    <string name="modifyYourInfo">Modify your information</string>
+    <string name="save">Save</string>
+    <string name="pressToChangeImage">Click to change the image</string>
+    <string name="catalan">Catalan</string>
+    <string name="english">English</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="favourites">Favourites</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="aboutImageRights">About the multimedia content used</string>
+    <string name="aboutImagesRightsText">Images from video games, movies, albums, and books can be used as long as
+        there is a justifiable use of the image, we can understand justifiable use as the one that seeks to provide information and not benefit from
+        exploitation of this image. Said by Yasmina I. Glez. Müller, Canary Islands lawyer specialized in Intellectual and Industrial Property.\n\nRegarding the music and trailers used in the app are taken from a version of the official YouTube API.
+        This app was not created for commercial use, it is purely informative, so the use of the videos is justified.
+        The code used for the videos has been taken from Pierfrancesco Soffritti\'s GitHub: <b>https://github.com/PierfrancescoSoffritti/android-youtube-player</b>
+        in his GitHub you can find a more detailed explanation of YouTube\'s terms and conditions.\n\n
+        The icons used in this application have been created by us or taken from the following links: https://freeicons.io/, https://icons8.com/icons/, https://www.flaticon.com/.\n\n
+        The images for the albums have been taken from Google or Spotify. The images for the video games are taken from the official websites or other platforms like Steam.
+        Series images are taken from platforms such as TV3 or from google. Finally, the images for the books are taken from Google or from their shopping page
+    </string>
+    <string name="aboutUs">About Us</string>
+    <string name="aboutUsText"> We are a group named Cat Renat, a team of 2 people.
+        <b>Erik Michel and Fatima Sahar Syed.</b>
+        We have made this app with great enthusiasm and desire, we have dedicated hours and hours during these months.
+        It has been a long process in which we have had fun and learned a lot, there have been more tense moments
+        where things didn\'t come out as we wished or simply we just didn\'t have enough time, but in the end, we managed to make an app with all the values that we want to convey.</string>
+    <string name="aboutApp">About the app</string>
+    <string name="aboutAppText">
+        Our app has been created to spread content in Catalan and at the same time promote and encourage the use of the Catalan language.
+        \n\nIt is aimed at the general audience, there is no age restriction, anyone can inform themselves through the sections created.
+        For this reason, there is also a variety of sections, we have a section dedicated to Catalan music, another to Catalan series, films, and documentaries, another about the available games translated to Catalan, and finally Catalan books.\n\n
+        Through this app, you can find out on which platform is all this content or where to buy it.
+        It provides links to all sites, and it\'s made with an intuitive and user-friendly design.</string>
+    <string name="buy">Buy</string>
+    <string name="detailsGame">Video game details</string>
+    <string name="profileUpdated">The data has been modified succesfully</string>
+    <string name="profileNotUpdated">The data could not be modified</string>
+    <string name="detailsSerie">Series details</string>
+    <string name="detailsMovie">Movie details</string>
+    <string name="detailsDocu">Documentary details</string>
+    <string name="music">Music</string>
+    <string name="movies">Audio-visuals</string>
+    <string name="books">Books</string>
+    <string name="history">Historic</string>
+    <string name="searchTitle">Search by title</string>
+    <string name="generalSubtitle">Tap the icon for the desired category</string>
+    <string name="tapDetail">Touch for more detail</string>
+    <string name="beforeStart">Before starting</string>
+    <string name="OnboardingText1">\u25A0 Search and filter results with the search engine</string>
+    <string name="OnboardingText2">\u25A0 Save your content of interest by marking it as a favourite</string>
+    <string name="OnboardingText3">\u25A0 Watch the trailers of the video games and audiovisuals</string>
+    <string name="OnboardingText4">\u25A0 Modify your user as you wish accessing the lateral menu</string>
+    <string name="goStart">Start now!</string>
+    <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
+    <string name="childBooks">Children\'s books</string>
+    <string name="literature">Literature</string>
+    <string name="information">Information</string>
+    <string name="author">Author</string>
+</resources>
