@@ -4,14 +4,23 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Locale;
 
 public class GeneralFragment extends Fragment {
 
@@ -42,7 +53,19 @@ public class GeneralFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        SharedPreferences prefs = getActivity().getSharedPreferences("SharedP", Context.MODE_PRIVATE);
+        String language = prefs.getString("language", null);
+        if (language != null) {
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration config = res.getConfiguration();
+
+            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN_MR1){
+                config.setLocale(new Locale(language.toLowerCase()));
+            } else {
+                config.locale = new Locale(language.toLowerCase());
+            }
+            res.updateConfiguration(config, dm);
         }
     }
 
@@ -251,5 +274,17 @@ public class GeneralFragment extends Fragment {
         for (int i = 0; i < bottomNav.getMenu().size(); i++) {
             bottomNav.getMenu().getItem(i).setEnabled(disable);
         }
+    }
+
+    // To change app language
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 }

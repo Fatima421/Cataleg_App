@@ -14,13 +14,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,9 +51,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     public static TextView headerUsername, headerBio, headerEmail;
     public static ImageView headerImage;
+    private Button catalanBtn, englishBtn;
     private Vibrator vibe;
     private BottomNavigationView bottomNav;
     private DrawerLayout drawerLayout;
@@ -70,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         drawerNav = findViewById(R.id.drawer_navigation);
+        SharedPreferences prefs = this.getSharedPreferences("SharedP", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String language = prefs.getString("language", null);
+        if (language != null) {
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration config = res.getConfiguration();
+
+            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN_MR1){
+                config.setLocale(new Locale(language.toLowerCase()));
+            } else {
+                config.locale = new Locale(language.toLowerCase());
+            }
+            res.updateConfiguration(config, dm);
+        }
+
 
         // Toolbar
         setSupportActionBar(toolbar);
@@ -97,6 +121,27 @@ public class MainActivity extends AppCompatActivity {
                                 headerBio = findViewById(R.id.headerBio);
                                 headerEmail = findViewById(R.id.headerEmail);
                                 headerImage = findViewById(R.id.headerImage);
+                                catalanBtn = findViewById(R.id.catalanBtn);
+                                englishBtn = findViewById(R.id.englishBtn);
+                                
+                                // Languages
+                                catalanBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        setLocale("ca");
+                                        editor.putString("language", "ca");
+                                        editor.commit();
+                                    }
+                                });
+
+                                englishBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        setLocale("en");
+                                        editor.putString("language", "en");
+                                        editor.commit();
+                                    }
+                                });
 
                                 headerUsername.setText(user.getUsername());
                                 headerBio.setText(user.getBio());
@@ -211,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_general:
                         vibe.vibrate(3);
                         fragment = new GeneralFragment();
+
                         break;
 
                     case R.id.nav_games:
@@ -228,6 +274,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    // To change app language
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(refresh);
     }
 
     // To change the ripple color

@@ -86,7 +86,6 @@ public class BooksFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Book book = document.toObject(Book.class);
                                 book.setUrl(document.getString("url"));
-                                Log.i("edwing", ""+book.getUrl());
                                 booksList.add(book);
                             }
                             for (int i = 0; i < booksList.size(); i++) {
@@ -137,14 +136,12 @@ public class BooksFragment extends Fragment {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Click", "Se iso clic open");
                 booksMotionLayout.transitionToEnd();
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d("Click", "Se iso clic close");
                 booksMotionLayout.transitionToStart();
                 return false;
             }
@@ -158,19 +155,19 @@ public class BooksFragment extends Fragment {
             booksCategoriesList.clear();
         }
         if (!romanceBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Romance", romanceBooks));
+            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.romance), romanceBooks));
         }
         if (!thrillerBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Suspens i misteri", thrillerBooks));
+            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.thriller), thrillerBooks));
         }
         if (!childsBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Llibres Infantils", childsBooks));
+            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.childBooks), childsBooks));
         }
         if (!comediaBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Comèdia", comediaBooks));
+            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.comedy), comediaBooks));
         }
         if (!literaturaBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory("Literatura", literaturaBooks));
+            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.literature), literaturaBooks));
         }
     }
 
