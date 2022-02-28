@@ -84,7 +84,7 @@ public class BooksDetailsFragment extends Fragment {
 
         // Setting book info to the values
         bookTitle.setText(book.getTitle());
-        bookAuthor.setText("Autor: " + book.getAuthor());
+        bookAuthor.setText(getResources().getString(R.string.author)+" " + book.getAuthor());
         bookSinopsis.setText(book.getDescription());
 
         bookTagAdapter = new BookTagRecyclerViewAdapter(book.getGenres());

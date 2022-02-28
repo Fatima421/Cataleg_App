@@ -32,11 +32,11 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
-
+    // Properties
     private List<Book> books;
     private final Context context;
     private User user;
-
+    // Constructor
     public BookAdapter(List<Book> books, Context context) {
         this.books = books;
         this.context = context;

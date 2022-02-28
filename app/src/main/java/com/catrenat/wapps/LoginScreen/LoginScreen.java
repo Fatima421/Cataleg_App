@@ -201,7 +201,6 @@ private static final int RC_SIGN_IN = 101;
                         String email = documentSnapshot.getString("email");
 
                         if(email.equals(user.getEmail())){
-                            Log.d(TAG, "User Exists");
                             isLoading(false);
                             LoginScreen.this.finish();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -210,7 +209,6 @@ private static final int RC_SIGN_IN = 101;
                 }
 
                 if(task.getResult().size() == 0 ){
-                    Log.d(TAG, "User not Exists");
                     createUser(user);
                 }
             }
@@ -304,7 +302,6 @@ private static final int RC_SIGN_IN = 101;
                 if(rememberBox.isChecked()) {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putBoolean("login", true).commit();
-                    saveLoginState();
                 }
                 finish();
                 isLoading(false);
@@ -317,41 +314,6 @@ private static final int RC_SIGN_IN = 101;
             }
         });
     }
-
-    private void saveLoginState(){
-        prefs = getSharedPreferences("SharedP", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        editor.putString("GG_LOGED", currentUser.getEmail());
-        editor.commit();
-    }
-
-    /*
-    private void signInAlert() {
-        // AlertDialog Builder class
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginScreen.this);
-
-        // Set the message show for the Alert time
-        builder.setMessage(getResources().getString(R.string.alertLoginMssg));
-
-        // Set Alert Title
-        builder.setTitle(getResources().getString(R.string.alertLoginTitle));
-        builder.setCancelable(false);
-        builder.setNegativeButton("Tancar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // If user click no
-                // then dialog box is canceled.
-                dialog.cancel();
-            }
-        });
-        // Create the Alert dialog
-        AlertDialog alertDialog = builder.create();
-        // Show the Alert Dialog box
-        alertDialog.show();
-    }
-
-     */
 
     private void isLoading(boolean isLoading) {
         if(isLoading) {

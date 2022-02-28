@@ -112,7 +112,6 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                         Glide.with(getContext())
                                 .load(uri.toString())
                                 .into(gameMainImage);
-                        Log.i("IMAGEGLIDE", uri.toString());
                     }
                 });
             }
@@ -174,7 +173,6 @@ public class DetailGameFragment extends Fragment implements SelectListener {
 
         // Translate button
         if(!game.getTranslateURL().isEmpty()) {
-            Log.d("Fatima", "trans: " + game.getTranslateURL() );
             translateView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
