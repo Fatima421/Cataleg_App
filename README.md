@@ -2,15 +2,23 @@
 This app has been created to spread content in Catalan and at the same time promote and encourage the use of the Catalan language.
 
 ## Splash Screen
+The Splash Screen was animated by one of the team members, it represents a catalog with all the app content.
+
 <img src="https://user-images.githubusercontent.com/72110927/156055158-dd3fd1ec-8a0a-4ec2-a8de-f5bb711a503f.jpg" width="30%" height="30%">
 
 ## Login Screen
+Via the Login Screen you can enter your user email and password and sign in or sign in through Google.
+
 <img src="https://user-images.githubusercontent.com/72110927/156056428-ec66733f-cc3f-4b7c-8e00-989c24abe742.jpg" width="30%" height="30%">
 
 ## Register Screen
+This screen is to be able to create your user for the app, you can add your username, a bio, your email and set a password.
+
 <img src="https://user-images.githubusercontent.com/72110927/156055156-ac0d2818-cfbb-4c09-9861-f15d41d39f76.jpg" width="30%" height="30%">
 
 ## General Fragment
+The General Fragment it's a 
+
 <img src="https://user-images.githubusercontent.com/72110927/156055159-38f62fa8-5b95-42c2-8dee-6d1fd8010cc1.jpg" width="30%" height="30%">
 
 ## Music Screen
