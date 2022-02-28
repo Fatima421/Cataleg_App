@@ -34,7 +34,6 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
         for(int i = 0; i < seriesCategories.size(); i++) {
             all_series.add(new ArrayList<>());
             all_series.get(i).addAll(seriesCategories.get(i).getSeries());
-            Log.d("ALLSERIES", "THIS: " + all_series.get(i));
         }
     }
 
@@ -69,13 +68,8 @@ public class AllSeriesRecyclerViewAdapter extends RecyclerView.Adapter<AllSeries
         for(int i = 0; i < seriesCategories.size(); i++) {
             String search = string.toLowerCase();
             if(search.length() == 0){
-                Log.d("CLICK", "series antes: " + seriesCategories.get(i).getSeries());
-                Log.d("CLICK", "All series: " + all_series.get(i));
-                Log.d("CLICK", "All series: " + all_series);
-
                 seriesCategories.get(i).getSeries().clear();
                 seriesCategories.get(i).getSeries().addAll(all_series.get(i));
-                Log.d("CLICK", "series despues: " + seriesCategories.get(i).getSeries());
             } else {
                 seriesCategories.get(i).getSeries().clear();
                 for(Serie serie: all_series.get(i)) {

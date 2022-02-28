@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdapter.CategoryViewHolder> {
-
+    // Properties
     private Context context;
     private List<BooksCategory> booksCategories;
     private ArrayList<ArrayList<Book>> all_books;
@@ -33,7 +33,6 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
         for(int i = 0; i < booksCategories.size(); i++) {
             all_books.add(new ArrayList<>());
             all_books.get(i).addAll(booksCategories.get(i).getBooks());
-            Log.d("ALLSERIES", "THIS: " + all_books.get(i));
         }
     }
 
@@ -66,13 +65,8 @@ public class BooksCategoryAdapter extends RecyclerView.Adapter<BooksCategoryAdap
         for(int i = 0; i < booksCategories.size(); i++) {
             String search = string.toLowerCase();
             if(search.length() == 0){
-                Log.d("CLICK", "series antes: " + booksCategories.get(i).getBooks());
-                Log.d("CLICK", "All series: " + all_books.get(i));
-                Log.d("CLICK", "All series: " + all_books);
-
                 booksCategories.get(i).getBooks().clear();
                 booksCategories.get(i).getBooks().addAll(all_books.get(i));
-                Log.d("CLICK", "series despues: " + booksCategories.get(i).getBooks());
             } else {
                 booksCategories.get(i).getBooks().clear();
                 for(Book book: all_books.get(i)) {
