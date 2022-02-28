@@ -237,9 +237,10 @@ public class GeneralFragment extends Fragment {
         Animation animationFadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
         img.setAnimation(animationFadeOut);
         welcomeText.setAnimation(animationFadeOut);
+        subtitleText.setAnimation(animationFadeOut);
         img.setVisibility(img.INVISIBLE);
         welcomeText.setVisibility(welcomeText.INVISIBLE);
-        subtitleText.setVisibility(welcomeText.INVISIBLE);
+        subtitleText.setVisibility(subtitleText.INVISIBLE);
     }
 
     // Wait a few seconds before changing screen
