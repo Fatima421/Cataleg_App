@@ -35,7 +35,6 @@ public class AllDocusRecyclerViewAdapter extends RecyclerView.Adapter<AllDocusRe
         for(int i = 0; i < documentalsCategories.size(); i++) {
             all_docus.add(new ArrayList<>());
             all_docus.get(i).addAll(documentalsCategories.get(i).getDocumentals());
-            Log.d("ALLSERIES", "THIS: " + all_docus.get(i));
         }
     }
 
@@ -70,13 +69,8 @@ public class AllDocusRecyclerViewAdapter extends RecyclerView.Adapter<AllDocusRe
         for(int i = 0; i < documentalsCategories.size(); i++) {
             String search = string.toLowerCase();
             if(search.length() == 0){
-                Log.d("CLICK", "series antes: " + documentalsCategories.get(i).getDocumentals());
-                Log.d("CLICK", "All series: " + all_docus.get(i));
-                Log.d("CLICK", "All series: " + all_docus);
-
                 documentalsCategories.get(i).getDocumentals().clear();
                 documentalsCategories.get(i).getDocumentals().addAll(all_docus.get(i));
-                Log.d("CLICK", "series despues: " + documentalsCategories.get(i).getDocumentals());
             } else {
                 documentalsCategories.get(i).getDocumentals().clear();
                 for(Documental documental: all_docus.get(i)) {

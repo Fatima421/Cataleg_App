@@ -34,7 +34,6 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         for(int i = 0; i < pelisCategories.size(); i++) {
             all_movies.add(new ArrayList<>());
             all_movies.get(i).addAll(pelisCategories.get(i).getPelis());
-            Log.d("ALLPELIS", "THIS: " + all_movies.get(i));
         }
     }
 
@@ -68,13 +67,8 @@ public class AllPelisRecyclerViewAdapter extends RecyclerView.Adapter<AllPelisRe
         for(int i = 0; i < pelisCategories.size(); i++) {
             String search = string.toLowerCase();
             if(search.length() == 0){
-                Log.d("CLICK", "Pelis antes: " + pelisCategories.get(i).getPelis());
-                Log.d("CLICK", "All Pelis: " + all_movies.get(i));
-                Log.d("CLICK", "All Pelis: " + all_movies);
-
                 pelisCategories.get(i).getPelis().clear();
                 pelisCategories.get(i).getPelis().addAll(all_movies.get(i));
-                Log.d("CLICK", "Pelis despues: " + pelisCategories.get(i).getPelis());
             } else {
                 pelisCategories.get(i).getPelis().clear();
                 for(Pelis pelis: all_movies.get(i)) {

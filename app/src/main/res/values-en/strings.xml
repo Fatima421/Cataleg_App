@@ -148,9 +148,10 @@
     <string name="OnboardingText2">\u25A0 Save your content of interest by marking it as a favourite</string>
     <string name="OnboardingText3">\u25A0 Watch the trailers of the video games and audiovisuals</string>
     <string name="OnboardingText4">\u25A0 Modify your user as you wish accessing the lateral menu</string>
-    <string name="goStart">Now yes!</string>
+    <string name="goStart">Start now!</string>
     <string name="default_web_client_id_manual">472127925999-rvcnl1dt6a1k5kggr8qlj2ejq9i6mi5c.apps.googleusercontent.com</string>
     <string name="childBooks">Children\'s books</string>
     <string name="literature">Literature</string>
     <string name="information">Information</string>
+    <string name="author">Author</string>
 </resources>
