@@ -14,7 +14,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Favourites.MusicFav.MusicFavRecyclerView.MusicFavRecyclerView;
-import com.catrenat.wapps.Games.RecyclerView.GameListRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
@@ -45,7 +44,7 @@ public class MusicFavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_music_fav, container, false);
+        View view = inflater.inflate(R.layout.fragment_music_list_fav, container, false);
 
         // Elements from the view
         TextView emptyMusicTxt = view.findViewById(R.id.emptyMusicFavs);

@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +22,6 @@ import com.catrenat.wapps.Games.RecyclerView.PlatformLogoRecyclerViewAdapter;
 import com.catrenat.wapps.Games.RecyclerView.SelectListener;
 import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.User;
-import com.catrenat.wapps.Music.RecyclerView.CustomPlayerUiController;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -69,7 +67,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_detail_game, container, false);
+        View root = inflater.inflate(R.layout.fragment_games_detail, container, false);
 
         // Properties
         gameTitle = root.findViewById(R.id.gameTitle);

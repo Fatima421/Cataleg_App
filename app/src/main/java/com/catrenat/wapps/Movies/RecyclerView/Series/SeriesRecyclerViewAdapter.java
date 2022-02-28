@@ -7,19 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.catrenat.wapps.Models.Game;
-import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesDetailsFragment;
-import com.catrenat.wapps.Movies.RecyclerView.SearchListener;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +28,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecyclerViewAdapter.SeriesViewHolder> {
     private List<Serie> series;
@@ -52,7 +47,7 @@ public class SeriesRecyclerViewAdapter extends RecyclerView.Adapter<SeriesRecycl
     @NonNull
     @Override
     public SeriesRecyclerViewAdapter.SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_series, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_serie, parent, false);
         SeriesRecyclerViewAdapter.SeriesViewHolder holder = new SeriesRecyclerViewAdapter.SeriesViewHolder(view);
         return holder;
     }

@@ -64,7 +64,7 @@ public class SeriesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_series, container, false);
+        View view = inflater.inflate(R.layout.fragment_audiovisuals_series_list, container, false);
         TextView noSeriesTxt = view.findViewById(R.id.noSeriesTxt);
         noSeriesTxt.setVisibility(view.GONE);
 

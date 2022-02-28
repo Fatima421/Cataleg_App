@@ -70,7 +70,7 @@ tools:context=".MainActivity">
     app:itemTextColor="@color/white"
     app:itemTextAppearance="@font/notosanshk_light"
     app:itemIconTint="@color/white"
-    app:headerLayout="@layout/header"
+    app:headerLayout="@layout/drawer_header"
     app:menu="@menu/main_sidebarmenu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

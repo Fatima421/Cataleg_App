@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
-import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.Movies.MoviesDetailsFragment;
 import com.catrenat.wapps.R;
@@ -45,7 +43,7 @@ public class PelisRecyclerViewAdapter extends RecyclerView.Adapter<PelisRecycler
     @NonNull
     @Override
     public PelisRecyclerViewAdapter.PelisViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pelis, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
         PelisRecyclerViewAdapter.PelisViewHolder holder = new PelisRecyclerViewAdapter.PelisViewHolder(view);
         return holder;
     }
