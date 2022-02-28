@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                                                     .into(headerImage);
                                         }
                                     });
+                                } else {
+                                    headerImage.setImageResource(R.drawable.default_user);
                                 }
                             } else {
                                 Log.d("FireStore", "No such document");
