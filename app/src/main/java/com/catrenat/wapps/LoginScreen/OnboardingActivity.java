@@ -1,4 +1,4 @@
-package com.catrenat.wapps;
+package com.catrenat.wapps.LoginScreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.catrenat.wapps.Main.MainActivity;
+import com.catrenat.wapps.R;
 
 public class OnboardingActivity extends AppCompatActivity {
 

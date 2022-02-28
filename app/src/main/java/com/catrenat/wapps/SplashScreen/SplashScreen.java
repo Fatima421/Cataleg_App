@@ -8,9 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.catrenat.wapps.GeneralFragment;
 import com.catrenat.wapps.LoginScreen.LoginScreen;
-import com.catrenat.wapps.MainActivity;
+import com.catrenat.wapps.Main.MainActivity;
 import com.catrenat.wapps.R;
 import com.google.firebase.auth.FirebaseAuth;
 

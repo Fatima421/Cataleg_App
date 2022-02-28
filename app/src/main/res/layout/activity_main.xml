@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 app:layoutDescription="@xml/activity_main_scene"
-tools:context=".MainActivity">
+tools:context=".Main.MainActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@ tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.catrenat.wapps.GeneralFragment"
+        android:name="com.catrenat.wapps.Main.GeneralFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
@@ -70,7 +70,7 @@ tools:context=".MainActivity">
     app:itemTextColor="@color/white"
     app:itemTextAppearance="@font/notosanshk_light"
     app:itemIconTint="@color/white"
-    app:headerLayout="@layout/header"
+    app:headerLayout="@layout/drawer_header"
     app:menu="@menu/main_sidebarmenu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

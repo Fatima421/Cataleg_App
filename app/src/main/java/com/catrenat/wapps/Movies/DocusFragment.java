@@ -65,7 +65,7 @@ public class DocusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_docus, container, false);
+        View view = inflater.inflate(R.layout.fragment_audiovisuals_docus_list, container, false);
         TextView noDocusText = view.findViewById(R.id.noDocumentalTxt);
         noDocusText.setText(getResources().getText(R.string.noDocumental));
         noDocusText.setVisibility(view.GONE);

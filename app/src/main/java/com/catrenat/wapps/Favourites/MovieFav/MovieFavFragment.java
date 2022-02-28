@@ -22,8 +22,6 @@ import com.catrenat.wapps.Models.Serie;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class MovieFavFragment extends Fragment {
@@ -57,7 +55,7 @@ public class MovieFavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_movie_fav, container, false);
+        View view = inflater.inflate(R.layout.fragment_audiovisuals_list_fav, container, false);
         // Elements from the view
         TextView emptyMovieText = view.findViewById(R.id.emptyMovieFav);
         emptyMovieText.setVisibility(View.INVISIBLE);

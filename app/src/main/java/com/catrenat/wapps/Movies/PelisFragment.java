@@ -66,7 +66,7 @@ public class PelisFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pelis, container, false);
+        View view = inflater.inflate(R.layout.fragment_audiovisuals_movies_list, container, false);
         TextView noMovieTxt = view.findViewById(R.id.noMovieTxt);
         noMovieTxt.setText(getResources().getText(R.string.noMovie));
         noMovieTxt.setVisibility(view.GONE);

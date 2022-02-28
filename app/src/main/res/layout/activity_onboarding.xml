@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_login_screen_bg"
-        tools:context=".OnboardingActivity">
+        tools:context=".LoginScreen.OnboardingActivity">
 
         <TextView
             android:id="@+id/onBoardingTitle"

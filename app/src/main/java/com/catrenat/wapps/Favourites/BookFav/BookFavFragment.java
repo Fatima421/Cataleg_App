@@ -14,9 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.catrenat.wapps.Favourites.BookFav.BookFavRecyclerView.BookFavRecyclerView;
-import com.catrenat.wapps.Favourites.MusicFav.MusicFavRecyclerView.MusicFavRecyclerView;
 import com.catrenat.wapps.Models.Book;
-import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
 
@@ -47,7 +45,7 @@ public class BookFavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_book_fav, container, false);
+        View view = inflater.inflate(R.layout.fragment_books_list_fav, container, false);
         // Elements from the view
         TextView emptyBooksFav = view.findViewById(R.id.emptyBooksFav);
         emptyBooksFav.setVisibility(View.INVISIBLE);

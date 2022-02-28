@@ -15,12 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.catrenat.wapps.Books.RecyclerView.BookTagRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.User;
@@ -66,7 +64,7 @@ public class BooksDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_books_detail, container, false);
 
         ImageView bookImageBackground = view.findViewById(R.id.imageBookBackground);
         ImageView bookImage = view.findViewById(R.id.imageBook);
