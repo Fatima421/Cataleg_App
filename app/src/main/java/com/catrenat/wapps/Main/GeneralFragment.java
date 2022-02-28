@@ -1,4 +1,4 @@
-package com.catrenat.wapps;
+package com.catrenat.wapps.Main;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
@@ -29,6 +29,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.catrenat.wapps.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;

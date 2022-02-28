@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wapps">
         <activity
-            android:name=".OnboardingActivity"
+            android:name=".LoginScreen.OnboardingActivity"
             android:exported="true"
             android:noHistory="true"/>
         <activity
@@ -44,11 +44,11 @@
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Main.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".LoginScreen.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

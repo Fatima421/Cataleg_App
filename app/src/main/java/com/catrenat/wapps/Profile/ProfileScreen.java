@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.catrenat.wapps.MainActivity;
+import com.catrenat.wapps.Main.MainActivity;
 import com.catrenat.wapps.Models.User;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;

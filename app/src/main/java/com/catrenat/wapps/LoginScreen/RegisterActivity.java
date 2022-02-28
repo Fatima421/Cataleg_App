@@ -1,4 +1,4 @@
-package com.catrenat.wapps;
+package com.catrenat.wapps.LoginScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,15 +14,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.catrenat.wapps.Models.User;
+import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText nameRegTxt, emailRegTxt, passRegTxt, passConfirmRegTxt, bioRegTxt;
