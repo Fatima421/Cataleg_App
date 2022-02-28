@@ -1,5 +1,7 @@
 # Wapps
-This app has been created to spread content in Catalan and at the same time promote and encourage the use of the Catalan language.
+<img src="https://user-images.githubusercontent.com/72110927/156069094-62d6511b-a4d5-467a-91ac-2f6dd0017474.svg" width="50%" height="50%">
+
+This app has been created to spread content in Catalan and at the same time promote and encourage the use of the Catalan language. 
 
 ## Splash Screen
 The Splash Screen was animated by one of the team members, it represents a catalog with all the app content.
