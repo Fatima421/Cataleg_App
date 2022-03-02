@@ -43,7 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_games_list_fav.xml" value="0.260546875" />
         <entry key="app/src/main/res/layout/fragment_general.xml" value="0.260546875" />
         <entry key="app/src/main/res/layout/fragment_general_fav.xml" value="0.3697916666666667" />
-        <entry key="app/src/main/res/layout/fragment_information.xml" value="0.14453125" />
+        <entry key="app/src/main/res/layout/fragment_information.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_movie_fav.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/fragment_movies_details.xml" value="0.33" />
