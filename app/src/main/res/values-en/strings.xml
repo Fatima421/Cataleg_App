@@ -9,7 +9,7 @@
     <string name="user">User</string>
     <string name="forgotPassword">Forgot your password?</string>
     <string name="registerIfNoAcc">Don\'t have an account?</string>
-    <string name="connect">Or connect with</string>
+    <string name="connect">Or</string>
     <string name="register">Register</string>
     <string name="registerBtn">Register</string>
     <string name="usernameRequired">Add a username</string>
@@ -154,4 +154,5 @@
     <string name="literature">Literature</string>
     <string name="information">Information</string>
     <string name="author">Author</string>
+    <string name="connectGoogle">Connect with Google</string>
 </resources>
