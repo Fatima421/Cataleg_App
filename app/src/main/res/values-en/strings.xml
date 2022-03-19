@@ -155,4 +155,5 @@
     <string name="information">Information</string>
     <string name="author">Author</string>
     <string name="connectGoogle">Connect with Google</string>
+    <string name="createdBy">- Created by CatRenat -</string>
 </resources>
