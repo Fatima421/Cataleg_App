@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.catrenat.wapps.Games.DetailGameFragment;
 import com.catrenat.wapps.Models.Music;
 import com.catrenat.wapps.Music.RecyclerView.AlbumRecyclerViewAdapter;
 import com.catrenat.wapps.Music.RecyclerView.MusicRecyclerViewAdapter;
@@ -63,6 +66,16 @@ public class MusicArtistFragment extends Fragment {
         // View Elements
         TextView artistName = view.findViewById(R.id.artistName);
         ImageView artistImage = view.findViewById(R.id.artistImage);
+        CardView onBack = view.findViewById(R.id.onBackMusic);
+
+        // OnBack button goes back to music list
+        onBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  new MusicFragment()).addToBackStack(null).commit();
+            }
+        });
 
         // Bundle properties
         bundle = getArguments();

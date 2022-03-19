@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,7 @@ import com.catrenat.wapps.Games.RecyclerView.PlatformLogoRecyclerViewAdapter;
 import com.catrenat.wapps.Games.RecyclerView.SelectListener;
 import com.catrenat.wapps.Models.Game;
 import com.catrenat.wapps.Models.User;
+import com.catrenat.wapps.Music.MusicFragment;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -87,6 +90,22 @@ public class DetailGameFragment extends Fragment implements SelectListener {
         youTubePlayerView = root.findViewById(R.id.gameYoutubePlayer);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
+        CardView onBack = root.findViewById(R.id.onBackGames);
+
+
+        // OnBack button goes back to music list
+        onBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Gets data from bundle
+                Bundle bundle = getArguments();
+                GamesListFragment gamesListFragment = new GamesListFragment();
+                gamesListFragment.setArguments(bundle);
+
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  gamesListFragment).addToBackStack(null).commit();
+            }
+        });
 
         // Set game details
         gameTitle.setText(game.getName());
