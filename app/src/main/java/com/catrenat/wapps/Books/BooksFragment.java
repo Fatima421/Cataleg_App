@@ -22,14 +22,20 @@ import com.catrenat.wapps.Books.RecyclerView.BooksCategoryAdapter;
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.BooksCategory;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BooksFragment extends Fragment {
 
@@ -207,5 +213,35 @@ public class BooksFragment extends Fragment {
         if (!searchView.isIconified()) {
             searchView.onActionViewCollapsed();
         }
+    }
+
+    private void addDataBookFirebase() {
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("author", "");
+        user.put("category", "");
+        user.put("description", "");
+        user.put("genres", Arrays.asList(""));
+        user.put("imagePath", "/booksImages/comedia/");
+        user.put("title", "");
+        user.put("url", "");
+
+
+        // Add a new document with a generated ID
+        db = FirebaseFirestore.getInstance();
+        db.collection("Books")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error adding document", e);
+                    }
+                });
     }
 }

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.catrenat.wapps.Books.RecyclerView.BookTagRecyclerViewAdapter;
 import com.catrenat.wapps.Models.Book;
 import com.catrenat.wapps.Models.User;
+import com.catrenat.wapps.Music.MusicFragment;
 import com.catrenat.wapps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -81,6 +84,16 @@ public class BooksDetailsFragment extends Fragment {
         TextView bookFavTxt = view.findViewById(R.id.bookFavouriteText);
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
+        CardView onBack = view.findViewById(R.id.onBackBooks);
+
+        // OnBack button goes back to music list
+        onBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  new BooksFragment()).addToBackStack(null).commit();
+            }
+        });
 
         // Setting book info to the values
         bookTitle.setText(book.getTitle());
