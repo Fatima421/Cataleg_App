@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,7 @@ public class MoviesDetailsFragment extends Fragment {
                 bundle.putSerializable("moviePlatform", selectedPlatform);
                 MoviesListFragment moviesListFragment = new MoviesListFragment();
                 moviesListFragment.setArguments(bundle);
+                youTubePlayerView.release();
 
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  moviesListFragment).addToBackStack(null).commit();
