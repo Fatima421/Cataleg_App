@@ -160,20 +160,22 @@ public class BooksFragment extends Fragment {
         if (booksCategoriesList != null){
             booksCategoriesList.clear();
         }
-        if (!romanceBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.romance), romanceBooks));
-        }
-        if (!thrillerBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.thriller), thrillerBooks));
-        }
-        if (!childsBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.childBooks), childsBooks));
-        }
-        if (!comediaBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.comedy), comediaBooks));
-        }
-        if (!literaturaBooks.isEmpty()) {
-            booksCategoriesList.add(new BooksCategory(getResources().getString(R.string.literature), literaturaBooks));
+        if (getContext()!=null) {
+            if (!romanceBooks.isEmpty()) {
+                booksCategoriesList.add(new BooksCategory(getActivity().getString(R.string.romance), romanceBooks));
+            }
+            if (!thrillerBooks.isEmpty()) {
+                booksCategoriesList.add(new BooksCategory(getActivity().getString(R.string.thriller), thrillerBooks));
+            }
+            if (!childsBooks.isEmpty()) {
+                booksCategoriesList.add(new BooksCategory(getActivity().getString(R.string.childBooks), childsBooks));
+            }
+            if (!comediaBooks.isEmpty()) {
+                booksCategoriesList.add(new BooksCategory(getActivity().getString(R.string.comedy), comediaBooks));
+            }
+            if (!literaturaBooks.isEmpty()) {
+                booksCategoriesList.add(new BooksCategory(getActivity().getString(R.string.literature), literaturaBooks));
+            }
         }
     }
 
