@@ -9,7 +9,7 @@
     <string name="user">Usuari</string>
     <string name="forgotPassword">Has oblidat la contrasenya?</string>
     <string name="registerIfNoAcc">No tens compte?</string>
-    <string name="connect">O connecta amb</string>
+    <string name="connect">O bé</string>
     <string name="register">Registra\'t</string>
     <string name="registerBtn">Registrar</string>
     <string name="usernameRequired">Introdueix un nom d\'usuari</string>
@@ -155,4 +155,6 @@
     <string name="literature">Literatura</string>
     <string name="information">Informació</string>
     <string name="author">Autor</string>
+    <string name="connectGoogle">Connecta amb Google</string>
+    <string name="createdBy">- Creat per CatRenat -</string>
 </resources>

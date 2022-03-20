@@ -41,15 +41,17 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
     private ArrayList<Game> all_games;
     private Context context;
     private User user;
+    private String selectedPlatform;
 
     public GameListRecyclerViewAdapter() {
     }
 
-    public GameListRecyclerViewAdapter(ArrayList<Game> games, Context context){
+    public GameListRecyclerViewAdapter(ArrayList<Game> games, Context context, String selectedPlatform){
         this.games = games;
         this.context = context;
         all_games = new ArrayList<>();
         all_games.addAll(games);
+        this.selectedPlatform = selectedPlatform;
     }
 
     @NonNull
@@ -99,8 +101,14 @@ public class GameListRecyclerViewAdapter extends RecyclerView.Adapter<GameListRe
                                 if (document.exists()) {
                                     user = document.toObject(User.class);
                                 }
+                                // Prepares and sets bundle for Detail fragment
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("platform", selectedPlatform);
+                                DetailGameFragment detailFragment = new DetailGameFragment(games.get(position), user);
+                                detailFragment.setArguments(bundle);
+
                                 // Fragment transaction
-                                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  new DetailGameFragment(games.get(position), user)).addToBackStack(null).commit();                                } else {
+                                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  detailFragment).addToBackStack(null).commit();                                } else {
                                 Log.w("TAG", "Error getting documents.", task.getException());
                             }
                         }

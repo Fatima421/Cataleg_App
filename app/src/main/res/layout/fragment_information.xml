@@ -34,10 +34,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:src="@drawable/wapps"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/aboutUsCardView" />
+
+        <ImageView
+            android:id="@+id/wappsLogo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:src="@drawable/fundacio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wappsLogo" />
+
+        <ImageView
+            android:id="@+id/wappsLogo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/copyright"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wappsLogo3"
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/imagesRightsCardView"

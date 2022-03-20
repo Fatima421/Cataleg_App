@@ -104,8 +104,10 @@ public class DocusFragment extends Fragment {
                             }
                             if (documentals.isEmpty() || documentals == null) {
                                 noDocusText.setVisibility(view.VISIBLE);
-                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-                                noDocusText.setAnimation(animation);
+                                if (getContext()!=null) {
+                                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                    noDocusText.setAnimation(animation);
+                                }
                             }
                             for (int i = 0; i < documentals.size(); i++) {
                                 if (documentals.get(i).getCategory().equals("Naturalesa")) {
@@ -172,20 +174,22 @@ public class DocusFragment extends Fragment {
         if (docusCategories != null){
             docusCategories.clear();
         }
-        if (!natureDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.nature), natureDocus));
-        }
-        if (!crimeDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.crime), crimeDocus));
-        }
-        if (!technologyDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.technology), technologyDocus));
-        }
-        if (!healthDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.health), healthDocus));
-        }
-        if (!historyDocus.isEmpty()) {
-            docusCategories.add(new DocusCategories(getString(R.string.history), historyDocus));
+        if (getContext()!=null) {
+            if (!natureDocus.isEmpty()) {
+                docusCategories.add(new DocusCategories(getActivity().getString(R.string.nature), natureDocus));
+            }
+            if (!crimeDocus.isEmpty()) {
+                docusCategories.add(new DocusCategories(getActivity().getString(R.string.crime), crimeDocus));
+            }
+            if (!technologyDocus.isEmpty()) {
+                docusCategories.add(new DocusCategories(getActivity().getString(R.string.technology), technologyDocus));
+            }
+            if (!healthDocus.isEmpty()) {
+                docusCategories.add(new DocusCategories(getActivity().getString(R.string.health), healthDocus));
+            }
+            if (!historyDocus.isEmpty()) {
+                docusCategories.add(new DocusCategories(getActivity().getString(R.string.history), historyDocus));
+            }
         }
     }
 
