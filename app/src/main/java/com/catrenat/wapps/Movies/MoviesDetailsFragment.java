@@ -136,8 +136,6 @@ public class MoviesDetailsFragment extends Fragment {
                 bundle.putSerializable("moviePlatform", selectedPlatform);
                 MoviesListFragment moviesListFragment = new MoviesListFragment();
                 moviesListFragment.setArguments(bundle);
-                youTubePlayerView.release();
-
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  moviesListFragment).addToBackStack(null).commit();
             }
@@ -609,6 +607,18 @@ public class MoviesDetailsFragment extends Fragment {
                         Log.w("TAG", "Error adding document", e);
                     }
                 });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        youTubePlayerView.release();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        youTubePlayerView.release();
     }
 
 }

@@ -366,4 +366,15 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                     }
                 });
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        youTubePlayerView.release();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        youTubePlayerView.release();
+    }
 }
