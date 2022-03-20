@@ -102,8 +102,10 @@ public class SeriesFragment extends Fragment {
                             }
                             if (seriesList.isEmpty() || seriesList == null) {
                                 noSeriesTxt.setVisibility(view.VISIBLE);
-                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-                                noSeriesTxt.setAnimation(animation);
+                                if (getContext()!=null) {
+                                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                    noSeriesTxt.setAnimation(animation);
+                                }
                             }
                             for (int i = 0; i < seriesList.size(); i++) {
                                 if (seriesList.get(i).getCategory().equals("Acció")) {
@@ -170,20 +172,22 @@ public class SeriesFragment extends Fragment {
         if (serieCategoriesList != null){
             serieCategoriesList.clear();
         }
-        if (!actionSeries.isEmpty()) {
-            serieCategoriesList.add(new SerieCategories(getString(R.string.action), actionSeries));
-        }
-        if (!romanceSeries.isEmpty()) {
-            serieCategoriesList.add(new SerieCategories(getString(R.string.romance), romanceSeries));
-        }
-        if (!comedySeries.isEmpty()) {
-            serieCategoriesList.add(new SerieCategories(getString(R.string.comedy), comedySeries));
-        }
-        if (!dramaSeries.isEmpty()) {
-            serieCategoriesList.add(new SerieCategories(getString(R.string.drama), dramaSeries));
-        }
-        if (!thrillerSeries.isEmpty()) {
-            serieCategoriesList.add(new SerieCategories(getString(R.string.thriller), thrillerSeries));
+        if(getContext()!=null) {
+            if (!actionSeries.isEmpty()) {
+                serieCategoriesList.add(new SerieCategories(getActivity().getString(R.string.action), actionSeries));
+            }
+            if (!romanceSeries.isEmpty()) {
+                serieCategoriesList.add(new SerieCategories(getActivity().getString(R.string.romance), romanceSeries));
+            }
+            if (!comedySeries.isEmpty()) {
+                serieCategoriesList.add(new SerieCategories(getActivity().getString(R.string.comedy), comedySeries));
+            }
+            if (!dramaSeries.isEmpty()) {
+                serieCategoriesList.add(new SerieCategories(getActivity().getString(R.string.drama), dramaSeries));
+            }
+            if (!thrillerSeries.isEmpty()) {
+                serieCategoriesList.add(new SerieCategories(getActivity().getString(R.string.thriller), thrillerSeries));
+            }
         }
     }
 

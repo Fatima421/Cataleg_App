@@ -127,6 +127,7 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                         .child(game.getGalleryPaths().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+                        if (getContext()!=null)
                         // Load image with glide
                         Glide.with(getContext())
                                 .load(uri.toString())
