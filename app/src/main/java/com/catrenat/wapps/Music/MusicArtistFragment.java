@@ -95,11 +95,13 @@ public class MusicArtistFragment extends Fragment {
                         storageReference.child(entry.getValue().toString()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Glide.with(getContext())
-                                        .load(uri.toString())
-                                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .into(artistImage);
+                                if (getContext()!=null) {
+                                    Glide.with(getContext())
+                                            .load(uri.toString())
+                                            .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .into(artistImage);
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
