@@ -101,7 +101,6 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                 Bundle bundle = getArguments();
                 GamesListFragment gamesListFragment = new GamesListFragment();
                 gamesListFragment.setArguments(bundle);
-                youTubePlayerView.release();
 
                 AppCompatActivity app = (AppCompatActivity) view.getContext();
                 app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  gamesListFragment).addToBackStack(null).commit();
@@ -365,16 +364,5 @@ public class DetailGameFragment extends Fragment implements SelectListener {
                         }
                     }
                 });
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        youTubePlayerView.release();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        youTubePlayerView.release();
     }
 }

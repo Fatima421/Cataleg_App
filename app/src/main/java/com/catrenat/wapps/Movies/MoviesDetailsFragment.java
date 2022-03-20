@@ -609,16 +609,4 @@ public class MoviesDetailsFragment extends Fragment {
                 });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        youTubePlayerView.release();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        youTubePlayerView.release();
-    }
-
 }
