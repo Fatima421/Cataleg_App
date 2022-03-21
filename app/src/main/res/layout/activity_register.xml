@@ -190,6 +190,8 @@
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:text="@string/registerBtn"
+            app:backgroundTint="@null"
+            android:backgroundTint="@color/blue"
             android:textAllCaps="false"
             android:textSize="12sp"
             app:cornerRadius="30dp"

@@ -250,6 +250,8 @@
                     android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColorLink="@color/blue"
+                    app:backgroundTint="@null"
+                    android:backgroundTint="@color/blue"
                     android:textSize="12sp"
                     app:cornerRadius="30dp"
                     app:layout_constraintBottom_toBottomOf="parent"

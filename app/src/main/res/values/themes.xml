@@ -17,10 +17,10 @@
     </style>
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/blue</item>
         <item name="colorControlHighlight">@color/blue</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="ToolBarTheme">
