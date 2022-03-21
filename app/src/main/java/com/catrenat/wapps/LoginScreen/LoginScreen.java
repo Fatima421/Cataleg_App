@@ -306,6 +306,7 @@ private static final int RC_SIGN_IN = 101;
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(LoginScreen.this, getString(R.string.wrongEmailPass), Toast.LENGTH_SHORT).show();
+                isLoading(false);
             }
         });
     }
