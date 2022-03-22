@@ -74,6 +74,8 @@
         android:text="CA"
         android:textColor="@color/white"
         android:textSize="12dp"
+        app:backgroundTint="@null"
+        android:backgroundTint="@color/blue"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/headerEmail"
         app:layout_constraintTop_toBottomOf="@+id/headerEmail" />
@@ -86,6 +88,8 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/notosanshk_regular"
         android:text="EN"
+        app:backgroundTint="@null"
+        android:backgroundTint="@color/blue"
         android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold"

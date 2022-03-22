@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Wapps" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Wapps" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/black</item>
@@ -13,9 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Nav Bar color. -->
         <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/black</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
-    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/blue</item>
         <item name="colorControlHighlight">@color/blue</item>
@@ -23,11 +25,13 @@
 
     <style name="ToolBarTheme">
         <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="CustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/notosanshk_bold</item>
         <item name="textAllCaps">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>

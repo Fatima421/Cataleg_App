@@ -5,12 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.catrenat.wapps.Games.GamesListFragment;
 import com.catrenat.wapps.Models.Documental;
 import com.catrenat.wapps.Models.Pelis;
 import com.catrenat.wapps.Models.Serie;
@@ -121,6 +125,21 @@ public class MoviesDetailsFragment extends Fragment {
 
         bottomNav = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNav.setVisibility(View.VISIBLE);
+        CardView onBack = view.findViewById(R.id.onBackAudiovisual);
+
+        // OnBack button goes back to music list
+        onBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Prepares bundle
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("moviePlatform", selectedPlatform);
+                MoviesListFragment moviesListFragment = new MoviesListFragment();
+                moviesListFragment.setArguments(bundle);
+                AppCompatActivity app = (AppCompatActivity) view.getContext();
+                app.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,  moviesListFragment).addToBackStack(null).commit();
+            }
+        });
 
         if (serie != null) {
             // Setting values to the view elements

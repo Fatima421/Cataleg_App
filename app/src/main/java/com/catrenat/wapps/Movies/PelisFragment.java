@@ -105,8 +105,10 @@ public class PelisFragment extends Fragment {
                             }
                             if (pelisList.isEmpty() || pelisList == null) {
                                 noMovieTxt.setVisibility(view.VISIBLE);
-                                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-                                noMovieTxt.setAnimation(animation);
+                                if (getContext()!=null) {
+                                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                                    noMovieTxt.setAnimation(animation);
+                                }
                             }
                             for (int i = 0; i < pelisList.size(); i++) {
                                 if (pelisList.get(i).getCategory().equals("Acció")) {
@@ -173,20 +175,22 @@ public class PelisFragment extends Fragment {
         if (pelisCategories != null){
             pelisCategories.clear();
         }
-        if (!actionPelis.isEmpty()) {
-            pelisCategories.add(new PelisCategories(getString(R.string.action), actionPelis));
-        }
-        if (!romancePelis.isEmpty()) {
-            pelisCategories.add(new PelisCategories(getString(R.string.romance), romancePelis));
-        }
-        if (!comedyPelis.isEmpty()) {
-            pelisCategories.add(new PelisCategories(getString(R.string.comedy), comedyPelis));
-        }
-        if (!dramaPelis.isEmpty()) {
-            pelisCategories.add(new PelisCategories(getString(R.string.drama), dramaPelis));
-        }
-        if (!thrillerPelis.isEmpty()) {
-            pelisCategories.add(new PelisCategories(getString(R.string.thriller), thrillerPelis));
+        if (getContext()!=null) {
+            if (!actionPelis.isEmpty()) {
+                pelisCategories.add(new PelisCategories(getActivity().getString(R.string.action), actionPelis));
+            }
+            if (!romancePelis.isEmpty()) {
+                pelisCategories.add(new PelisCategories(getActivity().getString(R.string.romance), romancePelis));
+            }
+            if (!comedyPelis.isEmpty()) {
+                pelisCategories.add(new PelisCategories(getActivity().getString(R.string.comedy), comedyPelis));
+            }
+            if (!dramaPelis.isEmpty()) {
+                pelisCategories.add(new PelisCategories(getActivity().getString(R.string.drama), dramaPelis));
+            }
+            if (!thrillerPelis.isEmpty()) {
+                pelisCategories.add(new PelisCategories(getActivity().getString(R.string.thriller), thrillerPelis));
+            }
         }
     }
 

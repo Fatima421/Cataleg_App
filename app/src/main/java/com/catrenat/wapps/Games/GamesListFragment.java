@@ -76,7 +76,7 @@ public class GamesListFragment extends Fragment {
 
                         // RecyclerView declared and init with array
                         RecyclerView recyclerView = root.findViewById(R.id.gameListRecyclerView);
-                        adapter = new GameListRecyclerViewAdapter(games, getContext());
+                        adapter = new GameListRecyclerViewAdapter(games, getContext(), selectedPlatform);
                         recyclerView.setAdapter(adapter);
 
                         // Disables recyclerView nested scroll
